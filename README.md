@@ -14,15 +14,17 @@ npm run check     # type-check .astro and .ts files
 
 ## Where things live
 
-| Path                     | What                                                                  |
-| ------------------------ | --------------------------------------------------------------------- |
-| `src/data/profile.ts`    | All the copy: stats, case studies, book, experience, links            |
-| `src/assets/media/`      | Images; drop a file in, named after its slot                          |
-| `src/pages/index.astro`  | The page: puts the sections in order                                  |
-| `src/sections/`          | Hero, Brands, Statement, CaseStudy, CaseRow, Book, Background, Footer |
-| `src/components/`        | Asset (images), Video, Text, Funnel                                   |
-| `src/three/funnel.ts`    | The Three.js particle funnel                                          |
-| `src/styles/globals.css` | Colours, fluid type and spacing scales, scroll animations             |
+| Path                        | What                                                                  |
+| --------------------------- | --------------------------------------------------------------------- |
+| `src/data/profile.ts`       | Copy: intro, statement, stats, brands, book, experience, links        |
+| `src/content/work/`         | One Markdown file per case study (card and its own page)              |
+| `src/assets/media/`         | Images; drop a file in, named after its slot                          |
+| `src/pages/index.astro`     | The home page: puts the sections in order                             |
+| `src/pages/work/[id].astro` | A page per case study, at `/work/<id>/`                               |
+| `src/sections/`             | Hero, Brands, Statement, CaseStudy, CaseRow, Book, Background, Footer |
+| `src/components/`           | Asset (images), Video, Text, Funnel                                   |
+| `src/three/funnel.ts`       | The Three.js particle funnel                                          |
+| `src/styles/globals.css`    | Colours, fluid type and spacing scales, scroll animations             |
 
 Any link set to `null` in `profile.ts` (LinkedIn, résumé, Amazon) is hidden
 until you fill it in.
