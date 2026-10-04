@@ -44,7 +44,7 @@ export const channels = [
   "Paid social",
   "Search",
   "SEO",
-  "AEO / GEO",
+  "AEO/GEO",
   "Cold email",
   "WhatsApp",
   "AI voice agents",

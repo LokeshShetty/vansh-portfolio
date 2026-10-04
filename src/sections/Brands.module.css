@@ -7,20 +7,7 @@
   border-block: 1px solid var(--line);
 }
 
-/* Channels: smaller, outlined, so the brand row stays the headline. */
-.alt {
-  font-size: var(--step-0);
-  font-weight: 400;
-  letter-spacing: 0;
-}
-
-.row.alt li::after {
-  content: "/";
-  font-size: 1em;
-  color: var(--line);
-}
-
-/* Without scroll timelines this is simply a centred, wrapping list. */
+/* For reduced motion this is simply a centred, wrapping list. */
 .track {
   display: flex;
   justify-content: center;
@@ -55,35 +42,50 @@
   color: var(--accent-text);
 }
 
-@keyframes slide {
-  from {
-    transform: translateX(0);
-  }
+/* Channels: smaller and lighter, so the brand row stays the headline. */
+.row.alt {
+  font-size: var(--step-0);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.row.alt li::after {
+  content: "/";
+  font-size: 1em;
+  color: var(--line);
+}
+
+/* Each track holds its list twice, so sliding by half its width lands on
+   an identical frame and the loop is seamless. */
+@keyframes marquee {
   to {
     transform: translateX(-50%);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .track {
-      justify-content: flex-start;
-      width: max-content;
-      animation: slide linear both;
-      animation-timeline: view();
-    }
+  .track {
+    justify-content: flex-start;
+    width: max-content;
+    animation: marquee 48s linear infinite;
+  }
 
-    .reverse {
-      animation-direction: reverse;
-    }
+  .reverse {
+    animation-duration: 40s;
+    animation-direction: reverse;
+  }
 
-    .row {
-      flex-wrap: nowrap;
-      padding-inline: 0 var(--space-l);
-    }
+  /* Hovering pauses both rows, so a name can actually be read. */
+  .band:hover .track {
+    animation-play-state: paused;
+  }
 
-    .row + .row {
-      display: flex;
-    }
+  .row {
+    flex-wrap: nowrap;
+    padding-inline: 0 var(--space-l);
+  }
+
+  .row + .row {
+    display: flex;
   }
 }

@@ -139,11 +139,15 @@ JavaScript and run off the main thread.
 - The hero stats count up from 0 (a registered `@property` integer printed
   by a CSS counter; `components/Count.astro`). Screen readers get the plain
   value.
-- Scroll-driven (`animation-timeline`): a progress line along the top, the
-  hero portrait zooming as you scroll away, the brand and channel strips
-  sliding in opposite directions,
+- The brand and channel strips scroll continuously in opposite directions
+  and pause on hover.
+- Scroll-driven (`animation-timeline`): a progress line along the top,
   tiles and stats rising in (`.reveal`, staggered with `.stagger` and `--i`),
-  meters filling, and case-study images opening from the bottom.
+  meters filling, and case-study images rising into place.
+
+For smooth scrolling, nothing uses `backdrop-filter`, blend modes or
+animated `clip-path`: each of those forced large repaints on every scroll
+frame.
 
 CSS is minified with esbuild, not Vite's default lightningcss.
 lightningcss folds `animation-timeline` into the `animation` shorthand,
