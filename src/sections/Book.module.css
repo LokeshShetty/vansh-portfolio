@@ -1,26 +1,14 @@
 .band {
-  /* Own palette, taken from the book: deep purple, violet gradient. */
-  --ink: #f3eefc;
-  --ink-dim: rgb(243 238 252 / 0.68);
-  --line: rgb(255 255 255 / 0.14);
-  --hairline: rgb(255 255 255 / 0.16);
-  --surface: rgb(255 255 255 / 0.06);
-  --page: #0c0912;
-  --violet-a: #c26be0;
-  --violet-b: #7b5cff;
+  /* Site palette: dark ink on lime, in both themes. The book is the only
+     purple on the page. */
+  --ink: #111213;
+  --ink-dim: rgb(17 18 19 / 0.68);
+  --line: rgb(17 18 19 / 0.22);
+  --hairline: rgb(17 18 19 / 0.25);
+  --surface: rgb(255 255 255 / 0.35);
+  --page: #d4ff3f;
   color: var(--ink);
-  background:
-    radial-gradient(
-      55% 75% at 78% 50%,
-      rgb(140 90 255 / 0.28),
-      transparent 70%
-    ),
-    radial-gradient(
-      40% 60% at 10% 100%,
-      rgb(194 107 224 / 0.16),
-      transparent 70%
-    ),
-    #0c0912;
+  background: var(--accent);
   padding-block: var(--space-2xl);
   margin-block: var(--space-xl);
   overflow: clip;
@@ -45,14 +33,6 @@
   letter-spacing: -0.06em;
 }
 
-/* The cover's violet gradient on the title. */
-.title span {
-  background: linear-gradient(100deg, var(--violet-a), var(--violet-b));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 .subtitle {
   font-size: var(--step-2);
   font-weight: 500;
@@ -66,8 +46,7 @@
   font-size: var(--step-1);
   font-style: italic;
   line-height: 1.4;
-  color: #d5b8ff;
-  border-left: 2px solid var(--violet-a);
+  border-left: 2px solid var(--ink);
 }
 
 .credit {
@@ -83,14 +62,15 @@
   padding: 0.7em 1.4em;
   font-weight: 600;
   text-decoration: none;
-  color: #fff;
-  background: linear-gradient(100deg, var(--violet-a), var(--violet-b));
+  color: var(--accent);
+  background: var(--ink);
   border-radius: 999px;
+  transition: transform 0.3s var(--ease-out);
 }
 
 .link:hover {
   color: #fff;
-  filter: brightness(1.1);
+  transform: translateY(-2px);
 }
 
 /* --- The 3D book --------------------------------------------------- */
@@ -152,7 +132,17 @@
 .front {
   transform: translateZ(calc(var(--d) / 2));
   border-radius: 2px 6px 6px 2px;
-  box-shadow: inset 4px 0 8px -4px rgb(0 0 0 / 0.6);
+  box-shadow:
+    inset 4px 0 8px -4px rgb(0 0 0 / 0.6),
+    /* The book's own drop shadow, cast down and to the right. */ 18px 28px
+      40px -10px rgb(17 18 19 / 0.45),
+    6px 10px 16px -6px rgb(17 18 19 / 0.35);
+}
+
+.back {
+  box-shadow:
+    -18px 28px 40px -10px rgb(17 18 19 / 0.45),
+    -6px 10px 16px -6px rgb(17 18 19 / 0.35);
 }
 
 .back {
@@ -192,14 +182,20 @@
   transform: rotateX(90deg) translateZ(calc(var(--h) / 2 - 3px));
 }
 
-/* Soft shadow on the "table". */
+/* Contact shadow on the "table" under the book. */
 .stage::after {
   content: "";
-  width: calc(var(--w, 15rem) * 0.9);
-  height: 1.5rem;
+  width: clamp(12rem, 8rem + 12vw, 19rem);
+  height: 2.25rem;
   margin-top: calc(var(--space-l) * -1);
-  background: radial-gradient(closest-side, rgb(0 0 0 / 0.55), transparent);
-  filter: blur(4px);
+  translate: 8% 0;
+  background: radial-gradient(
+    closest-side,
+    rgb(17 18 19 / 0.5),
+    rgb(17 18 19 / 0.18) 60%,
+    transparent
+  );
+  filter: blur(6px);
   order: 1;
 }
 
@@ -213,7 +209,7 @@
   font-size: var(--step--1);
   font-weight: 500;
   color: var(--ink);
-  background: rgb(255 255 255 / 0.06);
+  background: rgb(17 18 19 / 0.06);
   border: 1px solid var(--line);
   border-radius: 999px;
   cursor: pointer;
@@ -221,11 +217,11 @@
 }
 
 .flip:hover {
-  background: rgb(255 255 255 / 0.12);
+  background: rgb(17 18 19 / 0.12);
 }
 
 .flip:focus-visible {
-  outline: 2px solid var(--violet-a);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 
