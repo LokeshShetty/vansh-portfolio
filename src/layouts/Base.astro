@@ -6,6 +6,7 @@
 import "@fontsource-variable/inter/opsz.css";
 import interLatin from "@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2?url";
 import "@/styles/globals.css";
+import ThemeToggle from "@/components/ThemeToggle.astro";
 import { profile } from "@/data/profile";
 
 const title = `${profile.name}, ${profile.role}`;
@@ -19,7 +20,14 @@ const description = profile.intro;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0a0b0d" />
+    <meta name="theme-color" content="#f3f3ef" />
+    <script is:inline>
+      // Apply a saved dark-theme choice before first paint. Light is default.
+      try {
+        if (localStorage.getItem("theme") === "dark")
+          document.documentElement.dataset.theme = "dark";
+      } catch {}
+    </script>
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="profile" />
@@ -38,6 +46,7 @@ const description = profile.intro;
   </head>
   <body>
     <div class="progress" aria-hidden="true"></div>
+    <ThemeToggle />
     <slot />
   </body>
 </html>

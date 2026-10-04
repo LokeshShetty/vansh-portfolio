@@ -8,6 +8,7 @@
 
 import {
   AdditiveBlending,
+  NormalBlending,
   BufferAttribute,
   BufferGeometry,
   Color,
@@ -75,9 +76,16 @@ export function mount(canvas: HTMLCanvasElement) {
   const pixelRatio = Math.min(window.devicePixelRatio, 1.5);
   renderer.setPixelRatio(pixelRatio);
 
-  const accent = new Color(
-    getComputedStyle(canvas).getPropertyValue("--accent").trim() || "#d4ff3f",
-  );
+  // Lime glows on the dark theme; on the light theme it would vanish, so the
+  // particles switch to dark ink (--funnel) and normal blending.
+  const accent = new Color();
+  const isDark = () => document.documentElement.dataset.theme === "dark";
+  const readTheme = () => {
+    accent.set(
+      getComputedStyle(canvas).getPropertyValue("--funnel").trim() || "#1b2a00",
+    );
+  };
+  readTheme();
 
   const scene = new Scene();
   const camera = new PerspectiveCamera(35, 1, 0.1, 50);
@@ -115,7 +123,7 @@ export function mount(canvas: HTMLCanvasElement) {
     },
     transparent: true,
     depthWrite: false,
-    blending: AdditiveBlending,
+    blending: isDark() ? AdditiveBlending : NormalBlending,
   });
   const points = new Points(geometry, material);
   points.frustumCulled = false;
@@ -139,6 +147,15 @@ export function mount(canvas: HTMLCanvasElement) {
     g.setAttribute("position", new BufferAttribute(ring, 3));
     funnel.add(new LineLoop(g, ringMaterial));
   }
+
+  // Follow the theme toggle.
+  new MutationObserver(() => {
+    readTheme();
+    material.blending = isDark() ? AdditiveBlending : NormalBlending;
+    material.needsUpdate = true;
+    ringMaterial.color.copy(accent);
+    if (!frame) renderer.render(scene, camera);
+  }).observe(document.documentElement, { attributeFilter: ["data-theme"] });
 
   // Size the drawing buffer to the canvas's CSS box.
   const resize = () => {

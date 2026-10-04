@@ -3,11 +3,7 @@
   gap: var(--space-l);
   align-items: center;
   background:
-    radial-gradient(
-      60% 120% at 100% 0%,
-      rgb(212 255 63 / 0.08),
-      transparent 70%
-    ),
+    radial-gradient(60% 120% at 100% 0%, var(--accent-glow), transparent 70%),
     var(--tile);
 }
 
@@ -42,7 +38,7 @@
 }
 
 .link {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 @media (min-width: 48rem) {

@@ -55,7 +55,7 @@
   content: "↗";
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* Results as small cards inside the case-study card. */
@@ -79,7 +79,7 @@
 
 .value {
   font-size: var(--step-3);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .label {

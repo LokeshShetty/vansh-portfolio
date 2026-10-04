@@ -1,13 +1,26 @@
 :root {
-  color-scheme: dark;
-  --page: #0a0b0d;
-  --tile: #131518;
-  --tile-hi: #1a1d21;
-  --line: #24272d;
-  --ink: #ecece9;
-  --ink-dim: #8b8f96;
+  /* Light is the default theme. */
+  color-scheme: light;
+  --page: #f3f3ef;
+  --tile: #ffffff;
+  --tile-hi: #f5f5f1;
+  --line: #e2e2da;
+  --ink: #111213;
+  --ink-dim: #5f636a;
+  /* Lime is a fill colour (meters, badges, CTA). On white it can't carry
+     text, so anything lime-coloured as text uses --accent-text instead. */
   --accent: #d4ff3f;
-  --accent-ink: #0a0b0d;
+  --accent-ink: #111213;
+  --accent-text: #4f7a00;
+  --accent-glow: rgb(160 210 0 / 0.16);
+  --glass: rgb(255 255 255 / 0.72);
+  --shadow:
+    0 1px 2px rgb(17 18 19 / 0.04), 0 12px 32px -18px rgb(17 18 19 / 0.18);
+  --portrait-blend: multiply;
+  --portrait-opacity: 0.5;
+  /* Meter fill and 3D particles: lime would disappear on white. */
+  --meter: #9cd100;
+  --funnel: #1b2a00;
   /* Kept for components that still reference the old names. */
   --surface: var(--tile);
   --hairline: var(--line);
@@ -43,6 +56,35 @@
   --tile-pad: clamp(1.1rem, 0.8rem + 1.3vw, 2rem);
   --grid-gap: clamp(0.5rem, 0.35rem + 0.65vw, 1rem);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dark theme, switched on by the toggle (components/ThemeToggle.astro). */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0a0b0d;
+  --tile: #131518;
+  --tile-hi: #1a1d21;
+  --line: #24272d;
+  --ink: #ecece9;
+  --ink-dim: #8b8f96;
+  --accent-ink: #0a0b0d;
+  --accent-text: #d4ff3f;
+  --accent-glow: rgb(212 255 63 / 0.09);
+  --glass: rgb(19 21 24 / 0.62);
+  --shadow: none;
+  --portrait-blend: normal;
+  --portrait-opacity: 0.6;
+  --meter: var(--accent);
+  --funnel: var(--accent);
+}
+
+/* Light-only: a faint dot grid, like graph paper, behind the tiles. */
+:root:not([data-theme="dark"]) body {
+  background-image: radial-gradient(
+    rgb(17 18 19 / 0.08) 1px,
+    transparent 1.2px
+  );
+  background-size: 22px 22px;
 }
 
 *,
@@ -82,11 +124,11 @@ a {
 }
 
 a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 a:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--accent-text);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -109,6 +151,7 @@ ol {
   background: var(--tile);
   border: 1px solid var(--line);
   border-radius: var(--tile-radius);
+  box-shadow: var(--shadow);
 }
 
 .chip {
@@ -159,7 +202,7 @@ ol {
   inset: 0 0 auto;
   z-index: 10;
   height: 2px;
-  background: var(--accent);
+  background: var(--accent-text);
   transform-origin: 0 50%;
   transform: scaleX(0);
   pointer-events: none;

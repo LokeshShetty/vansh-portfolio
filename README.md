@@ -78,6 +78,25 @@ without WebGL 2, never download it; they see the tile without it. Particle
 motion runs on the GPU, and rendering pauses while the hero is off-screen or
 the tab is hidden.
 
+## Themes
+
+Light is the default. The round button in the top-right corner switches to
+dark and remembers the choice (`localStorage`). A two-line inline script in
+`layouts/Base.astro` applies it before first paint, so there's no flash.
+
+Colours are tokens in `src/styles/globals.css`: `:root` holds the light set,
+`:root[data-theme="dark"]` the dark one. Lime (`--accent`) is a fill colour
+in both themes. Anything lime as text uses `--accent-text`, which is deep
+olive on light, where lime would be unreadable. The light theme also has a
+few touches of its own:
+
+- a lime highlighter behind "grows things." instead of lime text;
+- a faint dot-grid page background;
+- dark funnel particles;
+- a stronger green on the meters.
+
+The contact card stays dark in both themes.
+
 ## Responsive type and spacing
 
 `src/styles/globals.css` defines a fluid type scale (`--step--1` …

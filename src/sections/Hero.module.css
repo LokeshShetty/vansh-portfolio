@@ -36,6 +36,8 @@
 }
 
 .status {
+  /* Room for the floating theme toggle on small screens. */
+  padding-right: 3rem;
   display: inline-flex;
   align-items: center;
   gap: 0.6em;
@@ -48,7 +50,7 @@
   height: 0.5rem;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 4px rgb(212 255 63 / 0.15);
+  box-shadow: 0 0 0 4px var(--accent-glow);
 }
 
 .name {
@@ -58,7 +60,20 @@
 }
 
 .tagline {
-  color: var(--accent);
+  color: var(--accent-text);
+}
+
+/* Light theme: dark text over a lime highlighter stroke instead. */
+:global(:root:not([data-theme="dark"])) .tagline {
+  color: var(--ink);
+  background: linear-gradient(
+    transparent 55%,
+    var(--accent) 55%,
+    var(--accent) 90%,
+    transparent 90%
+  );
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .lede {
@@ -85,12 +100,13 @@
   pointer-events: none;
   /* Fainter on narrow screens, where the text sits on top of the face. */
   opacity: 0.32;
+  mix-blend-mode: var(--portrait-blend);
   mask-image: radial-gradient(closest-side, #000 50%, transparent 100%);
 }
 
 @media (min-width: 64rem) {
   .backdrop {
-    opacity: 0.6;
+    opacity: var(--portrait-opacity);
   }
 }
 
@@ -102,7 +118,7 @@
 
 /* Hero tiles let the portrait through, frosted. */
 .bento > :global(.tile):not(.cta) {
-  background: rgb(19 21 24 / 0.62);
+  background: var(--glass);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
@@ -163,7 +179,7 @@
   left: var(--from);
   width: calc(var(--to) - var(--from));
   border-radius: 999px;
-  background: var(--accent);
+  background: var(--meter);
   transform-origin: 0 50%;
 }
 
