@@ -36,13 +36,10 @@
 
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-    /* Word i lights up over its own slice of the section's journey through
-       the viewport, from 10% to 55% of the way. */
+    /* Each word's animation-range is set inline (see Statement.astro). */
     .word {
       animation: light-up linear both;
       animation-timeline: --statement;
-      animation-range: cover calc(10% + 45% * var(--i) / var(--n)) cover
-        calc(14% + 45% * var(--i) / var(--n));
     }
   }
 }

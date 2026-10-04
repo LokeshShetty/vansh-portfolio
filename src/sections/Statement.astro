@@ -18,15 +18,24 @@ const words = profile.statement.split(/(\*[^*]+\*)/).flatMap((part) =>
         .filter(Boolean)
         .map((text) => ({ text, accent: false })),
 );
+// Word i lights up over its own slice of the section's journey into view;
+// the last word is fully dark by 40% of the way, before the sentence reaches
+// the middle of the screen. Computed here as plain percentages, so the CSS
+// needs no custom properties (an earlier --n here clashed with the
+// registered, non-inheriting --n of the count-up and broke every word).
+const range = (i: number) => {
+  const start = 8 + (28 * i) / words.length;
+  return `cover ${start.toFixed(2)}% cover ${(start + 4).toFixed(2)}%`;
+};
 ---
 
 <section class:list={["shell", styles.statement]} aria-label="In short">
-  <p class={styles.text} style={{ "--n": words.length }}>
+  <p class={styles.text}>
     {words.map((w, i) => (
       <>
         <span
           class:list={[styles.word, w.accent && styles.accent]}
-          style={{ "--i": i }}
+          style={{ "animation-range": range(i) }}
         >
           {w.text}
         </span>{" "}
