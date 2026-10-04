@@ -27,6 +27,7 @@
 
   --font-sans:
     "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
   --font-mono-stack: ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   /* Fluid type scale: each step grows linearly from a 360px to a 1440px
@@ -185,6 +186,53 @@ ol {
   text-wrap: balance;
 }
 
+/* Accent words in italic serif, set against Inter Display. The serif runs
+   small next to Inter, so it's scaled up a touch. */
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: normal;
+  font-size: 1.12em;
+  letter-spacing: -0.02em;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Count-up figures (components/Count.astro). --n is a registered integer,
+   so it animates step by step and a CSS counter prints it. Gated with the
+   scroll animations below, so browsers without them show the plain figure. */
+@property --n {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.count {
+  display: inline-block;
+}
+
+@keyframes count {
+  from {
+    --n: 0;
+  }
+  to {
+    --n: var(--to);
+  }
+}
+
+/* Figures that line up and don't jitter while counting. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
 /* Glyphs drawn from the system font (see components/Text). */
 .sys {
   font-family:
@@ -258,6 +306,22 @@ ol {
       animation: reveal linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 70%;
+    }
+
+    /* The hero stats are on screen at load, so they count once as the page
+       appears (staggered by the tile's --i) rather than on scroll. */
+    .count {
+      counter-reset: n var(--n);
+      animation: count 1.6s var(--ease-out) both;
+      animation-delay: calc(var(--i, 0) * 120ms + 350ms);
+    }
+
+    .count > .num {
+      display: none;
+    }
+
+    .count::after {
+      content: counter(n);
     }
 
     /* Stagger siblings: each starts a little later in the same range. */

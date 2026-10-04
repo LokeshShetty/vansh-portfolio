@@ -154,6 +154,12 @@
   letter-spacing: -0.05em;
 }
 
+/* Reserve the final width while counting, so the suffix doesn't jump.
+   Each tabular digit is 1ch, less the -0.05em tracking. */
+.value :global(.count) {
+  min-width: calc(var(--digits) * (1ch - 0.05em));
+}
+
 .label {
   font-size: var(--step--1);
   color: var(--ink-dim);

@@ -5,12 +5,17 @@
 // Headings use the opsz 32 cut, which is Inter Display.
 import "@fontsource-variable/inter/opsz.css";
 import interLatin from "@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2?url";
+// Accent face for a few words ("grows things.", "touch"): Instrument Serif
+// italic, latin only (~20 KB). Preloaded because the tagline is above the fold.
+import "@fontsource/instrument-serif/latin-400-italic.css";
+import serifItalic from "@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url";
 import "@/styles/globals.css";
 import ThemeToggle from "@/components/ThemeToggle.astro";
 import { profile } from "@/data/profile";
 
 const title = `${profile.name}, ${profile.role}`;
 const description = profile.intro;
+const ogImage = new URL("/og.png", Astro.site ?? Astro.url).href;
 ---
 
 <!doctype html>
@@ -31,13 +36,24 @@ const description = profile.intro;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="profile" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link
       rel="preload"
       href={interLatin}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={serifItalic}
       as="font"
       type="font/woff2"
       crossorigin

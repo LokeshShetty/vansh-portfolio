@@ -55,9 +55,12 @@ to `"/resume.pdf"`.
 - **Static HTML, no framework runtime.** Astro ships no JavaScript unless a
   component asks for it. The page is about 9 KB of gzipped HTML, with the CSS
   inlined (`build.inlineStylesheets: "always"`), so nothing blocks rendering.
-- **One font file.** Inter as a single variable font (weight and optical
-  size), self-hosted from Fontsource. Only the Latin file (~73 KB) is
+- **Two font files.** Inter as a single variable font (weight and optical
+  size), self-hosted from Fontsource; only the Latin file (~73 KB) is
   preloaded and used. Headings use optical size 32, which is Inter Display.
+  Instrument Serif Italic (Latin, ~22 KB) is the accent face for a few words
+  ("grows things.", "touch") via the `.serif` class. Numbers use tabular
+  figures (`.tnum`).
   The ₹ sign is drawn from the system font (`components/Text.astro`), because
   Inter keeps it in a separate ~130 KB file.
 - **Images.** Every image becomes a `<picture>` with AVIF and WebP sources,
@@ -97,6 +100,15 @@ few touches of its own:
 
 The contact card stays dark in both themes.
 
+## Share image
+
+`src/pages/og.png.ts` renders the 1200×630 image used when the link is shared
+on LinkedIn, X or Slack. It's built at build time with satori (layout and
+fonts) and sharp (PNG), from the name, tagline, stats and portrait in
+`profile.ts`. Share images need an absolute URL. On Vercel the production
+domain is picked up automatically; for a custom domain, set `SITE_URL` (for
+example `https://vansh.co`) in the project's environment variables.
+
 ## Responsive type and spacing
 
 `src/styles/globals.css` defines a fluid type scale (`--step--1` …
@@ -110,10 +122,18 @@ Apart from the funnel, the animations are CSS only, so they need no
 JavaScript and run off the main thread.
 
 - The name slides up word by word when the page loads.
+- The hero stats count up from 0 (a registered `@property` integer printed
+  by a CSS counter; `components/Count.astro`). Screen readers get the plain
+  value.
 - Scroll-driven (`animation-timeline`): a progress line along the top, the
   hero portrait zooming as you scroll away, the brand strip sliding sideways,
   tiles and stats rising in (`.reveal`, staggered with `.stagger` and `--i`),
   meters filling, and case-study images opening from the bottom.
+
+CSS is minified with esbuild, not Vite's default lightningcss.
+lightningcss folds `animation-timeline` into the `animation` shorthand,
+which browsers reject, and that silently turns off every scroll animation
+(see `astro.config.mjs`).
 
 Anything not animated is simply shown in its final state. That covers
 browsers without scroll timelines, such as Firefox today, and visitors whose

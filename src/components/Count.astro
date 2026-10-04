@@ -1,0 +1,30 @@
+---
+// A figure like "700+" or "₹55L" whose number counts up from 0 when the
+// page appears. Pure CSS (see .count in globals.css). Screen readers
+// get the plain value, and without scroll-timeline support the number is
+// simply shown as written.
+import Text from "./Text.astro";
+
+type Props = { value: string };
+
+const { value } = Astro.props;
+const match = value.match(/^(\D*?)(\d+)(\D*)$/);
+---
+
+{match ? (
+  <>
+    <span class="sr-only">{value}</span>
+    <span aria-hidden="true">
+      {match[1] && <Text text={match[1]} />}
+      <span
+        class="count tnum"
+        style={{ "--to": Number(match[2]), "--digits": match[2].length }}
+      >
+        <span class="num">{match[2]}</span>
+      </span>
+      {match[3]}
+    </span>
+  </>
+) : (
+  <Text text={value} />
+)}
