@@ -14,15 +14,15 @@ npm run check     # type-check .astro and .ts files
 
 ## Where things live
 
-| Path                     | What                                                       |
-| ------------------------ | ---------------------------------------------------------- |
-| `src/data/profile.ts`    | All the copy: stats, case studies, book, experience, links |
-| `src/assets/media/`      | Images; drop a file in, named after its slot               |
-| `src/pages/index.astro`  | The page: puts the sections in order                       |
-| `src/sections/`          | Hero, Brands, CaseStudy, Book, Background, Footer          |
-| `src/components/`        | Asset (images), Video, Text, Funnel                        |
-| `src/three/funnel.ts`    | The Three.js particle funnel                               |
-| `src/styles/globals.css` | Colours, fluid type and spacing scales, scroll animations  |
+| Path                     | What                                                                  |
+| ------------------------ | --------------------------------------------------------------------- |
+| `src/data/profile.ts`    | All the copy: stats, case studies, book, experience, links            |
+| `src/assets/media/`      | Images; drop a file in, named after its slot                          |
+| `src/pages/index.astro`  | The page: puts the sections in order                                  |
+| `src/sections/`          | Hero, Brands, Statement, CaseStudy, CaseRow, Book, Background, Footer |
+| `src/components/`        | Asset (images), Video, Text, Funnel                                   |
+| `src/three/funnel.ts`    | The Three.js particle funnel                                          |
+| `src/styles/globals.css` | Colours, fluid type and spacing scales, scroll animations             |
 
 Any link set to `null` in `profile.ts` (LinkedIn, résumé, Amazon) is hidden
 until you fill it in.
@@ -34,7 +34,9 @@ Each project is a Markdown file in `src/content/work/`. The frontmatter
 card on the home page and the top of the project's own page at
 `/work/<file-name>/`. The Markdown body underneath is the full write-up. Each
 file starts with an outline in an HTML comment; nothing shows on the page
-until real text is written. To add a project, copy a file and change it. The
+until real text is written. Projects with `featured: true` get a large split
+card on the home page (image side alternating); the rest form an
+expandable list underneath. To add a project, copy a file and change it. The
 schema in `src/content.config.ts` checks every field at build time.
 
 ## Adding assets
