@@ -1,0 +1,106 @@
+---
+import Asset from "@/components/Asset.astro";
+import Funnel from "@/components/Funnel.astro";
+import Text from "@/components/Text.astro";
+import { profile, stack, stats } from "@/data/profile";
+import styles from "./Hero.module.css";
+
+const nameWords = profile.name.split(" ");
+const taglineWords = profile.tagline.split(" ");
+---
+
+<header class={styles.hero}>
+  {/* Greyscale portrait behind the grid; the tiles are translucent so it shows through them softly. */}
+  <div class={styles.backdrop} aria-hidden="true">
+    <Asset
+      {...profile.portrait}
+      alt=""
+      class={styles.picture}
+      sizes="(min-width: 90rem) 52rem, (min-width: 40rem) 60vw, 26rem"
+      priority
+    />
+  </div>
+
+  <div class:list={["shell", styles.bento]}>
+    <div class:list={["tile", styles.intro]}>
+      <Funnel class={styles.funnel} />
+      <p class:list={["eyebrow", styles.status]}>{profile.current}</p>
+      <h1 class:list={["display", styles.name]}>
+        {nameWords.map((word, i) => (
+          <>
+            {i > 0 && " "}
+            <span class="word" style={{ "--i": i }}>
+              <span>{word}</span>
+            </span>
+          </>
+        ))}
+        <br />
+        <span class={styles.tagline}>
+          {taglineWords.map((word, i) => (
+            <>
+              {i > 0 && " "}
+              <span class="word" style={{ "--i": nameWords.length + i }}>
+                <span>{word}</span>
+              </span>
+            </>
+          ))}
+        </span>
+      </h1>
+      <div class={styles.lower}>
+        <p class={styles.lede}>{profile.intro}</p>
+        <span class={styles.place}>{profile.location}</span>
+      </div>
+    </div>
+
+    {stats.map((stat, i) => (
+      <div
+        class:list={["tile", styles.stat, "reveal", "stagger"]}
+        style={{ "--i": i }}
+      >
+        <p class="eyebrow">{stat.kicker}</p>
+        <p class:list={["display", styles.value]}>
+          <Text text={stat.value} />
+        </p>
+        <p class={styles.label}>{stat.label}</p>
+        {stat.meter && (
+          <div class={styles.meter}>
+            <div
+              class={styles.track}
+              role="img"
+              aria-label={`${stat.meter.label}: ${stat.meter.display}`}
+              style={{
+                "--from": `${stat.meter.from ?? 0}%`,
+                "--to": `${stat.meter.to}%`,
+              }}
+            >
+              <span class={styles.fill} />
+            </div>
+            <p class={styles.meterLabel}>
+              <span>{stat.meter.label}</span>
+              <span>{stat.meter.display}</span>
+            </p>
+          </div>
+        )}
+      </div>
+    ))}
+
+    <div class:list={["tile", styles.stack, "reveal"]}>
+      <p class="eyebrow">Stack</p>
+      <ul class={styles.chips}>
+        {stack.map((tool) => (
+          <li class="chip">{tool}</li>
+        ))}
+      </ul>
+    </div>
+
+    <a
+      class:list={["tile", styles.cta, "reveal"]}
+      href={`mailto:${profile.email}`}
+    >
+      <span class="eyebrow">Open to talk</span>
+      <span class:list={["display", styles.ctaText]}>
+        Let&rsquo;s grow <span aria-hidden="true">→</span>
+      </span>
+    </a>
+  </div>
+</header>

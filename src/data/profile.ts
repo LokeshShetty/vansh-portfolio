@@ -1,11 +1,11 @@
 // All page copy lives here. Fields set to `null` are placeholders: the page
 // hides a null link, and an asset `name` with no file behind it renders as a
-// labelled empty frame until it's uploaded (see README → Adding assets).
+// labelled empty frame until it's added (see README → Adding assets).
 
 export type Link = { label: string; href: string | null };
 
 export type AssetSlot = {
-  /** File name (without extension) to drop into assets-src/. */
+  /** File name (without extension) in src/assets/media/. */
   name: string;
   alt: string;
   /** Frame shape shown before the real file exists. */

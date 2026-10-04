@@ -1,7 +1,6 @@
 // The hero's 3D funnel: lime particles stream from a wide mouth down to a
-// narrow pipeline. Not part of the Next build. scripts/postbuild.mjs bundles
-// this file on its own and the page loads it only after it is idle, so the
-// HTML still renders with no JavaScript at all.
+// narrow pipeline. Loaded by components/Funnel.astro only after the page is
+// idle, so the HTML still renders with no JavaScript at all.
 //
 // All particle motion runs in the vertex shader, so the CPU only updates two
 // uniforms per frame. Rendering pauses while the canvas is off-screen or the

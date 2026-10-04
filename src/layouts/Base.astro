@@ -1,0 +1,43 @@
+---
+// The only web font: Inter as one variable file (weight + optical size),
+// self-hosted from Fontsource. Only the latin file is preloaded; the other
+// subsets load on demand via unicode-range and the page never uses them.
+// Headings use the opsz 32 cut, which is Inter Display.
+import "@fontsource-variable/inter/opsz.css";
+import interLatin from "@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2?url";
+import "@/styles/globals.css";
+import { profile } from "@/data/profile";
+
+const title = `${profile.name}, ${profile.role}`;
+const description = profile.intro;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0a0b0d" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="profile" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href={interLatin}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="progress" aria-hidden="true"></div>
+    <slot />
+  </body>
+</html>

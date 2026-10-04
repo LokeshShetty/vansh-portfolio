@@ -1,0 +1,18 @@
+---
+import { brands } from "@/data/profile";
+import styles from "./Brands.module.css";
+// A row of names that slides sideways as the page scrolls. The second copy
+// only exists so the row never shows a gap; screen readers skip it.
+---
+
+<section class={styles.band} aria-label="Brands and stages">
+  <div class={styles.track}>
+    {[0, 1].map((copy) => (
+      <ul class={styles.row} aria-hidden={copy === 1 ? "true" : undefined}>
+        {brands.map((b) => (
+          <li>{b}</li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</section>

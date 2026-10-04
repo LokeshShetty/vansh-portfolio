@@ -1,0 +1,31 @@
+---
+import Asset from "@/components/Asset.astro";
+import { book } from "@/data/profile";
+import styles from "./Book.module.css";
+---
+
+<section id="book" class="shell" aria-labelledby="book-title">
+  <div class:list={["tile", styles.inner, "reveal"]}>
+    <div class={styles.coverWrap}>
+      <Asset {...book.cover} class={styles.cover} sizes="16rem" />
+    </div>
+    <div class={styles.copy}>
+      <p class="chip">Author · Amazon, 2026</p>
+      <h2 id="book-title" class:list={["display", styles.title]}>
+        {book.title}
+      </h2>
+      <p class={styles.subtitle}>{book.subtitle}</p>
+      <p class={styles.note}>{book.note}</p>
+      {book.href && (
+        <a
+          class={styles.link}
+          href={book.href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Get it on Amazon ↗
+        </a>
+      )}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+---
+// Inter's ₹ lives in its latin-ext file (~130 KB). Drawing just that glyph
+// from the system font keeps the page on the single latin file.
+type Props = { text: string };
+
+const parts = Astro.props.text.split("₹");
+---
+
+{parts.map((part, i) => (
+  <>
+    {i > 0 && <span class="sys">₹</span>}
+    {part}
+  </>
+))}

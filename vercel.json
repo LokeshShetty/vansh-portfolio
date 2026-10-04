@@ -1,19 +1,10 @@
 {
   "framework": null,
   "buildCommand": "npm run build",
-  "outputDirectory": "out",
+  "outputDirectory": "dist",
   "headers": [
     {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/js/(.*)",
+      "source": "/_astro/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
