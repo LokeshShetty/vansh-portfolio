@@ -1,0 +1,79 @@
+---
+import Asset from "@/components/Asset.astro";
+import Text from "@/components/Text.astro";
+import Video from "@/components/Video.astro";
+import type { CollectionEntry } from "astro:content";
+import styles from "./CaseStudy.module.css";
+
+type Props = { study: CollectionEntry<"work">; index: number };
+
+const { id } = Astro.props.study;
+const study = Astro.props.study.data;
+const { index } = Astro.props;
+const href = `/work/${id}/`;
+const hasAssets = study.assets.length > 0;
+
+// "9 / 16" → true. Portrait media is capped so a reel doesn't fill a phone screen.
+const isTall = (ratio = "") => {
+  const [w, h] = ratio.split("/").map(Number);
+  return h > w;
+};
+const mediaClass = (ratio?: string) =>
+  [styles.item, isTall(ratio) ? styles.tall : ""].join(" ");
+---
+
+<article
+  id={id}
+  class:list={["tile", styles.study, !hasAssets && styles.textOnly]}
+  aria-labelledby={`${id}-title`}
+>
+  <div class={styles.copy}>
+    <div class:list={[styles.head, "reveal"]}>
+      <span class:list={["display", styles.index]} aria-hidden="true">
+        {String(index).padStart(2, "0")}
+      </span>
+      <p class="eyebrow">{study.kicker}</p>
+    </div>
+    <h3 id={`${id}-title`} class:list={["display", styles.title, "reveal"]}>
+      <a href={href} class={styles.titleLink}>
+        <Text text={study.title} />
+      </a>
+    </h3>
+    <p class:list={[styles.summary, "reveal"]}>{study.summary}</p>
+    <ul class:list={[styles.did, "reveal"]}>
+      {study.did.map((item) => (
+        <li>
+          <Text text={item} />
+        </li>
+      ))}
+    </ul>
+    <dl class={styles.results}>
+      {study.results.map((r, i) => (
+        <div
+          class:list={[styles.result, "reveal", "stagger"]}
+          style={{ "--i": i }}
+        >
+          <dt class={styles.label}>{r.label}</dt>
+          <dd class:list={["display", styles.value]}>
+            <Text text={r.value} />
+          </dd>
+        </div>
+      ))}
+    </dl>
+    <a href={href} class:list={[styles.more, "reveal"]}>
+      Read the case study <span aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  {hasAssets && (
+    <div class={styles.media}>
+      {study.assets.map((asset) =>
+        asset.src !== undefined ? (
+          <Video {...asset} src={asset.src} class={mediaClass(asset.ratio)} />
+        ) : (
+          <Asset {...asset} class={mediaClass(asset.ratio)} />
+        ),
+      )}
+    </div>
+  )}
+</article>

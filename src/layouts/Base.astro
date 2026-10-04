@@ -1,0 +1,101 @@
+---
+// The only web font: Inter as one variable file (weight + optical size),
+// self-hosted from Fontsource. Only the latin file is preloaded; the other
+// subsets load on demand via unicode-range and the page never uses them.
+// Headings use the opsz 32 cut, which is Inter Display.
+import "@fontsource-variable/inter/opsz.css";
+import interLatin from "@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2?url";
+import "@/styles/globals.css";
+import ThemeToggle from "@/components/ThemeToggle.astro";
+import { profile } from "@/data/profile";
+
+type Props = { title?: string; description?: string };
+
+const title = Astro.props.title
+  ? `${Astro.props.title} | ${profile.name}`
+  : `${profile.name}, ${profile.role}`;
+const description = Astro.props.description ?? profile.intro;
+const ogImage = new URL("/og.png", Astro.site ?? Astro.url).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f3f3ef" />
+    <script is:inline>
+      // Apply a saved dark-theme choice before first paint. Light is default.
+      try {
+        if (localStorage.getItem("theme") === "dark")
+          document.documentElement.dataset.theme = "dark";
+      } catch {}
+    </script>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href={interLatin}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="progress" aria-hidden="true"></div>
+    <ThemeToggle />
+    <slot />
+    {import.meta.env.PROD && (
+      <>
+        {/* Vercel Web Analytics: page views, plus "contact_click" events
+              from any link with data-track (custom events need a Vercel Pro
+              plan; on Hobby they're ignored). Enable Analytics in the
+              Vercel dashboard; until then the script just 404s. */}
+        <script is:inline>
+          window.va =
+            window.va ||
+            function () {
+              (window.vaq = window.vaq || []).push(arguments);
+            };
+          addEventListener("click", (e) => {
+            const a = e.target.closest?.("[data-track]");
+            if (a)
+              va("event", {
+                name: a.dataset.track,
+                data: { from: a.dataset.from || "" },
+              });
+          });
+        </script>
+        <script is:inline defer src="/_vercel/insights/script.js"></script>
+      </>
+    )}
+    <script is:inline>
+      // Cursor spotlight on tiles: mouse and trackpad only, never on touch.
+      if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        addEventListener(
+          "pointermove",
+          (e) => {
+            const tile = e.target.closest?.(".tile");
+            if (!tile) return;
+            const r = tile.getBoundingClientRect();
+            tile.style.setProperty("--mx", `${e.clientX - r.left}px`);
+            tile.style.setProperty("--my", `${e.clientY - r.top}px`);
+          },
+          { passive: true },
+        );
+      }
+    </script>
+  </body>
+</html>

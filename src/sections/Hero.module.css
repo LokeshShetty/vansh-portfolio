@@ -1,0 +1,314 @@
+.bento {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  padding-top: var(--grid-gap);
+}
+
+/* Name tile */
+.intro {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-l);
+  min-height: clamp(20rem, 14rem + 16vw, 30rem);
+}
+
+/* 3D funnel behind the name. Empty (and invisible) until it loads. */
+.funnel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 85%;
+  height: 70%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+}
+
+.funnel[data-ready] {
+  opacity: 0.4;
+}
+
+.intro > :not(.funnel) {
+  position: relative;
+}
+
+.status {
+  /* Room for the floating theme toggle on small screens. */
+  padding-right: 3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.status::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.name {
+  font-size: clamp(2.6rem, 1rem + 7vw, 8.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.tagline {
+  color: var(--accent-text);
+}
+
+/* Light theme: dark text over a lime highlighter stroke instead. */
+:global(:root:not([data-theme="dark"])) .tagline {
+  color: var(--ink);
+  background: linear-gradient(
+    transparent 55%,
+    var(--accent) 55%,
+    var(--accent) 90%,
+    transparent 90%
+  );
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.lede {
+  max-width: 40ch;
+  font-size: var(--step-1);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--ink-dim);
+}
+
+/* Portrait blended into the page behind the grid. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.backdrop {
+  position: absolute;
+  z-index: -1;
+  top: clamp(-2rem, -4rem + 4vw, 0rem);
+  right: clamp(-12rem, -2rem - 8vw, -3rem);
+  width: clamp(24rem, 12rem + 42vw, 54rem);
+  pointer-events: none;
+  /* Fainter on narrow screens, where the text sits on top of the face. */
+  opacity: 0.32;
+  mix-blend-mode: var(--portrait-blend);
+  mask-image: radial-gradient(closest-side, #000 50%, transparent 100%);
+}
+
+@media (min-width: 64rem) {
+  .backdrop {
+    opacity: var(--portrait-opacity);
+  }
+}
+
+.picture {
+  border-radius: 0;
+  background: none;
+  filter: grayscale(1) contrast(1.1) brightness(0.95);
+}
+
+/* Hero tiles let the portrait through, frosted. */
+.bento > :global(.tile):not(.cta) {
+  background: var(--glass);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.lower {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-s);
+}
+
+.place {
+  flex: none;
+  padding: 0.4em 0.95em;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+/* Metric tiles */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.value {
+  margin-top: var(--space-xs);
+  font-size: clamp(2.4rem, 1.6rem + 3.3vw, 4.75rem);
+  letter-spacing: -0.05em;
+}
+
+/* Reserve the final width while counting, so the suffix doesn't jump.
+   Each tabular digit is 1ch, less the -0.05em tracking. */
+.value :global(.count) {
+  min-width: calc(var(--digits) * (1ch - 0.05em));
+}
+
+.label {
+  font-size: var(--step--1);
+  color: var(--ink-dim);
+}
+
+.meter {
+  margin-top: auto;
+  padding-top: var(--space-m);
+}
+
+/* Dim up to --from, lime from --from to --to. */
+.track {
+  position: relative;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  inset-block: 0;
+  left: var(--from);
+  width: calc(var(--to) - var(--from));
+  border-radius: 999px;
+  background: var(--meter);
+  transform-origin: 0 50%;
+}
+
+.meterLabel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.15rem 1rem;
+  margin-top: var(--space-2xs);
+  font-family: var(--font-mono-stack);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+}
+
+.meterLabel span {
+  white-space: nowrap;
+}
+
+/* Stack + CTA */
+.stack {
+  grid-column: 1 / -1;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  margin-top: var(--space-s);
+}
+
+.cta {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-l);
+  min-height: clamp(9rem, 7rem + 6vw, 13rem);
+  color: var(--accent-ink);
+  text-decoration: none;
+  background: var(--accent);
+  border-color: var(--accent);
+  transition: transform 0.3s var(--ease-out);
+}
+
+.cta:hover {
+  color: var(--accent-ink);
+  transform: translateY(-3px);
+}
+
+.cta :global(.eyebrow) {
+  color: inherit;
+  opacity: 0.7;
+}
+
+.ctaText {
+  font-size: var(--step-4);
+}
+
+.ctaText span {
+  display: inline-block;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.cta:hover .ctaText span {
+  transform: translateX(0.2em);
+}
+
+@media (min-width: 48rem) {
+  /* Sits left of the portrait so the two don't stack up. */
+  .funnel {
+    right: 30%;
+    width: 34%;
+    height: 100%;
+  }
+
+  .funnel[data-ready] {
+    opacity: 1;
+  }
+}
+
+/* Desktop: name across the top, four stats in a row, then stack + CTA. */
+@media (min-width: 64rem) {
+  .bento {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .intro {
+    grid-column: 1 / -1;
+  }
+
+  .stack {
+    grid-column: span 3;
+  }
+
+  .cta {
+    grid-column: span 1;
+  }
+}
+
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes zoom {
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .fill {
+      animation: fill linear both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 45%;
+    }
+
+    .picture {
+      animation: zoom linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100svh;
+    }
+  }
+}

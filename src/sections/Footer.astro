@@ -1,0 +1,104 @@
+---
+// Closing contact card: a big "Get in touch", the email, round icon links,
+// and a slim footer row.
+import { profile } from "@/data/profile";
+import styles from "./Footer.module.css";
+
+const icons: Record<string, { d: string; width: number }> = {
+  Email: { d: "M3 6h18v12H3zM3 6l9 7 9-7", width: 1.6 },
+  LinkedIn: {
+    d: "M6.5 9.5V18M6.5 6.2v.1M10.5 18v-5a2.5 2.5 0 0 1 5 0v5M10.5 9.5V18",
+    width: 1.8,
+  },
+  "Résumé (PDF)": {
+    d: "M7 3h7l4 4v14H7zM14 3v4h4M9.5 12h6M9.5 15.5h6",
+    width: 1.6,
+  },
+};
+
+const sections = [
+  { label: "Work", href: "/#work" },
+  { label: "Book", href: "/#book" },
+  { label: "Experience", href: "/#about" },
+];
+
+const links = [
+  { label: "Email", href: `mailto:${profile.email}` },
+  ...profile.links,
+].filter((l): l is { label: string; href: string } => Boolean(l.href));
+---
+
+<footer class:list={["shell", styles.footer]}>
+  <div class:list={["tile", styles.card, "reveal"]}>
+    <p class={styles.lets}>Let&rsquo;s</p>
+    <h2 class:list={["display", "lift", styles.big]}>
+      <span>
+        Get in <span class={styles.touch}>touch</span>
+      </span>
+    </h2>
+
+    <div class={styles.contact}>
+      <a
+        class={styles.email}
+        href={`mailto:${profile.email}`}
+        data-track="contact_click"
+        data-from="footer"
+      >
+        {profile.email}
+      </a>
+      <ul class={styles.icons}>
+        {links.map((link) => {
+          const external = link.href.startsWith("http");
+          const icon = icons[link.label];
+          return (
+            <li>
+              <a
+                href={link.href}
+                aria-label={link.label}
+                data-track={
+                  link.label === "Email" ? "contact_click" : "link_click"
+                }
+                data-from={`footer-${link.label.toLowerCase()}`}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                >
+                  {icon && (
+                    <path
+                      d={icon.d}
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width={icon.width}
+                      stroke-linecap="round"
+                    />
+                  )}
+                </svg>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+
+    <div class={styles.bar}>
+      <nav aria-label="Sections">
+        <ul class={styles.nav}>
+          {sections.map((s) => (
+            <li>
+              <a href={s.href}>{s.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <p class={styles.mark}>{profile.name}</p>
+      <p class={styles.meta}>
+        {profile.location} · © {new Date().getFullYear()}
+      </p>
+    </div>
+  </div>
+</footer>

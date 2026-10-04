@@ -1,0 +1,40 @@
+---
+// Native player with preload="none": only the poster loads with the page,
+// and no video bytes are fetched until someone presses play. No JavaScript.
+// The poster is the image in src/assets/media with the same name.
+import { getImage } from "astro:assets";
+import type { VideoSlot } from "@/data/profile";
+import { getMedia } from "@/lib/media";
+import Asset from "./Asset.astro";
+import styles from "./Video.module.css";
+
+type Props = VideoSlot & { class?: string };
+
+const { name, alt, src, ratio = "16 / 9", class: className } = Astro.props;
+const image = getMedia(name);
+const poster =
+  src && image
+    ? await getImage({
+        src: image,
+        format: "webp",
+        width: Math.min(image.width, 960),
+      })
+    : undefined;
+---
+
+{src && image && poster ? (
+  <video
+    class:list={[styles.video, className]}
+    style={{ aspectRatio: ratio }}
+    src={src}
+    poster={poster.src}
+    aria-label={alt}
+    width={image.width}
+    height={image.height}
+    preload="none"
+    controls
+    playsinline
+  />
+) : (
+  <Asset {...Astro.props} />
+)}

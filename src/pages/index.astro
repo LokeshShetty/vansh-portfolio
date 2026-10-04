@@ -1,0 +1,58 @@
+---
+import Base from "@/layouts/Base.astro";
+import Hero from "@/sections/Hero.astro";
+import Brands from "@/sections/Brands.astro";
+import CaseStudy from "@/sections/CaseStudy.astro";
+import Book from "@/sections/Book.astro";
+import Background from "@/sections/Background.astro";
+import Footer from "@/sections/Footer.astro";
+import { getCollection } from "astro:content";
+import { profile } from "@/data/profile";
+import styles from "@/styles/page.module.css";
+
+const caseStudies = (await getCollection("work")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  jobTitle: profile.role,
+  email: `mailto:${profile.email}`,
+  sameAs: profile.links.flatMap((l) => (l.href ? [l.href] : [])),
+};
+---
+
+<Base>
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(personJsonLd)}
+  />
+  <main>
+    <Hero />
+    <Brands />
+    <section
+      id="work"
+      class:list={["shell", styles.work]}
+      aria-labelledby="work-title"
+    >
+      <div class={styles.heading}>
+        <h2 id="work-title" class="display lift">
+          <span>Selected work</span>
+        </h2>
+        <p class="chip reveal">
+          {String(caseStudies.length).padStart(2, "0")} projects
+        </p>
+      </div>
+      {caseStudies.map((study, i) => (
+        <CaseStudy study={study} index={i + 1} />
+      ))}
+    </section>
+    <Book />
+    <Background />
+  </main>
+  <Footer />
+</Base>

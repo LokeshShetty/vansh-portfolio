@@ -1,10 +1,10 @@
 {
   "framework": null,
   "buildCommand": "npm run build",
-  "outputDirectory": "out",
+  "outputDirectory": "dist",
   "headers": [
     {
-      "source": "/assets/(.*)",
+      "source": "/_astro/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

@@ -1,0 +1,35 @@
+---
+// Canvas for the Three.js particle funnel (src/three/funnel.ts). Astro
+// bundles the script below; three.js itself is split into its own hashed
+// chunk and only downloaded once the page has loaded and gone idle. Skipped
+// for reduced motion, Save-Data and browsers without WebGL 2, which simply
+// see the tile without it.
+type Props = { class?: string };
+---
+
+<canvas data-funnel class={Astro.props.class} aria-hidden="true"></canvas>
+
+<script>
+  const canvas = document.querySelector<HTMLCanvasElement>(
+    "canvas[data-funnel]",
+  );
+  const ok =
+    canvas &&
+    matchMedia("(prefers-reduced-motion: no-preference)").matches &&
+    !(navigator as Navigator & { connection?: { saveData?: boolean } })
+      .connection?.saveData &&
+    !!document.createElement("canvas").getContext("webgl2");
+
+  if (canvas && ok) {
+    const go = () =>
+      import("../three/funnel")
+        .then(({ mount }) => mount(canvas))
+        .catch(() => {});
+    const idle = () =>
+      "requestIdleCallback" in window
+        ? requestIdleCallback(go, { timeout: 2500 })
+        : setTimeout(go, 1200);
+    if (document.readyState === "complete") idle();
+    else addEventListener("load", idle, { once: true });
+  }
+</script>

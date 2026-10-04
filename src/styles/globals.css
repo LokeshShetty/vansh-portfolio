@@ -1,0 +1,380 @@
+:root {
+  /* Light is the default theme. */
+  color-scheme: light;
+  --page: #f3f3ef;
+  --tile: #ffffff;
+  --tile-hi: #f5f5f1;
+  --line: #e2e2da;
+  --ink: #111213;
+  --ink-dim: #5f636a;
+  /* Lime is a fill colour (meters, badges, CTA). On white it can't carry
+     text, so anything lime-coloured as text uses --accent-text instead. */
+  --accent: #d4ff3f;
+  --accent-ink: #111213;
+  --accent-text: #4f7a00;
+  --accent-glow: rgb(160 210 0 / 0.16);
+  --glass: rgb(255 255 255 / 0.72);
+  --shadow:
+    0 1px 2px rgb(17 18 19 / 0.04), 0 12px 32px -18px rgb(17 18 19 / 0.18);
+  --portrait-blend: multiply;
+  --portrait-opacity: 0.5;
+  /* Meter fill and 3D particles: lime would disappear on white. */
+  --meter: #9cd100;
+  --funnel: #1b2a00;
+  /* Kept for components that still reference the old names. */
+  --surface: var(--tile);
+  --hairline: var(--line);
+
+  --font-sans:
+    "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono-stack: ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Fluid type scale: each step grows linearly from a 360px to a 1440px
+     viewport and stops there, so there are no breakpoint jumps. */
+  --step--1: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-0: clamp(1rem, 0.96rem + 0.19vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.12rem + 0.37vw, 1.45rem);
+  --step-2: clamp(1.44rem, 1.29rem + 0.65vw, 1.875rem);
+  --step-3: clamp(1.75rem, 1.5rem + 1.1vw, 2.5rem);
+  --step-4: clamp(2.1rem, 1.7rem + 1.85vw, 3.35rem);
+  --step-5: clamp(2.5rem, 1.83rem + 3vw, 4.5rem);
+  --step-hero: clamp(3rem, 1.25rem + 8.1vw, 9.25rem);
+
+  /* Fluid spacing on the same 360 → 1440 range. */
+  --space-2xs: clamp(0.375rem, 0.35rem + 0.1vw, 0.5rem);
+  --space-xs: clamp(0.5rem, 0.46rem + 0.19vw, 0.75rem);
+  --space-s: clamp(1rem, 0.93rem + 0.37vw, 1.25rem);
+  --space-m: clamp(1.5rem, 1.39rem + 0.56vw, 2rem);
+  --space-l: clamp(2rem, 1.58rem + 1.85vw, 3.25rem);
+  --space-xl: clamp(3rem, 2.17rem + 3.7vw, 5.5rem);
+  --space-2xl: clamp(4.5rem, 3rem + 6.7vw, 9rem);
+
+  --gutter: clamp(1rem, 0.4rem + 2.7vw, 3rem);
+  --shell: 80rem;
+  --radius: clamp(0.5rem, 0.4rem + 0.4vw, 0.875rem);
+  --tile-radius: clamp(1rem, 0.8rem + 0.9vw, 1.75rem);
+  --tile-pad: clamp(1.1rem, 0.8rem + 1.3vw, 2rem);
+  --grid-gap: clamp(0.5rem, 0.35rem + 0.65vw, 1rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dark theme, switched on by the toggle (components/ThemeToggle.astro). */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0a0b0d;
+  --tile: #131518;
+  --tile-hi: #1a1d21;
+  --line: #24272d;
+  --ink: #ecece9;
+  --ink-dim: #8b8f96;
+  --accent-ink: #0a0b0d;
+  --accent-text: #d4ff3f;
+  --accent-glow: rgb(212 255 63 / 0.09);
+  --glass: rgb(19 21 24 / 0.62);
+  --shadow: none;
+  --portrait-blend: normal;
+  --portrait-opacity: 0.6;
+  --meter: var(--accent);
+  --funnel: var(--accent);
+}
+
+/* Light-only: a faint dot grid, like graph paper, behind the tiles. */
+:root:not([data-theme="dark"]) body {
+  background-image: radial-gradient(
+    rgb(17 18 19 / 0.08) 1px,
+    transparent 1.2px
+  );
+  background-size: 22px 22px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100svh;
+  color: var(--ink);
+  background: var(--page);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  font-optical-sizing: auto;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-text);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+::selection {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+
+/* The dashboard card every section is built from. */
+.tile {
+  position: relative;
+  overflow: hidden;
+  padding: var(--tile-pad);
+  background: var(--tile);
+  border: 1px solid var(--line);
+  border-radius: var(--tile-radius);
+  box-shadow: var(--shadow);
+}
+
+/* Cursor spotlight (layouts/Base.astro sets --mx/--my on the hovered tile).
+   The glow sits between the tile's background and its content. */
+.tile {
+  isolation: isolate;
+}
+
+.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    28rem circle at var(--mx, 50%) var(--my, 50%),
+    var(--accent-glow),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.tile:hover::before {
+  opacity: 1;
+}
+
+/* Theme switch: the circular clip-path in ThemeToggle.astro does the whole
+   transition, so the default cross-fade is turned off. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.3em 0.85em;
+  font-size: var(--step--1);
+  color: var(--ink-dim);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.shell {
+  width: min(100% - 2 * var(--gutter), var(--shell));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  font-family: var(--font-mono-stack);
+  font-size: var(--step--1);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+/* Inter Display: the opsz 32 cut of Inter, with tight tracking. */
+.display {
+  font-variation-settings: "opsz" 32;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Count-up figures (components/Count.astro). --n is a registered integer,
+   so it animates step by step and a CSS counter prints it. Gated with the
+   scroll animations below, so browsers without them show the plain figure. */
+@property --n {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.count {
+  display: inline-block;
+}
+
+@keyframes count {
+  from {
+    --n: 0;
+  }
+  to {
+    --n: var(--to);
+  }
+}
+
+/* Figures that line up and don't jitter while counting. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Glyphs drawn from the system font (see components/Text). */
+.sys {
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  font-weight: 500;
+}
+
+/* Scroll progress hairline across the top of the viewport. */
+.progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 10;
+  height: 2px;
+  background: var(--accent-text);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+/*
+  Scroll animations. All of it is CSS scroll-driven, so it costs no
+  JavaScript and runs off the main thread. The page without it is the
+  finished layout: browsers without support, and anyone who prefers reduced
+  motion, simply see everything in place.
+*/
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-shift, 2rem));
+  }
+}
+
+@keyframes grow-x {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* On-load headline: each word slides up out of its own mask. */
+  .word {
+    display: inline-block;
+    overflow: clip;
+    overflow-clip-margin: 0.12em;
+    vertical-align: bottom;
+  }
+
+  .word > span {
+    display: inline-block;
+    animation: rise 0.9s var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 90ms + 80ms);
+  }
+
+  @supports (animation-timeline: view()) {
+    .progress {
+      animation: grow-x linear both;
+      animation-timeline: scroll(root);
+    }
+
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+
+    /* The hero stats are on screen at load, so they count once as the page
+       appears (staggered by the tile's --i) rather than on scroll. */
+    .count {
+      counter-reset: n var(--n);
+      animation: count 1.6s var(--ease-out) both;
+      animation-delay: calc(var(--i, 0) * 120ms + 350ms);
+    }
+
+    .count > .num {
+      display: none;
+    }
+
+    .count::after {
+      content: counter(n);
+    }
+
+    /* Section headings slide up out of a mask as they scroll in. */
+    .lift {
+      overflow: clip;
+      overflow-clip-margin: 0.15em;
+    }
+
+    .lift > span {
+      display: inline-block;
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 90%;
+    }
+
+    /* Stagger siblings: each starts a little later in the same range. */
+    .stagger {
+      animation-range: entry calc(var(--i, 0) * 8%) entry
+        calc(70% + var(--i, 0) * 8%);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,106 @@
+---
+// One page per case study, generated from src/content/work/<id>.md: the
+// frontmatter fills the header, results and visuals; the Markdown body is
+// the write-up underneath.
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import Asset from "@/components/Asset.astro";
+import Video from "@/components/Video.astro";
+import Text from "@/components/Text.astro";
+import Footer from "@/sections/Footer.astro";
+import styles from "@/styles/work.module.css";
+
+export async function getStaticPaths() {
+  const all = (await getCollection("work")).sort(
+    (a, b) => a.data.order - b.data.order,
+  );
+  return all.map((study, i) => ({
+    params: { id: study.id },
+    props: { study, next: all[(i + 1) % all.length] },
+  }));
+}
+
+type Props = { study: CollectionEntry<"work">; next: CollectionEntry<"work"> };
+
+const { study, next } = Astro.props;
+const { data } = study;
+const { Content } = await render(study);
+// The body starts as just an outline in an HTML comment; show the write-up
+// area only once there's real text.
+const hasWriteUp = Boolean(study.body?.replace(/<!--[\s\S]*?-->/g, "").trim());
+---
+
+<Base title={data.title} description={data.summary}>
+  <main class:list={["shell", styles.page]}>
+    <a href="/#work" class={styles.back}>
+      <span aria-hidden="true">←</span> All work
+    </a>
+
+    <header class:list={["tile", styles.header]}>
+      <div class={styles.head}>
+        <span class:list={["display", styles.index]} aria-hidden="true">
+          {String(data.order).padStart(2, "0")}
+        </span>
+        <p class="eyebrow">{data.kicker}</p>
+      </div>
+      <h1 class:list={["display", styles.title]}>
+        <Text text={data.title} />
+      </h1>
+      <p class={styles.summary}>{data.summary}</p>
+    </header>
+
+    <dl class={styles.results}>
+      {data.results.map((r, i) => (
+        <div
+          class:list={["tile", styles.result, "reveal", "stagger"]}
+          style={{ "--i": i }}
+        >
+          <dt class={styles.label}>{r.label}</dt>
+          <dd class:list={["display", styles.value]}>
+            <Text text={r.value} />
+          </dd>
+        </div>
+      ))}
+    </dl>
+
+    {data.assets.length > 0 && (
+      <div class={styles.media}>
+        {data.assets.map((asset) =>
+          asset.src !== undefined ? (
+            <Video {...asset} src={asset.src} class={styles.item} />
+          ) : (
+            <Asset
+              {...asset}
+              class={styles.item}
+              sizes="(min-width: 80rem) 76rem, 100vw"
+            />
+          ),
+        )}
+      </div>
+    )}
+
+    <section class:list={["tile", styles.body, "reveal"]}>
+      <h2 class="eyebrow">What I did</h2>
+      <ul class={styles.did}>
+        {data.did.map((item) => (
+          <li>
+            <Text text={item} />
+          </li>
+        ))}
+      </ul>
+      {hasWriteUp && (
+        <div class={styles.prose}>
+          <Content />
+        </div>
+      )}
+    </section>
+
+    <a href={`/work/${next.id}/`} class:list={["tile", styles.next, "reveal"]}>
+      <span class="eyebrow">Next project</span>
+      <span class:list={["display", styles.nextTitle]}>
+        <Text text={next.data.title} /> <span aria-hidden="true">→</span>
+      </span>
+    </a>
+  </main>
+  <Footer />
+</Base>
