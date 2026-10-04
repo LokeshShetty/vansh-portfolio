@@ -24,12 +24,9 @@ const h = (
 });
 
 export const GET: APIRoute = async () => {
-  const [inter400, inter600, serif, portrait] = await Promise.all([
+  const [inter400, inter600, portrait] = await Promise.all([
     font("@fontsource/inter/files/inter-latin-400-normal.woff"),
     font("@fontsource/inter/files/inter-latin-600-normal.woff"),
-    font(
-      "@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff",
-    ),
     // Greyscale, with its edges faded to transparent by a radial alpha mask.
     sharp("src/assets/media/portrait.jpg")
       .resize(560, 560)
@@ -110,9 +107,9 @@ export const GET: APIRoute = async () => {
         h(
           "div",
           {
-            fontFamily: "Instrument Serif",
-            fontStyle: "italic",
-            fontSize: 118,
+            fontSize: 104,
+            fontWeight: 600,
+            letterSpacing: -4,
             color: lime,
             lineHeight: 1.05,
           },
@@ -147,7 +144,6 @@ export const GET: APIRoute = async () => {
     fonts: [
       { name: "Inter", data: inter400, weight: 400, style: "normal" },
       { name: "Inter", data: inter600, weight: 600, style: "normal" },
-      { name: "Instrument Serif", data: serif, weight: 400, style: "italic" },
     ],
   });
   const png = await sharp(Buffer.from(svg)).png().toBuffer();

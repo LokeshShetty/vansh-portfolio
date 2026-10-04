@@ -179,13 +179,29 @@ export function mount(canvas: HTMLCanvasElement) {
     { passive: true },
   );
 
+  // Scrolling speeds the flow up; it eases back once scrolling stops.
+  let boost = 0;
+  let lastY = scrollY;
+  addEventListener(
+    "scroll",
+    () => {
+      boost = Math.min(boost + Math.abs(scrollY - lastY) / 60, 6);
+      lastY = scrollY;
+    },
+    { passive: true },
+  );
+
   let visible = true;
   let frame = 0;
-  const start = performance.now();
+  let clock = 0;
+  let last = performance.now();
 
   const tick = (now: number) => {
     frame = 0;
-    material.uniforms.uTime.value = (now - start) / 1000;
+    const dt = Math.min((now - last) / 1000, 0.1);
+    boost *= 0.94;
+    clock += dt * (1 + boost);
+    material.uniforms.uTime.value = clock;
     funnel.rotation.y += (target.x - funnel.rotation.y) * 0.05;
     funnel.rotation.x += (0.18 + target.y - funnel.rotation.x) * 0.05;
     renderer.render(scene, camera);
@@ -193,6 +209,7 @@ export function mount(canvas: HTMLCanvasElement) {
   };
   const schedule = () => {
     if (!frame && visible && !document.hidden) {
+      last = performance.now();
       frame = requestAnimationFrame(tick);
     }
   };

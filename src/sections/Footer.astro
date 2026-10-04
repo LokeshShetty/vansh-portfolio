@@ -17,9 +17,9 @@ const icons: Record<string, { d: string; width: number }> = {
 };
 
 const sections = [
-  { label: "Work", href: "#work" },
-  { label: "Book", href: "#book" },
-  { label: "Experience", href: "#about" },
+  { label: "Work", href: "/#work" },
+  { label: "Book", href: "/#book" },
+  { label: "Experience", href: "/#about" },
 ];
 
 const links = [
@@ -31,12 +31,19 @@ const links = [
 <footer class:list={["shell", styles.footer]}>
   <div class:list={["tile", styles.card, "reveal"]}>
     <p class={styles.lets}>Let&rsquo;s</p>
-    <h2 class:list={["display", styles.big]}>
-      Get in <span class:list={["serif", styles.touch]}>touch</span>
+    <h2 class:list={["display", "lift", styles.big]}>
+      <span>
+        Get in <span class={styles.touch}>touch</span>
+      </span>
     </h2>
 
     <div class={styles.contact}>
-      <a class={styles.email} href={`mailto:${profile.email}`}>
+      <a
+        class={styles.email}
+        href={`mailto:${profile.email}`}
+        data-track="contact_click"
+        data-from="footer"
+      >
         {profile.email}
       </a>
       <ul class={styles.icons}>
@@ -48,6 +55,10 @@ const links = [
               <a
                 href={link.href}
                 aria-label={link.label}
+                data-track={
+                  link.label === "Email" ? "contact_click" : "link_click"
+                }
+                data-from={`footer-${link.label.toLowerCase()}`}
                 target={external ? "_blank" : undefined}
                 rel={external ? "noopener noreferrer" : undefined}
               >

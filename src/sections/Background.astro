@@ -5,7 +5,9 @@ import styles from "./Background.module.css";
 
 <section id="about" class:list={["shell", styles.grid]} aria-label="Background">
   <div class="tile reveal">
-    <h2 class:list={["display", styles.heading]}>Experience</h2>
+    <h2 class:list={["display", "lift", styles.heading]}>
+      <span>Experience</span>
+    </h2>
     <ol class={styles.list}>
       {experience.map((item) => (
         <li class={styles.row}>
@@ -20,7 +22,9 @@ import styles from "./Background.module.css";
     </ol>
   </div>
   <div class="tile reveal">
-    <h2 class:list={["display", styles.heading]}>Toolkit</h2>
+    <h2 class:list={["display", "lift", styles.heading]}>
+      <span>Toolkit</span>
+    </h2>
     <dl class={styles.list}>
       {toolkit.map((t) => (
         <div class={styles.tool}>

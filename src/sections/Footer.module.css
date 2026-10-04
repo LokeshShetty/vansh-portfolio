@@ -37,6 +37,7 @@
 }
 
 .touch {
+  font-weight: 200;
   color: var(--accent-text);
 }
 

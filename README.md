@@ -27,6 +27,16 @@ npm run check     # type-check .astro and .ts files
 Any link set to `null` in `profile.ts` (LinkedIn, résumé, Amazon) is hidden
 until you fill it in.
 
+## Case studies
+
+Each project is a Markdown file in `src/content/work/`. The frontmatter
+(order, kicker, title, summary, what he did, results, assets) drives both the
+card on the home page and the top of the project's own page at
+`/work/<file-name>/`. The Markdown body underneath is the full write-up. Each
+file starts with an outline in an HTML comment; nothing shows on the page
+until real text is written. To add a project, copy a file and change it. The
+schema in `src/content.config.ts` checks every field at build time.
+
 ## Adding assets
 
 Put the original image in `src/assets/media/`, named after its slot (for
@@ -55,12 +65,10 @@ to `"/resume.pdf"`.
 - **Static HTML, no framework runtime.** Astro ships no JavaScript unless a
   component asks for it. The page is about 9 KB of gzipped HTML, with the CSS
   inlined (`build.inlineStylesheets: "always"`), so nothing blocks rendering.
-- **Two font files.** Inter as a single variable font (weight and optical
+- **One font file.** Inter as a single variable font (weight and optical
   size), self-hosted from Fontsource; only the Latin file (~73 KB) is
   preloaded and used. Headings use optical size 32, which is Inter Display.
-  Instrument Serif Italic (Latin, ~22 KB) is the accent face for a few words
-  ("grows things.", "touch") via the `.serif` class. Numbers use tabular
-  figures (`.tnum`).
+  Numbers use tabular figures (`.tnum`).
   The ₹ sign is drawn from the system font (`components/Text.astro`), because
   Inter keeps it in a separate ~130 KB file.
 - **Images.** Every image becomes a `<picture>` with AVIF and WebP sources,
@@ -122,11 +130,18 @@ Apart from the funnel, the animations are CSS only, so they need no
 JavaScript and run off the main thread.
 
 - The name slides up word by word when the page loads.
+- Section headings slide up out of a mask as they scroll in (`.lift`).
+- Switching theme wipes the new one in as a circle from the toggle (View
+  Transitions API; an instant switch where it isn't supported).
+- Tiles get a faint lime spotlight that follows the cursor (mouse and
+  trackpad only; a few lines in `layouts/Base.astro`).
+- The 3D funnel flows faster while you scroll and eases back after.
 - The hero stats count up from 0 (a registered `@property` integer printed
   by a CSS counter; `components/Count.astro`). Screen readers get the plain
   value.
 - Scroll-driven (`animation-timeline`): a progress line along the top, the
-  hero portrait zooming as you scroll away, the brand strip sliding sideways,
+  hero portrait zooming as you scroll away, the brand and channel strips
+  sliding in opposite directions,
   tiles and stats rising in (`.reveal`, staggered with `.stagger` and `--i`),
   meters filling, and case-study images opening from the bottom.
 
@@ -138,6 +153,15 @@ which browsers reject, and that silently turns off every scroll animation
 Anything not animated is simply shown in its final state. That covers
 browsers without scroll timelines, such as Firefox today, and visitors whose
 system asks for reduced motion.
+
+## Analytics
+
+Production builds include Vercel Web Analytics (under 1 KB). To turn it on,
+open the Vercel project → Analytics → Enable. Page views then work on any
+plan. Clicks on "Get in touch" links are sent as `contact_click` events
+(tagged with where they came from) via a `data-track` attribute. Custom
+events need a Vercel Pro plan; on Hobby they're simply ignored. Until
+Analytics is enabled, the script request returns a harmless 404.
 
 ## Deploying (Vercel)
 

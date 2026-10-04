@@ -35,7 +35,7 @@ const taglineWords = profile.tagline.split(" ");
           </>
         ))}
         <br />
-        <span class:list={["serif", styles.tagline]}>
+        <span class={styles.tagline}>
           {taglineWords.map((word, i) => (
             <>
               {i > 0 && " "}
@@ -96,6 +96,8 @@ const taglineWords = profile.tagline.split(" ");
     <a
       class:list={["tile", styles.cta, "reveal"]}
       href={`mailto:${profile.email}`}
+      data-track="contact_click"
+      data-from="hero"
     >
       <span class="eyebrow">Open to talk</span>
       <span class:list={["display", styles.ctaText]}>

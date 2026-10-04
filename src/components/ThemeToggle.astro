@@ -1,7 +1,8 @@
 ---
 // Light is the default. The toggle switches to dark and remembers it; the
 // inline script in Base.astro applies a saved choice before first paint, so
-// there's no flash of the wrong theme.
+// there's no flash of the wrong theme. Where the View Transitions API is
+// available, the new theme wipes in as a circle from the button.
 import styles from "./ThemeToggle.module.css";
 ---
 
@@ -61,14 +62,43 @@ import styles from "./ThemeToggle.module.css";
       button.setAttribute("aria-pressed", String(dark));
       meta.setAttribute("content", dark ? "#0a0b0d" : "#f3f3ef");
     };
-    button.addEventListener("click", () => {
-      const dark = root.dataset.theme !== "dark";
+    const apply = (dark) => {
       if (dark) root.dataset.theme = "dark";
       else delete root.dataset.theme;
       try {
         localStorage.setItem("theme", dark ? "dark" : "light");
       } catch {}
       sync();
+    };
+    button.addEventListener("click", (event) => {
+      const dark = root.dataset.theme !== "dark";
+      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!document.startViewTransition || still) return apply(dark);
+      // The new theme spreads out in a circle from the button.
+      const r = button.getBoundingClientRect();
+      const x = event.clientX || r.left + r.width / 2;
+      const y = event.clientY || r.top + r.height / 2;
+      const end = Math.hypot(
+        Math.max(x, innerWidth - x),
+        Math.max(y, innerHeight - y),
+      );
+      document
+        .startViewTransition(() => apply(dark))
+        .ready.then(() => {
+          root.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${end}px at ${x}px ${y}px)`,
+              ],
+            },
+            {
+              duration: 650,
+              easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+              pseudoElement: "::view-transition-new(root)",
+            },
+          );
+        });
     });
     sync();
   })();

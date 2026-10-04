@@ -1,0 +1,148 @@
+.page {
+  display: grid;
+  gap: var(--grid-gap);
+  padding-top: var(--grid-gap);
+}
+
+.back {
+  justify-self: start;
+  padding: 0.55em 1.1em;
+  font-size: var(--step--1);
+  font-weight: 500;
+  text-decoration: none;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.header {
+  display: grid;
+  gap: var(--space-s);
+  padding-block: var(--space-xl);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.index {
+  display: grid;
+  place-items: center;
+  width: 2.4em;
+  height: 2.4em;
+  font-size: var(--step--1);
+  letter-spacing: 0;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.title {
+  max-width: 18ch;
+  font-size: var(--step-5);
+}
+
+.summary {
+  max-width: 52ch;
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-dim);
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--grid-gap);
+}
+
+.result {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: var(--space-2xs);
+}
+
+.value {
+  font-size: var(--step-4);
+  color: var(--accent-text);
+}
+
+.label {
+  font-size: var(--step--1);
+  color: var(--ink-dim);
+}
+
+.media {
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  align-items: start;
+}
+
+.item {
+  border-radius: var(--tile-radius);
+}
+
+.body {
+  display: grid;
+  gap: var(--space-m);
+}
+
+.did {
+  display: grid;
+  gap: var(--space-xs);
+  font-size: var(--step-1);
+}
+
+.did li {
+  position: relative;
+  padding-left: 1.4em;
+}
+
+.did li::before {
+  content: "↗";
+  position: absolute;
+  left: 0;
+  color: var(--accent-text);
+}
+
+/* The Markdown write-up, rendered only once it's written. */
+.prose {
+  display: grid;
+  gap: var(--space-s);
+  max-width: 64ch;
+}
+
+.prose :global(h2) {
+  margin-top: var(--space-m);
+  font-size: var(--step-3);
+  font-variation-settings: "opsz" 32;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.prose :global(p),
+.prose :global(li) {
+  color: var(--ink-dim);
+}
+
+.prose :global(ul) {
+  list-style: disc;
+  padding-left: 1.2em;
+}
+
+.next {
+  display: grid;
+  gap: var(--space-xs);
+  text-decoration: none;
+}
+
+.nextTitle {
+  font-size: var(--step-3);
+}
+
+.next:hover .nextTitle {
+  color: var(--accent-text);
+}

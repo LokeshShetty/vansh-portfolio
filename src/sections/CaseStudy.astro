@@ -2,12 +2,15 @@
 import Asset from "@/components/Asset.astro";
 import Text from "@/components/Text.astro";
 import Video from "@/components/Video.astro";
-import type { CaseStudy } from "@/data/profile";
+import type { CollectionEntry } from "astro:content";
 import styles from "./CaseStudy.module.css";
 
-type Props = { study: CaseStudy; index: number };
+type Props = { study: CollectionEntry<"work">; index: number };
 
-const { study, index } = Astro.props;
+const { id } = Astro.props.study;
+const study = Astro.props.study.data;
+const { index } = Astro.props;
+const href = `/work/${id}/`;
 const hasAssets = study.assets.length > 0;
 
 // "9 / 16" → true. Portrait media is capped so a reel doesn't fill a phone screen.
@@ -20,9 +23,9 @@ const mediaClass = (ratio?: string) =>
 ---
 
 <article
-  id={study.id}
+  id={id}
   class:list={["tile", styles.study, !hasAssets && styles.textOnly]}
-  aria-labelledby={`${study.id}-title`}
+  aria-labelledby={`${id}-title`}
 >
   <div class={styles.copy}>
     <div class:list={[styles.head, "reveal"]}>
@@ -31,11 +34,10 @@ const mediaClass = (ratio?: string) =>
       </span>
       <p class="eyebrow">{study.kicker}</p>
     </div>
-    <h3
-      id={`${study.id}-title`}
-      class:list={["display", styles.title, "reveal"]}
-    >
-      <Text text={study.title} />
+    <h3 id={`${id}-title`} class:list={["display", styles.title, "reveal"]}>
+      <a href={href} class={styles.titleLink}>
+        <Text text={study.title} />
+      </a>
     </h3>
     <p class:list={[styles.summary, "reveal"]}>{study.summary}</p>
     <ul class:list={[styles.did, "reveal"]}>
@@ -58,13 +60,16 @@ const mediaClass = (ratio?: string) =>
         </div>
       ))}
     </dl>
+    <a href={href} class:list={[styles.more, "reveal"]}>
+      Read the case study <span aria-hidden="true">→</span>
+    </a>
   </div>
 
   {hasAssets && (
     <div class={styles.media}>
       {study.assets.map((asset) =>
-        "src" in asset ? (
-          <Video {...asset} class={mediaClass(asset.ratio)} />
+        asset.src !== undefined ? (
+          <Video {...asset} src={asset.src} class={mediaClass(asset.ratio)} />
         ) : (
           <Asset {...asset} class={mediaClass(asset.ratio)} />
         ),

@@ -6,8 +6,13 @@ import CaseStudy from "@/sections/CaseStudy.astro";
 import Book from "@/sections/Book.astro";
 import Background from "@/sections/Background.astro";
 import Footer from "@/sections/Footer.astro";
-import { caseStudies, profile } from "@/data/profile";
+import { getCollection } from "astro:content";
+import { profile } from "@/data/profile";
 import styles from "@/styles/page.module.css";
+
+const caseStudies = (await getCollection("work")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -35,8 +40,8 @@ const personJsonLd = {
       aria-labelledby="work-title"
     >
       <div class={styles.heading}>
-        <h2 id="work-title" class="display reveal">
-          Selected work
+        <h2 id="work-title" class="display lift">
+          <span>Selected work</span>
         </h2>
         <p class="chip reveal">
           {String(caseStudies.length).padStart(2, "0")} projects

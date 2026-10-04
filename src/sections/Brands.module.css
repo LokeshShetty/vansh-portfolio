@@ -1,8 +1,23 @@
 .band {
+  display: grid;
+  gap: var(--space-s);
   overflow: hidden;
   margin-top: var(--space-xl);
   padding-block: var(--space-m);
   border-block: 1px solid var(--line);
+}
+
+/* Channels: smaller, outlined, so the brand row stays the headline. */
+.alt {
+  font-size: var(--step-0);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.row.alt li::after {
+  content: "/";
+  font-size: 1em;
+  color: var(--line);
 }
 
 /* Without scroll timelines this is simply a centred, wrapping list. */
@@ -56,6 +71,10 @@
       width: max-content;
       animation: slide linear both;
       animation-timeline: view();
+    }
+
+    .reverse {
+      animation-direction: reverse;
     }
 
     .row {

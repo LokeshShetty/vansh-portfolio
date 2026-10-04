@@ -32,6 +32,40 @@
   line-height: 1.02;
 }
 
+.titleLink {
+  text-decoration: none;
+}
+
+.more {
+  justify-self: start;
+  margin-top: var(--space-xs);
+  padding: 0.55em 1.1em;
+  font-size: var(--step--1);
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.more:hover {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.more span {
+  display: inline-block;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.more:hover span {
+  transform: translateX(0.2em);
+}
+
 .summary {
   max-width: 48ch;
   font-size: var(--step-1);

@@ -11,8 +11,8 @@ import styles from "./Book.module.css";
     </div>
     <div class={styles.copy}>
       <p class="chip">Author · Amazon, 2026</p>
-      <h2 id="book-title" class:list={["display", styles.title]}>
-        {book.title}
+      <h2 id="book-title" class:list={["display", "lift", styles.title]}>
+        <span>{book.title}</span>
       </h2>
       <p class={styles.subtitle}>{book.subtitle}</p>
       <p class={styles.note}>{book.note}</p>

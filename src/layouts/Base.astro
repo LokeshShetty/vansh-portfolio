@@ -5,16 +5,16 @@
 // Headings use the opsz 32 cut, which is Inter Display.
 import "@fontsource-variable/inter/opsz.css";
 import interLatin from "@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2?url";
-// Accent face for a few words ("grows things.", "touch"): Instrument Serif
-// italic, latin only (~20 KB). Preloaded because the tagline is above the fold.
-import "@fontsource/instrument-serif/latin-400-italic.css";
-import serifItalic from "@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url";
 import "@/styles/globals.css";
 import ThemeToggle from "@/components/ThemeToggle.astro";
 import { profile } from "@/data/profile";
 
-const title = `${profile.name}, ${profile.role}`;
-const description = profile.intro;
+type Props = { title?: string; description?: string };
+
+const title = Astro.props.title
+  ? `${Astro.props.title} | ${profile.name}`
+  : `${profile.name}, ${profile.role}`;
+const description = Astro.props.description ?? profile.intro;
 const ogImage = new URL("/og.png", Astro.site ?? Astro.url).href;
 ---
 
@@ -51,18 +51,51 @@ const ogImage = new URL("/og.png", Astro.site ?? Astro.url).href;
       type="font/woff2"
       crossorigin
     />
-    <link
-      rel="preload"
-      href={serifItalic}
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
     <slot name="head" />
   </head>
   <body>
     <div class="progress" aria-hidden="true"></div>
     <ThemeToggle />
     <slot />
+    {import.meta.env.PROD && (
+      <>
+        {/* Vercel Web Analytics: page views, plus "contact_click" events
+              from any link with data-track (custom events need a Vercel Pro
+              plan; on Hobby they're ignored). Enable Analytics in the
+              Vercel dashboard; until then the script just 404s. */}
+        <script is:inline>
+          window.va =
+            window.va ||
+            function () {
+              (window.vaq = window.vaq || []).push(arguments);
+            };
+          addEventListener("click", (e) => {
+            const a = e.target.closest?.("[data-track]");
+            if (a)
+              va("event", {
+                name: a.dataset.track,
+                data: { from: a.dataset.from || "" },
+              });
+          });
+        </script>
+        <script is:inline defer src="/_vercel/insights/script.js"></script>
+      </>
+    )}
+    <script is:inline>
+      // Cursor spotlight on tiles: mouse and trackpad only, never on touch.
+      if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        addEventListener(
+          "pointermove",
+          (e) => {
+            const tile = e.target.closest?.(".tile");
+            if (!tile) return;
+            const r = tile.getBoundingClientRect();
+            tile.style.setProperty("--mx", `${e.clientX - r.left}px`);
+            tile.style.setProperty("--my", `${e.clientY - r.top}px`);
+          },
+          { passive: true },
+        );
+      }
+    </script>
   </body>
 </html>

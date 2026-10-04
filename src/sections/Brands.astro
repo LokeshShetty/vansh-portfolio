@@ -1,18 +1,32 @@
 ---
-import { brands } from "@/data/profile";
+import { brands, channels } from "@/data/profile";
 import styles from "./Brands.module.css";
-// A row of names that slides sideways as the page scrolls. The second copy
-// only exists so the row never shows a gap; screen readers skip it.
+// Two rows that slide in opposite directions as the page scrolls: brands on
+// top, channels below. Each row is doubled so it never shows a gap; screen
+// readers skip the copies.
+const rows = [
+  { label: "Brands and stages", items: brands, reverse: false },
+  { label: "Channels", items: channels, reverse: true },
+];
 ---
 
-<section class={styles.band} aria-label="Brands and stages">
-  <div class={styles.track}>
-    {[0, 1].map((copy) => (
-      <ul class={styles.row} aria-hidden={copy === 1 ? "true" : undefined}>
-        {brands.map((b) => (
-          <li>{b}</li>
-        ))}
-      </ul>
-    ))}
-  </div>
+<section class={styles.band} aria-label="Brands and channels">
+  {rows.map((row) => (
+    <div
+      class:list={[styles.track, row.reverse && styles.reverse]}
+      aria-label={row.label}
+      role="group"
+    >
+      {[0, 1].map((copy) => (
+        <ul
+          class:list={[styles.row, row.reverse && styles.alt]}
+          aria-hidden={copy === 1 ? "true" : undefined}
+        >
+          {row.items.map((b) => (
+            <li>{b}</li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  ))}
 </section>
