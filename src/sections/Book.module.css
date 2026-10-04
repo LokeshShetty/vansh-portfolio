@@ -1,13 +1,26 @@
 .band {
-  /* Own palette: dark ink on lime, in both themes. */
-  --ink: #111213;
-  --ink-dim: rgb(17 18 19 / 0.68);
-  --line: rgb(17 18 19 / 0.22);
-  --hairline: rgb(17 18 19 / 0.25);
-  --surface: rgb(255 255 255 / 0.35);
-  --page: #d4ff3f;
+  /* Own palette, taken from the book: deep purple, violet gradient. */
+  --ink: #f3eefc;
+  --ink-dim: rgb(243 238 252 / 0.68);
+  --line: rgb(255 255 255 / 0.14);
+  --hairline: rgb(255 255 255 / 0.16);
+  --surface: rgb(255 255 255 / 0.06);
+  --page: #0c0912;
+  --violet-a: #c26be0;
+  --violet-b: #7b5cff;
   color: var(--ink);
-  background: var(--accent);
+  background:
+    radial-gradient(
+      55% 75% at 78% 50%,
+      rgb(140 90 255 / 0.28),
+      transparent 70%
+    ),
+    radial-gradient(
+      40% 60% at 10% 100%,
+      rgb(194 107 224 / 0.16),
+      transparent 70%
+    ),
+    #0c0912;
   padding-block: var(--space-2xl);
   margin-block: var(--space-xl);
   overflow: clip;
@@ -32,11 +45,33 @@
   letter-spacing: -0.06em;
 }
 
+/* The cover's violet gradient on the title. */
+.title span {
+  background: linear-gradient(100deg, var(--violet-a), var(--violet-b));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .subtitle {
   font-size: var(--step-2);
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.02em;
+}
+
+.quote {
+  margin-block: var(--space-xs);
+  padding-left: var(--space-s);
+  font-size: var(--step-1);
+  font-style: italic;
+  line-height: 1.4;
+  color: #d5b8ff;
+  border-left: 2px solid var(--violet-a);
+}
+
+.credit {
+  font-weight: 600;
 }
 
 .note {
@@ -48,43 +83,155 @@
   padding: 0.7em 1.4em;
   font-weight: 600;
   text-decoration: none;
-  color: var(--accent);
-  background: var(--ink);
+  color: #fff;
+  background: linear-gradient(100deg, var(--violet-a), var(--violet-b));
   border-radius: 999px;
 }
 
 .link:hover {
   color: #fff;
+  filter: brightness(1.1);
 }
 
-/* The cover, tilted like a book on a table. */
+/* --- The 3D book --------------------------------------------------- */
+
 .stage {
   display: grid;
-  place-items: center;
-  perspective: 1400px;
+  justify-items: center;
+  gap: var(--space-l);
+  perspective: 1600px;
+  padding-block: var(--space-m);
 }
 
 .book {
-  width: clamp(11rem, 7rem + 12vw, 18rem);
-  transform: rotateY(-24deg) rotateX(6deg) rotateZ(-2deg);
+  --w: clamp(12rem, 8rem + 12vw, 19rem);
+  --h: calc(var(--w) * 1.503);
+  /* Spine depth, from the cover image: 94px spine on a 954px front. */
+  --d: calc(var(--w) * 0.0985);
+  position: relative;
+  width: var(--w);
+  height: var(--h);
   transform-style: preserve-3d;
-  transition: transform 0.7s var(--ease-out);
+  transform: rotateX(8deg) rotateY(32deg);
+  transition: transform 0.9s var(--ease-out);
 }
 
 .stage:hover .book {
-  transform: rotateY(0) rotateX(0) rotateZ(0);
+  transform: rotateX(4deg) rotateY(18deg);
 }
 
-.cover {
-  border-radius: 4px 10px 10px 4px;
-  box-shadow:
-    inset 6px 0 10px -6px rgb(0 0 0 / 0.35),
-    -18px 30px 50px -18px rgb(17 18 19 / 0.55);
+.book[data-flipped],
+.stage:hover .book[data-flipped] {
+  transform: rotateX(8deg) rotateY(-162deg);
+}
+
+.face {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+.art :global(img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front,
+.back {
+  inset: 0;
+  overflow: hidden;
+}
+
+.front {
+  transform: translateZ(calc(var(--d) / 2));
+  border-radius: 2px 6px 6px 2px;
+  box-shadow: inset 4px 0 8px -4px rgb(0 0 0 / 0.6);
+}
+
+.back {
+  transform: rotateY(180deg) translateZ(calc(var(--d) / 2));
+  border-radius: 6px 2px 2px 6px;
+}
+
+/* Spine: on the left edge, facing left. */
+.spine {
+  top: 0;
+  left: calc(50% - var(--d) / 2);
+  width: var(--d);
+  height: 100%;
+  transform: rotateY(-90deg) translateZ(calc(var(--w) / 2));
+}
+
+/* Page edges: right side and top. */
+.pages,
+.top {
+  background: repeating-linear-gradient(90deg, #f4f1ea 0 1px, #d8d2c4 1px 2px);
+}
+
+.pages {
+  top: 3px;
+  left: calc(50% - var(--d) / 2);
+  width: calc(var(--d) - 2px);
+  height: calc(100% - 6px);
+  transform: rotateY(90deg) translateZ(calc(var(--w) / 2 - 3px));
+}
+
+.top {
+  top: calc(50% - var(--d) / 2);
+  left: 3px;
+  width: calc(100% - 6px);
+  height: calc(var(--d) - 2px);
+  background: repeating-linear-gradient(0deg, #f4f1ea 0 1px, #d8d2c4 1px 2px);
+  transform: rotateX(90deg) translateZ(calc(var(--h) / 2 - 3px));
+}
+
+/* Soft shadow on the "table". */
+.stage::after {
+  content: "";
+  width: calc(var(--w, 15rem) * 0.9);
+  height: 1.5rem;
+  margin-top: calc(var(--space-l) * -1);
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.55), transparent);
+  filter: blur(4px);
+  order: 1;
+}
+
+.flip {
+  order: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.6em 1.2em;
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--ink);
+  background: rgb(255 255 255 / 0.06);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.flip:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+.flip:focus-visible {
+  outline: 2px solid var(--violet-a);
+  outline-offset: 3px;
 }
 
 @media (min-width: 48rem) {
   .inner {
-    grid-template-columns: 1.3fr 1fr;
+    grid-template-columns: 1.2fr 1fr;
   }
 }
 

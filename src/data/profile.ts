@@ -139,9 +139,20 @@ export const book = {
   title: "AGI Now",
   subtitle:
     "AGI is Already Here, Are You Ready for the Biggest Technological Revolution?",
-  note: "Co-authored with founder Ishaan Bhola. Amazon, January 2026, Kindle and paperback.",
+  /** From the back cover. */
+  quote:
+    "AGI did not arrive with an announcement. It has started emerging in our systems.",
+  credit: "By Ishaan Bhola (CEO & Founder, SuperAGI) with Vansh Agicha",
+  note: "Amazon, January 2026 · Kindle and paperback",
   href: null as string | null,
-  cover: { name: "agi-now-cover", alt: "Cover of AGI Now", ratio: "2 / 3" },
+  /** The three parts of the wraparound cover, cut from one image. */
+  cover: {
+    name: "agi-now-cover",
+    alt: "Front cover of AGI Now by Ishaan Bhola with Vansh Agicha",
+    ratio: "2 / 3",
+  },
+  spine: { name: "agi-now-spine", alt: "", ratio: "94 / 1434" },
+  back: { name: "agi-now-back", alt: "Back cover of AGI Now", ratio: "2 / 3" },
 };
 
 export const experience = [

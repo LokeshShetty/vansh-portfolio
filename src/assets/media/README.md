@@ -16,7 +16,9 @@ time, so commit the originals as they are.
 | `organic-growth-chart`    | AI content engine: traffic chart  | 16:9            |
 | `social-posts`            | Social: top LinkedIn posts        | 4:3             |
 | `social-reel`             | Social: video poster              | 9:16            |
-| `agi-now-cover`           | AGI Now book cover                | 2:3             |
+| `agi-now-cover`           | AGI Now: front cover (3D book)    | 2:3             |
+| `agi-now-spine`           | AGI Now: spine                    | 94:1434         |
+| `agi-now-back`            | AGI Now: back cover (on "Flip")   | 2:3             |
 
 Export at least 1600px wide where you can (portrait/cover: 1000px). Bigger
 is fine; the build never upscales and caps output at 1600px.

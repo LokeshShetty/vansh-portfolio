@@ -1,7 +1,8 @@
 ---
-// The book, as a full-width lime band with the cover tilted in 3D. It
-// straightens up on hover. The band sets its own colour tokens, so it reads
-// the same in both themes.
+// The book, in its own deep-purple band (both themes), as a 3D object built
+// from the real wraparound cover: front, spine and back are separate faces,
+// with page edges on the right and top. It sits tilted so the spine shows,
+// turns a little on hover, and "Flip" spins it round to the back cover.
 import Asset from "@/components/Asset.astro";
 import { book } from "@/data/profile";
 import styles from "./Book.module.css";
@@ -15,6 +16,8 @@ import styles from "./Book.module.css";
         <span>{book.title}</span>
       </h2>
       <p class={styles.subtitle}>{book.subtitle}</p>
+      <blockquote class={styles.quote}>“{book.quote}”</blockquote>
+      <p class={styles.credit}>{book.credit}</p>
       <p class={styles.note}>{book.note}</p>
       {book.href && (
         <a
@@ -27,10 +30,44 @@ import styles from "./Book.module.css";
         </a>
       )}
     </div>
+
     <div class={styles.stage}>
-      <div class={styles.book}>
-        <Asset {...book.cover} class={styles.cover} sizes="18rem" />
+      <div class={styles.book} data-book>
+        <div class:list={[styles.face, styles.front]}>
+          <Asset
+            {...book.cover}
+            class={styles.art}
+            sizes="(min-width: 48rem) 19rem, 60vw"
+          />
+        </div>
+        <div class:list={[styles.face, styles.spine]} aria-hidden="true">
+          <Asset {...book.spine} class={styles.art} sizes="2rem" />
+        </div>
+        <div class:list={[styles.face, styles.back]}>
+          <Asset
+            {...book.back}
+            class={styles.art}
+            sizes="(min-width: 48rem) 19rem, 60vw"
+          />
+        </div>
+        <div class:list={[styles.face, styles.pages]} aria-hidden="true"></div>
+        <div class:list={[styles.face, styles.top]} aria-hidden="true"></div>
       </div>
+      <button type="button" class={styles.flip} data-flip aria-pressed="false">
+        <span aria-hidden="true">↻</span> Flip to the back cover
+      </button>
     </div>
   </div>
 </section>
+
+<script>
+  const book = document.querySelector<HTMLElement>("[data-book]");
+  const flip = document.querySelector<HTMLButtonElement>("[data-flip]");
+  flip?.addEventListener("click", () => {
+    const back = book?.toggleAttribute("data-flipped") ?? false;
+    flip.setAttribute("aria-pressed", String(back));
+    flip.lastChild!.textContent = back
+      ? " Flip to the front cover"
+      : " Flip to the back cover";
+  });
+</script>
