@@ -154,14 +154,12 @@
   }
 }
 
-/* Media opens from the bottom as it scrolls in. */
+/* Media rises and settles as it scrolls in. Transform and opacity only, so
+   the compositor runs it without repainting (clip-path would repaint). */
 @keyframes unveil {
   from {
-    clip-path: inset(30% 0 0 0 round var(--radius));
+    opacity: 0;
     transform: translateY(3rem) scale(0.96);
-  }
-  to {
-    clip-path: inset(0 0 0 0 round var(--radius));
   }
 }
 

@@ -13,11 +13,10 @@
   --accent-ink: #111213;
   --accent-text: #4f7a00;
   --accent-glow: rgb(160 210 0 / 0.16);
-  --glass: rgb(255 255 255 / 0.72);
+  --glass: rgb(255 255 255 / 0.66);
   --shadow:
     0 1px 2px rgb(17 18 19 / 0.04), 0 12px 32px -18px rgb(17 18 19 / 0.18);
-  --portrait-blend: multiply;
-  --portrait-opacity: 0.5;
+  --portrait-opacity: 0.85;
   /* Meter fill and 3D particles: lime would disappear on white. */
   --meter: #9cd100;
   --funnel: #1b2a00;
@@ -70,10 +69,9 @@
   --accent-ink: #0a0b0d;
   --accent-text: #d4ff3f;
   --accent-glow: rgb(212 255 63 / 0.09);
-  --glass: rgb(19 21 24 / 0.62);
+  --glass: rgb(19 21 24 / 0.74);
   --shadow: none;
-  --portrait-blend: normal;
-  --portrait-opacity: 0.6;
+  --portrait-opacity: 0.7;
   --meter: var(--accent);
   --funnel: var(--accent);
 }

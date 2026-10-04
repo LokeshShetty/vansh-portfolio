@@ -29,7 +29,7 @@ export default defineConfig({
   image: {
     service: {
       entrypoint: "astro/assets/services/sharp",
-      config: { avif: { quality: 50, effort: 6 }, webp: { quality: 72 } },
+      config: { avif: { quality: 64, effort: 6 }, webp: { quality: 82 } },
     },
   },
 });

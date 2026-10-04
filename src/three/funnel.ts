@@ -22,7 +22,10 @@ import {
   WebGLRenderer,
 } from "three";
 
-const COUNT = 2400;
+// Fewer particles and a lower render resolution on small screens, which are
+// usually phones with weaker GPUs.
+const SMALL = matchMedia("(max-width: 48rem)").matches;
+const COUNT = SMALL ? 1200 : 2400;
 const TOP = 1.7; // y of the funnel mouth
 const BOTTOM = -1.9; // y where the stream leaves
 const MOUTH = 1.75; // radius at the top
@@ -73,7 +76,7 @@ export function mount(canvas: HTMLCanvasElement) {
     antialias: false,
     powerPreference: "low-power",
   });
-  const pixelRatio = Math.min(window.devicePixelRatio, 1.5);
+  const pixelRatio = Math.min(window.devicePixelRatio, SMALL ? 1.25 : 1.5);
   renderer.setPixelRatio(pixelRatio);
 
   // Lime glows on the dark theme; on the light theme it would vanish, so the
