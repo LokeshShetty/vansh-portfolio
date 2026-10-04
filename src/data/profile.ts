@@ -144,7 +144,7 @@ export const book = {
     "AGI did not arrive with an announcement. It has started emerging in our systems.",
   credit: "By Ishaan Bhola (CEO & Founder, SuperAGI) with Vansh Agicha",
   note: "Amazon, January 2026 · Kindle and paperback",
-  href: null as string | null,
+  href: "https://www.amazon.com/dp/B0GJFGW6V9" as string | null,
   /** The three parts of the wraparound cover, cut from one image. */
   cover: {
     name: "agi-now-cover",
