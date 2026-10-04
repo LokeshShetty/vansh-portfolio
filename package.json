@@ -1,0 +1,27 @@
+{
+  "name": "vansh-agicha-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && node scripts/postbuild.mjs",
+    "start": "npx serve out",
+    "lint": "eslint",
+    "assets": "node scripts/optimize-assets.mjs"
+  },
+  "dependencies": {
+    "next": "16.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.0",
+    "prettier": "^3.9.6",
+    "sharp": "^0.34.0",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,21 @@
+.footer {
+  border-top: 1px solid var(--hairline);
+  padding-block: var(--section-gap) 2rem;
+}
+
+.inner {
+  display: grid;
+  gap: 1rem;
+}
+
+.cta {
+  font-size: clamp(1.75rem, 0.9rem + 4.5vw, 4.5rem);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.fine {
+  margin-top: 3rem;
+  font-size: 0.8125rem;
+  color: var(--ink-dim);
+}

@@ -1,0 +1,33 @@
+.frame {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+}
+
+.placeholder {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--hairline);
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent 0 10px,
+    var(--surface) 10px 11px
+  );
+}
+
+.label {
+  font-family: var(--font-mono-stack);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+  padding: 0.25rem 0.5rem;
+  background: var(--page);
+  border-radius: 999px;
+}

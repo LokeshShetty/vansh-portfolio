@@ -1,0 +1,87 @@
+.study {
+  display: grid;
+  gap: 2rem;
+}
+
+.copy {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  max-width: 34rem;
+}
+
+.title {
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+}
+
+.did {
+  display: grid;
+  gap: 0.375rem;
+  color: var(--ink-dim);
+}
+
+.did li {
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.did li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+}
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.results > div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 0.125rem;
+}
+
+.value {
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+.label {
+  font-size: 0.8125rem;
+  color: var(--ink-dim);
+  max-width: 12rem;
+}
+
+.media {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  align-items: start;
+}
+
+.tall {
+  width: min(100%, 18rem);
+}
+
+/* Portrait media (reels, posters) sit side by side instead of towering. */
+@media (min-width: 40rem) {
+  .media {
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .study {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .textOnly .copy {
+    max-width: 40rem;
+  }
+}
