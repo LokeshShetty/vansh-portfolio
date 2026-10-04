@@ -7,9 +7,6 @@ const nextConfig: NextConfig = {
   // (which static export can't use anyway) is off.
   images: { unoptimized: true },
   poweredByHeader: false,
-  // This app sits inside another app's repo; keep Turbopack from treating
-  // the parent folder as the workspace root.
-  turbopack: { root: import.meta.dirname },
 };
 
 export default nextConfig;

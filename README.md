@@ -1,8 +1,7 @@
 # Vansh Agicha: portfolio
 
 A one-page portfolio for a growth marketing manager. It uses Next.js 16 and
-plain CSS Modules, and the build output is plain static files. It's a separate
-app from the site at the repo root and is deployed on its own.
+plain CSS Modules, and the build output is plain static files.
 
 ```bash
 npm install
@@ -66,5 +65,5 @@ Remove `-an` if the video needs sound.
 
 ## Deploying (Vercel)
 
-Import the repo and set **Root Directory** to `portfolio`. `vercel.json`
-already sets the build command and the `out/` output folder.
+Import the repo; no settings to change. `vercel.json` already sets the build
+command and the `out/` output folder.
