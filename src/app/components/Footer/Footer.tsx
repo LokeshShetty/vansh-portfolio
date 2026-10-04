@@ -3,27 +3,22 @@ import styles from "./Footer.module.css";
 
 export function Footer() {
   return (
-    <footer className={styles.footer}>
-      <div className={`shell ${styles.inner}`}>
-        <p className="eyebrow reveal">Have a growth problem worth solving?</p>
-        <a
-          href={`mailto:${profile.email}`}
-          className={`display ${styles.cta} reveal`}
-        >
-          Let&rsquo;s talk <span aria-hidden="true">→</span>
-        </a>
-        <a
-          href={`mailto:${profile.email}`}
-          className={`${styles.email} reveal`}
-        >
-          {profile.email}
-        </a>
-        <div className={styles.fine}>
-          <p>
-            © {new Date().getFullYear()} {profile.name}
-          </p>
-          <p>{profile.location}</p>
-        </div>
+    <footer className={`shell ${styles.footer}`}>
+      <a
+        className={`tile ${styles.cta} reveal`}
+        href={`mailto:${profile.email}`}
+      >
+        <span className="eyebrow">Have a growth problem worth solving?</span>
+        <span className={`display ${styles.big}`}>
+          Let&rsquo;s grow <span aria-hidden="true">→</span>
+        </span>
+        <span className={styles.email}>{profile.email}</span>
+      </a>
+      <div className={styles.fine}>
+        <p>
+          © {new Date().getFullYear()} {profile.name}
+        </p>
+        <p>{profile.location}</p>
       </div>
     </footer>
   );

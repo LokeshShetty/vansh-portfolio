@@ -1,26 +1,30 @@
 .study {
   display: grid;
   gap: var(--space-l);
-  padding-top: var(--space-l);
-  border-top: 1px solid var(--hairline);
 }
 
 .copy {
   display: grid;
   gap: var(--space-s);
   align-content: start;
-  max-width: 40rem;
 }
 
 .head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--space-s);
 }
 
 .index {
-  font-size: var(--step-2);
-  color: var(--accent);
+  display: grid;
+  place-items: center;
+  width: 2.4em;
+  height: 2.4em;
+  font-size: var(--step--1);
+  letter-spacing: 0;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 50%;
 }
 
 .title {
@@ -29,9 +33,11 @@
 }
 
 .summary {
+  max-width: 48ch;
   font-size: var(--step-1);
   line-height: 1.45;
   letter-spacing: -0.01em;
+  color: var(--ink-dim);
 }
 
 .did {
@@ -42,34 +48,38 @@
 
 .did li {
   position: relative;
-  padding-left: 1.25em;
+  padding-left: 1.4em;
 }
 
 .did li::before {
-  content: "→";
+  content: "↗";
   position: absolute;
   left: 0;
   color: var(--accent);
 }
 
+/* Results as small cards inside the case-study card. */
 .results {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
-  gap: var(--space-s) var(--space-m);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+  gap: var(--grid-gap);
   margin-top: var(--space-xs);
-  padding-top: var(--space-s);
-  border-top: 1px solid var(--hairline);
 }
 
-.results > div {
+.result {
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
   gap: var(--space-2xs);
+  padding: var(--space-s);
+  background: var(--tile-hi);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--tile-radius) * 0.6);
 }
 
 .value {
   font-size: var(--step-3);
+  color: var(--accent);
 }
 
 .label {
@@ -79,9 +89,14 @@
 
 .media {
   display: grid;
-  gap: var(--space-s);
+  gap: var(--grid-gap);
   align-content: start;
   align-items: start;
+}
+
+.media :global(picture),
+.media video {
+  border-radius: calc(var(--tile-radius) * 0.6);
 }
 
 .tall {
@@ -94,29 +109,18 @@
   }
 }
 
-/* Two columns from tablet-landscape up; the copy stays pinned while the
-   media scrolls past it. */
 @media (min-width: 64rem) {
   .study {
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
     gap: var(--space-xl);
   }
 
-  .copy {
-    position: sticky;
-    top: var(--space-l);
-  }
-
   .textOnly {
     grid-template-columns: minmax(0, 1fr);
   }
-
-  .textOnly .copy {
-    max-width: 48rem;
-  }
 }
 
-/* Media opens from the bottom like a window blind as it scrolls in. */
+/* Media opens from the bottom as it scrolls in. */
 @keyframes unveil {
   from {
     clip-path: inset(30% 0 0 0 round var(--radius));
@@ -129,6 +133,12 @@
 
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
+    .study {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+
     .item {
       animation: unveil linear both;
       animation-timeline: view();

@@ -1,7 +1,8 @@
 .band {
   overflow: hidden;
+  margin-top: var(--space-xl);
   padding-block: var(--space-m);
-  border-block: 1px solid var(--hairline);
+  border-block: 1px solid var(--line);
 }
 
 /* Without scroll timelines this is simply a centred, wrapping list. */

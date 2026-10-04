@@ -1,76 +1,111 @@
 import { Fragment } from "react";
 import { Asset } from "@/components/Asset/Asset";
-import { profile } from "@/data/profile";
+import { Text } from "@/components/Text/Text";
+import { profile, stack, stats, type Stat } from "@/data/profile";
 import styles from "./Hero.module.css";
 
+function Words({ text, start }: { text: string; start: number }) {
+  return text.split(" ").map((word, i) => (
+    <Fragment key={word + i}>
+      {i > 0 && " "}
+      <span
+        className="word"
+        style={{ "--i": start + i } as React.CSSProperties}
+      >
+        <span>{word}</span>
+      </span>
+    </Fragment>
+  ));
+}
+
+function StatTile({ stat, index }: { stat: Stat; index: number }) {
+  const { meter } = stat;
+  return (
+    <div
+      className={`tile ${styles.stat} reveal stagger`}
+      style={{ "--i": index } as React.CSSProperties}
+    >
+      <p className="eyebrow">{stat.kicker}</p>
+      <p className={`display ${styles.value}`}>
+        <Text>{stat.value}</Text>
+      </p>
+      <p className={styles.label}>{stat.label}</p>
+      {meter && (
+        <div className={styles.meter}>
+          <div
+            className={styles.track}
+            role="img"
+            aria-label={`${meter.label}: ${meter.display}`}
+            style={
+              {
+                "--from": `${meter.from ?? 0}%`,
+                "--to": `${meter.to}%`,
+              } as React.CSSProperties
+            }
+          >
+            <span className={styles.fill} />
+          </div>
+          <p className={styles.meterLabel}>
+            <span>{meter.label}</span>
+            <span>{meter.display}</span>
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function Hero() {
-  const words = profile.name.split(" ");
+  const nameWords = profile.name.split(" ").length;
 
   return (
-    <header className={styles.hero}>
-      <div className={styles.backdrop} aria-hidden="true">
+    <header className={`shell ${styles.bento}`}>
+      <div className={`tile ${styles.intro}`}>
+        <p className={`eyebrow ${styles.status}`}>{profile.current}</p>
+        <h1 className={`display ${styles.name}`}>
+          <Words text={profile.name} start={0} />
+          <br />
+          <span className={styles.tagline}>
+            <Words text={profile.tagline} start={nameWords} />
+          </span>
+        </h1>
+        <p className={styles.lede}>{profile.intro}</p>
+      </div>
+
+      <div className={`tile ${styles.photo}`}>
         <Asset
           {...profile.portrait}
-          alt=""
-          className={styles.portrait}
-          sizes="(min-width: 90rem) 46rem, (min-width: 40rem) 50vw, 22rem"
+          className={styles.picture}
+          sizes="(min-width: 64rem) 20rem, 100vw"
           priority
         />
+        <span className={styles.place}>{profile.location}</span>
       </div>
 
-      <div className={`shell ${styles.inner}`}>
-        <p className="eyebrow">
-          {profile.role} — {profile.location}
-        </p>
-        <h1 className={`display ${styles.name}`} aria-label={profile.name}>
-          {words.map((word, i) => (
-            <Fragment key={word}>
-              {i > 0 && " "}
-              <span
-                className="word"
-                style={{ "--i": i } as React.CSSProperties}
-              >
-                <span>{word}</span>
-              </span>
-            </Fragment>
+      {stats.map((stat, i) => (
+        <StatTile key={stat.kicker} stat={stat} index={i} />
+      ))}
+
+      <div className={`tile ${styles.stack} reveal`}>
+        <p className="eyebrow">Stack</p>
+        <ul className={styles.chips}>
+          {stack.map((tool) => (
+            <li key={tool} className="chip">
+              {tool}
+            </li>
           ))}
-        </h1>
-
-        <div className={styles.foot}>
-          <p className={styles.intro}>{profile.intro}</p>
-          <div className={styles.side}>
-            <ul className={styles.focus}>
-              {profile.focus.map((f) => (
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
-            <ul className={styles.links}>
-              <li>
-                <a className={styles.cta} href={`mailto:${profile.email}`}>
-                  Get in touch
-                </a>
-              </li>
-              {profile.links.map(
-                (link) =>
-                  link.href && (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {link.label} ↗
-                      </a>
-                    </li>
-                  ),
-              )}
-              <li>
-                <a href="#work">Selected work ↓</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        </ul>
       </div>
+
+      <a
+        className={`tile ${styles.cta} reveal`}
+        href={`mailto:${profile.email}`}
+      >
+        <span className="eyebrow">Open to talk</span>
+        <span className={`display ${styles.ctaText}`}>
+          Let&rsquo;s grow <span aria-hidden="true">→</span>
+        </span>
+      </a>
     </header>
   );
 }

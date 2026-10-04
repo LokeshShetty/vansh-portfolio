@@ -18,7 +18,9 @@ export function CaseStudy({ study, index }: CaseStudyProps) {
   return (
     <article
       id={study.id}
-      className={[styles.study, hasAssets ? "" : styles.textOnly].join(" ")}
+      className={["tile", styles.study, hasAssets ? "" : styles.textOnly].join(
+        " ",
+      )}
       aria-labelledby={`${study.id}-title`}
     >
       <div className={styles.copy}>
@@ -46,7 +48,7 @@ export function CaseStudy({ study, index }: CaseStudyProps) {
           {study.results.map((r, i) => (
             <div
               key={r.label}
-              className="reveal stagger"
+              className={`${styles.result} reveal stagger`}
               style={{ "--i": i } as React.CSSProperties}
             >
               <dt className={styles.label}>{r.label}</dt>

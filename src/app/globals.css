@@ -1,11 +1,16 @@
 :root {
-  color-scheme: light dark;
-  --page: #f5f4f0;
-  --surface: #e9e7e1;
-  --ink: #111110;
-  --ink-dim: #6b6a65;
-  --hairline: rgb(17 17 16 / 0.12);
-  --accent: #d9480f;
+  color-scheme: dark;
+  --page: #0a0b0d;
+  --tile: #131518;
+  --tile-hi: #1a1d21;
+  --line: #24272d;
+  --ink: #ecece9;
+  --ink-dim: #8b8f96;
+  --accent: #d4ff3f;
+  --accent-ink: #0a0b0d;
+  /* Kept for components that still reference the old names. */
+  --surface: var(--tile);
+  --hairline: var(--line);
 
   --font-sans:
     var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -34,18 +39,10 @@
   --gutter: clamp(1rem, 0.4rem + 2.7vw, 3rem);
   --shell: 80rem;
   --radius: clamp(0.5rem, 0.4rem + 0.4vw, 0.875rem);
+  --tile-radius: clamp(1rem, 0.8rem + 0.9vw, 1.75rem);
+  --tile-pad: clamp(1.1rem, 0.8rem + 1.3vw, 2rem);
+  --grid-gap: clamp(0.5rem, 0.35rem + 0.65vw, 1rem);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --page: #0f0f0e;
-    --surface: #1b1b19;
-    --ink: #f0efeb;
-    --ink-dim: #9b9a94;
-    --hairline: rgb(240 239 235 / 0.12);
-    --accent: #ff8a4c;
-  }
 }
 
 *,
@@ -100,8 +97,27 @@ ol {
 }
 
 ::selection {
-  color: var(--page);
+  color: var(--accent-ink);
   background: var(--accent);
+}
+
+/* The dashboard card every section is built from. */
+.tile {
+  position: relative;
+  overflow: hidden;
+  padding: var(--tile-pad);
+  background: var(--tile);
+  border: 1px solid var(--line);
+  border-radius: var(--tile-radius);
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.3em 0.85em;
+  font-size: var(--step--1);
+  color: var(--ink-dim);
+  border: 1px solid var(--line);
+  border-radius: 999px;
 }
 
 .shell {

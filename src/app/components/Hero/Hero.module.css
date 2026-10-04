@@ -1,131 +1,248 @@
-.hero {
-  position: relative;
-  isolation: isolate;
-  overflow: clip;
-  display: flex;
-  align-items: flex-end;
-  min-height: clamp(36rem, 92svh, 64rem);
-  padding-block: var(--space-2xl) var(--space-xl);
-}
-
-/* Greyscale portrait behind the name, fading out at its edges. */
-.backdrop {
-  position: absolute;
-  z-index: -1;
-  top: clamp(0rem, -2rem + 6vw, 3rem);
-  right: clamp(-5rem, -3rem - 2vw, -1rem);
-  width: clamp(17rem, 9rem + 30vw, 38rem);
-  pointer-events: none;
-  opacity: 0.55;
-  mix-blend-mode: multiply;
-  /* Soft circular edge, plus a fade at the bottom so it sinks behind the text. */
-  mask-image:
-    radial-gradient(closest-side, #000 55%, transparent 100%),
-    linear-gradient(#000 55%, transparent 95%);
-  mask-composite: intersect;
-}
-
-.hero .portrait {
-  border-radius: 0;
-  background: none;
-  filter: grayscale(1) contrast(1.05);
-}
-
-.inner {
+.bento {
   display: grid;
-  gap: var(--space-m);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  padding-top: var(--grid-gap);
+}
+
+/* Name tile */
+.intro {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-l);
+  min-height: clamp(20rem, 14rem + 16vw, 30rem);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.status::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgb(212 255 63 / 0.15);
 }
 
 .name {
-  font-size: var(--step-hero);
-  line-height: 0.92;
+  font-size: clamp(2.6rem, 1rem + 7vw, 8.5rem);
+  line-height: 0.95;
   letter-spacing: -0.05em;
-  margin-left: -0.04em;
 }
 
-.foot {
-  display: grid;
-  gap: var(--space-l);
-  padding-top: var(--space-m);
-  border-top: 1px solid var(--hairline);
+.tagline {
+  color: var(--accent);
 }
 
-.intro {
-  max-width: 38ch;
+.lede {
+  max-width: 48ch;
   font-size: var(--step-1);
   line-height: 1.45;
   letter-spacing: -0.01em;
+  color: var(--ink-dim);
 }
 
-.side {
-  display: grid;
-  gap: var(--space-m);
-  align-content: space-between;
+/* Photo tile: greyscale portrait faded into the card. */
+.photo {
+  grid-column: 1 / -1;
+  min-height: clamp(18rem, 12rem + 25vw, 26rem);
+  padding: 0;
 }
 
-.focus {
+.picture {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+  filter: grayscale(1) contrast(1.08);
+  mask-image: radial-gradient(
+    ellipse 70% 62% at 50% 44%,
+    #000 55%,
+    transparent 100%
+  );
+}
+
+.place {
+  position: absolute;
+  left: var(--space-s);
+  bottom: var(--space-s);
+  padding: 0.4em 0.95em;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+/* Metric tiles */
+.stat {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--space-2xs);
 }
 
-.focus li {
-  padding: 0.25em 0.75em;
-  font-size: var(--step--1);
-  border: 1px solid var(--hairline);
-  border-radius: 999px;
+.value {
+  margin-top: var(--space-xs);
+  font-size: clamp(2.4rem, 1.6rem + 3.3vw, 4.75rem);
+  letter-spacing: -0.05em;
 }
 
-.links {
+.label {
+  font-size: var(--step--1);
+  color: var(--ink-dim);
+}
+
+.meter {
+  margin-top: auto;
+  padding-top: var(--space-m);
+}
+
+/* Dim up to --from, lime from --from to --to. */
+.track {
+  position: relative;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  inset-block: 0;
+  left: var(--from);
+  width: calc(var(--to) - var(--from));
+  border-radius: 999px;
+  background: var(--accent);
+  transform-origin: 0 50%;
+}
+
+.meterLabel {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: var(--space-2xs);
+  font-family: var(--font-mono-stack);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+}
+
+/* Stack + CTA */
+.stack {
+  grid-column: 1 / -1;
+}
+
+.chips {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-xs) var(--space-m);
+  gap: var(--space-2xs);
+  margin-top: var(--space-s);
 }
 
 .cta {
-  display: inline-block;
-  padding: 0.7em 1.4em;
-  font-weight: 500;
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-l);
+  min-height: clamp(9rem, 7rem + 6vw, 13rem);
+  color: var(--accent-ink);
   text-decoration: none;
-  color: var(--page);
-  background: var(--ink);
-  border-radius: 999px;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
+  background: var(--accent);
+  border-color: var(--accent);
+  transition: transform 0.3s var(--ease-out);
 }
 
 .cta:hover {
-  color: #fff;
-  background: var(--accent);
+  color: var(--accent-ink);
+  transform: translateY(-3px);
 }
 
-@media (min-width: 48rem) {
-  .foot {
-    grid-template-columns: 1.4fr 1fr;
+.cta :global(.eyebrow) {
+  color: inherit;
+  opacity: 0.7;
+}
+
+.ctaText {
+  font-size: var(--step-4);
+}
+
+.ctaText span {
+  display: inline-block;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.cta:hover .ctaText span {
+  transform: translateX(0.2em);
+}
+
+@media (min-width: 40rem) {
+  .photo {
+    grid-column: span 1;
+    grid-row: span 2;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .backdrop {
-    opacity: 0.4;
-    mix-blend-mode: luminosity;
+/* Desktop: name spans three columns, photo runs down the fourth. */
+@media (min-width: 64rem) {
+  .bento {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .intro {
+    grid-column: span 3;
+  }
+
+  .photo {
+    grid-column: 4;
+    grid-row: 1 / span 2;
+    min-height: 0;
+  }
+
+  .stack {
+    grid-column: span 2;
+  }
+
+  .cta {
+    grid-column: span 1;
   }
 }
 
-/* The portrait drifts up and fades as the hero scrolls away. */
-@keyframes drift {
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes zoom {
   to {
-    transform: translateY(-12%) scale(1.06);
-    opacity: 0;
+    transform: scale(1.12);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-    .portrait {
-      animation: drift linear both;
+    .fill {
+      animation: fill linear both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 45%;
+    }
+
+    .picture {
+      animation: zoom linear both;
       animation-timeline: scroll(root);
       animation-range: 0 100svh;
     }

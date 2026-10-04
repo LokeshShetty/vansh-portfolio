@@ -30,6 +30,9 @@ export type CaseStudy = {
 export const profile = {
   name: "Vansh Agicha",
   role: "Growth Marketing Manager",
+  /** Second line of the hero headline, in the accent colour. */
+  tagline: "grows things.",
+  current: "Marketing Manager @ Contlo · SuperAGI",
   focus: ["Performance marketing", "GTM", "AI-led growth"],
   location: "Rishikesh, India",
   intro:
@@ -46,6 +49,19 @@ export const profile = {
   },
 };
 
+/** Tools shown as chips in the hero grid. */
+export const stack = [
+  "Google Ads",
+  "Meta Ads",
+  "LinkedIn Ads",
+  "HubSpot",
+  "GA4",
+  "n8n",
+  "OpenAI",
+  "Claude Code",
+  "AI voice agents",
+];
+
 /** Companies, clients and stages, shown in the scrolling strip under the hero. */
 export const brands = [
   "SuperAGI",
@@ -59,11 +75,42 @@ export const brands = [
   "Affinity Branding",
 ];
 
-export const stats = [
-  { value: "700+", label: "sales-qualified leads in six months" },
-  { value: "60×", label: "organic traffic growth" },
-  { value: "₹55L", label: "monthly GMV, three months after launch" },
-  { value: "1M", label: "people reached by a single LinkedIn post" },
+export type Stat = {
+  kicker: string;
+  value: string;
+  label: string;
+  /** Optional bar drawn under the number. Real figures only, 0–100. */
+  meter?: { label: string; from?: number; to: number; display: string };
+};
+
+export const stats: Stat[] = [
+  {
+    kicker: "Pipeline",
+    value: "700+",
+    label: "SQLs in six months",
+    meter: { label: "SQL → opportunity", to: 47, display: "47%" },
+  },
+  {
+    kicker: "Organic",
+    value: "60×",
+    label: "organic traffic",
+    meter: {
+      label: "Domain Rating 45 → 75",
+      from: 45,
+      to: 75,
+      display: "75/100",
+    },
+  },
+  {
+    kicker: "Launch",
+    value: "₹55L",
+    label: "monthly GMV, three months after launch",
+  },
+  {
+    kicker: "Reach",
+    value: "1M",
+    label: "people reached by a single LinkedIn post",
+  },
 ];
 
 export const caseStudies: CaseStudy[] = [

@@ -1,7 +1,7 @@
 .grid {
   display: grid;
-  gap: var(--space-xl);
-  padding-block: var(--space-2xl);
+  gap: var(--grid-gap);
+  padding-block: var(--grid-gap);
 }
 
 .heading {
@@ -10,7 +10,13 @@
 
 .list {
   margin-top: var(--space-m);
-  border-top: 1px solid var(--ink);
+  border-top: 1px solid var(--line);
+}
+
+.row:last-child,
+.tool:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
 .row,

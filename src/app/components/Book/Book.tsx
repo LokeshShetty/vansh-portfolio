@@ -4,21 +4,21 @@ import styles from "./Book.module.css";
 
 export function Book() {
   return (
-    <section className={styles.band} aria-labelledby="book-title">
-      <div className={`shell ${styles.inner}`}>
-        <div className={`${styles.coverWrap} reveal`}>
+    <section className="shell" aria-labelledby="book-title">
+      <div className={`tile ${styles.inner} reveal`}>
+        <div className={styles.coverWrap}>
           <Asset {...book.cover} className={styles.cover} sizes="16rem" />
         </div>
         <div className={styles.copy}>
-          <p className="eyebrow reveal">Publication</p>
-          <h2 id="book-title" className={`display ${styles.title} reveal`}>
+          <p className="chip">Author · Amazon, 2026</p>
+          <h2 id="book-title" className={`display ${styles.title}`}>
             {book.title}
           </h2>
-          <p className={`${styles.subtitle} reveal`}>{book.subtitle}</p>
-          <p className={`${styles.note} reveal`}>{book.note}</p>
+          <p className={styles.subtitle}>{book.subtitle}</p>
+          <p className={styles.note}>{book.note}</p>
           {book.href && (
             <a
-              className="reveal"
+              className={styles.link}
               href={book.href}
               target="_blank"
               rel="noopener noreferrer"

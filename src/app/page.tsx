@@ -1,7 +1,6 @@
 import { caseStudies, profile } from "@/data/profile";
 import { Hero } from "./components/Hero/Hero";
 import { Brands } from "./components/Brands/Brands";
-import { Stats } from "./components/Stats/Stats";
 import { CaseStudy } from "./components/CaseStudy/CaseStudy";
 import { Book } from "./components/Book/Book";
 import { Background } from "./components/Background/Background";
@@ -27,7 +26,6 @@ export default function Home() {
       <main>
         <Hero />
         <Brands />
-        <Stats />
         <section
           id="work"
           className={`shell ${styles.work}`}
@@ -37,7 +35,7 @@ export default function Home() {
             <h2 id="work-title" className="display reveal">
               Selected work
             </h2>
-            <p className="eyebrow reveal">
+            <p className="chip reveal">
               {String(caseStudies.length).padStart(2, "0")} projects
             </p>
           </div>

@@ -1,26 +1,29 @@
-.band {
-  background: var(--surface);
-  padding-block: var(--space-2xl);
-}
-
 .inner {
   display: grid;
   gap: var(--space-l);
   align-items: center;
+  background:
+    radial-gradient(
+      60% 120% at 100% 0%,
+      rgb(212 255 63 / 0.08),
+      transparent 70%
+    ),
+    var(--tile);
 }
 
 .coverWrap {
-  width: clamp(10rem, 6rem + 10vw, 16rem);
+  width: clamp(10rem, 6rem + 10vw, 15rem);
 }
 
 .cover {
-  box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.4);
+  box-shadow: 0 1.5rem 3rem -1rem rgb(0 0 0 / 0.6);
 }
 
 .copy {
   display: grid;
+  justify-items: start;
   gap: var(--space-s);
-  max-width: 40rem;
+  max-width: 44rem;
 }
 
 .title {
@@ -36,6 +39,10 @@
 
 .note {
   color: var(--ink-dim);
+}
+
+.link {
+  color: var(--accent);
 }
 
 @media (min-width: 48rem) {
