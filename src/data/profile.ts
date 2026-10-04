@@ -27,6 +27,10 @@ export const profile = {
   location: "Rishikesh, India",
   intro:
     "I run full-funnel growth for B2B SaaS and consumer brands. In four years at Contlo Technologies (SuperAGI, Verk, OK) I went from part-time video editor to marketing manager, leading a team of seven.",
+  /** The big scroll-lit sentence under the strips. *Starred* words get the
+   *  accent colour. */
+  statement:
+    "From part-time video editor to *marketing manager* in four years, with two 100% performance-based raises, a *team of seven* and a *book on AGI* along the way.",
   email: "agi.vansh@gmail.com",
   links: [
     { label: "LinkedIn", href: null },

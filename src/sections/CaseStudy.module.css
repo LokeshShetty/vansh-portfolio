@@ -95,7 +95,7 @@
 /* Results as small cards inside the case-study card. */
 .results {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11.5rem), 1fr));
   gap: var(--grid-gap);
   margin-top: var(--space-xs);
 }
@@ -151,6 +151,15 @@
 
   .textOnly {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Alternate featured cards: media first. */
+  .flip {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  }
+
+  .flip .media {
+    order: -1;
   }
 }
 

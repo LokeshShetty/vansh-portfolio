@@ -1,0 +1,36 @@
+---
+// One big sentence that lights up word by word as it scrolls through the
+// viewport. CSS only: every word reads the section's named view timeline and
+// starts a little later than the one before it. Without scroll-timeline
+// support (or with reduced motion) the sentence is simply shown in full.
+import { profile } from "@/data/profile";
+import styles from "./Statement.module.css";
+
+// "*marketing manager*" → accent words.
+const words = profile.statement.split(/(\*[^*]+\*)/).flatMap((part) =>
+  part.startsWith("*")
+    ? part
+        .slice(1, -1)
+        .split(" ")
+        .map((text) => ({ text, accent: true }))
+    : part
+        .split(" ")
+        .filter(Boolean)
+        .map((text) => ({ text, accent: false })),
+);
+---
+
+<section class:list={["shell", styles.statement]} aria-label="In short">
+  <p class={styles.text} style={{ "--n": words.length }}>
+    {words.map((w, i) => (
+      <>
+        <span
+          class:list={[styles.word, w.accent && styles.accent]}
+          style={{ "--i": i }}
+        >
+          {w.text}
+        </span>{" "}
+      </>
+    ))}
+  </p>
+</section>

@@ -18,6 +18,8 @@ const work = defineCollection({
   loader: glob({ base: "./src/content/work", pattern: "*.md" }),
   schema: z.object({
     order: z.number(),
+    /** Featured projects get a large split card; the rest go in the list. */
+    featured: z.boolean().default(false),
     kicker: z.string(),
     title: z.string(),
     summary: z.string(),

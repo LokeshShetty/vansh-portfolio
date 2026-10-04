@@ -1,4 +1,5 @@
 ---
+featured: true
 order: 2
 kicker: "Launch · Consumer quick commerce, Bengaluru"
 title: "OK: from zero to ₹55 lakh GMV"

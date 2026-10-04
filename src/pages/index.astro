@@ -2,7 +2,9 @@
 import Base from "@/layouts/Base.astro";
 import Hero from "@/sections/Hero.astro";
 import Brands from "@/sections/Brands.astro";
+import Statement from "@/sections/Statement.astro";
 import CaseStudy from "@/sections/CaseStudy.astro";
+import CaseRow from "@/sections/CaseRow.astro";
 import Book from "@/sections/Book.astro";
 import Background from "@/sections/Background.astro";
 import Footer from "@/sections/Footer.astro";
@@ -13,6 +15,10 @@ import styles from "@/styles/page.module.css";
 const caseStudies = (await getCollection("work")).sort(
   (a, b) => a.data.order - b.data.order,
 );
+// Featured projects get large split cards; the rest form an accordion list.
+const featured = caseStudies.filter((s) => s.data.featured);
+const others = caseStudies.filter((s) => !s.data.featured);
+const number = (s: (typeof caseStudies)[number]) => caseStudies.indexOf(s) + 1;
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -34,6 +40,7 @@ const personJsonLd = {
   <main>
     <Hero />
     <Brands />
+    <Statement />
     <section
       id="work"
       class:list={["shell", styles.work]}
@@ -47,9 +54,16 @@ const personJsonLd = {
           {String(caseStudies.length).padStart(2, "0")} projects
         </p>
       </div>
-      {caseStudies.map((study, i) => (
-        <CaseStudy study={study} index={i + 1} />
+      {featured.map((study, i) => (
+        <CaseStudy study={study} index={number(study)} flip={i % 2 === 1} />
       ))}
+      {others.length > 0 && (
+        <div class={styles.list}>
+          {others.map((study) => (
+            <CaseRow study={study} index={number(study)} />
+          ))}
+        </div>
+      )}
     </section>
     <Book />
     <Background />

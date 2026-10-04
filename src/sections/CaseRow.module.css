@@ -1,0 +1,182 @@
+.row {
+  border-top: 1px solid var(--line);
+}
+
+.row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-xs) var(--space-m);
+  padding-block: var(--space-m);
+  cursor: pointer;
+  list-style: none;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.index {
+  align-self: start;
+  padding-top: 0.45em;
+  font-family: var(--font-mono-stack);
+  font-size: var(--step--1);
+  color: var(--ink-dim);
+}
+
+.titles {
+  display: grid;
+  gap: var(--space-2xs);
+}
+
+.title {
+  font-size: var(--step-3);
+  line-height: 1.05;
+  transition: color 0.2s ease;
+}
+
+.summary:hover .title {
+  color: var(--accent-text);
+}
+
+/* The headline result sits on the right on wide screens. */
+.headline {
+  display: none;
+  text-align: right;
+}
+
+.value {
+  font-size: var(--step-2);
+  color: var(--accent-text);
+}
+
+.label {
+  font-size: var(--step--1);
+  color: var(--ink-dim);
+}
+
+/* "+" that turns into "×" when open. */
+.plus {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  transition:
+    transform 0.35s var(--ease-out),
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.plus::before,
+.plus::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 0.85rem;
+  height: 1.5px;
+  background: currentColor;
+  translate: -50% -50%;
+}
+
+.plus::after {
+  rotate: 90deg;
+}
+
+.summary:hover .plus {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.row[open] .plus {
+  transform: rotate(45deg);
+}
+
+.body {
+  display: grid;
+  gap: var(--space-s);
+  max-width: 52rem;
+  /* Lines up with the title: the number column plus the gap. */
+  padding: 0 0 var(--space-l) calc(2.5rem + var(--space-m));
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-dim);
+}
+
+.did {
+  display: grid;
+  gap: var(--space-2xs);
+}
+
+.did li {
+  position: relative;
+  padding-left: 1.4em;
+}
+
+.did li::before {
+  content: "↗";
+  position: absolute;
+  left: 0;
+  color: var(--accent-text);
+}
+
+.more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s) var(--space-l);
+}
+
+.more > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-2xs);
+}
+
+.link {
+  justify-self: start;
+  font-weight: 500;
+}
+
+@media (min-width: 48rem) {
+  .summary {
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto auto;
+  }
+
+  .headline {
+    display: grid;
+    gap: 0.15rem;
+  }
+}
+
+/* Smooth open/close where the browser can animate to height: auto. */
+.row::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.45s var(--ease-out),
+    content-visibility 0.45s allow-discrete;
+}
+
+.row[open]::details-content {
+  block-size: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row::details-content {
+    transition: none;
+  }
+}

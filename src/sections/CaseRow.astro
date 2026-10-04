@@ -1,0 +1,64 @@
+---
+// A case study as one row of an accordion: number, title, headline result
+// and a "+". Opening it shows the summary, what he did, the results and a
+// link to the full page. Native <details>, so no JavaScript; rows sharing a
+// `name` close each other in browsers that support it.
+import type { CollectionEntry } from "astro:content";
+import Text from "@/components/Text.astro";
+import styles from "./CaseRow.module.css";
+
+type Props = { study: CollectionEntry<"work">; index: number };
+
+const { id, data } = Astro.props.study;
+const { index } = Astro.props;
+const [headline, ...rest] = data.results;
+---
+
+<details class:list={[styles.row, "reveal"]} name="work" id={id}>
+  <summary class={styles.summary}>
+    <span class:list={["tnum", styles.index]}>
+      {String(index).padStart(2, "0")}
+    </span>
+    <span class={styles.titles}>
+      <span class:list={["display", styles.title]}>
+        <Text text={data.title} />
+      </span>
+      <span class:list={["eyebrow", styles.kicker]}>{data.kicker}</span>
+    </span>
+    {headline && (
+      <span class={styles.headline}>
+        <span class:list={["display", styles.value]}>
+          <Text text={headline.value} />
+        </span>
+        <span class={styles.label}>{headline.label}</span>
+      </span>
+    )}
+    <span class={styles.plus} aria-hidden="true"></span>
+  </summary>
+
+  <div class={styles.body}>
+    <p class={styles.lede}>{data.summary}</p>
+    <ul class={styles.did}>
+      {data.did.map((item) => (
+        <li>
+          <Text text={item} />
+        </li>
+      ))}
+    </ul>
+    {rest.length > 0 && (
+      <dl class={styles.more}>
+        {rest.map((r) => (
+          <div>
+            <dt class={styles.label}>{r.label}</dt>
+            <dd class:list={["display", styles.value]}>
+              <Text text={r.value} />
+            </dd>
+          </div>
+        ))}
+      </dl>
+    )}
+    <a href={`/work/${id}/`} class={styles.link}>
+      Read the case study <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</details>

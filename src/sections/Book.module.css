@@ -1,35 +1,41 @@
+.band {
+  /* Own palette: dark ink on lime, in both themes. */
+  --ink: #111213;
+  --ink-dim: rgb(17 18 19 / 0.68);
+  --line: rgb(17 18 19 / 0.22);
+  --hairline: rgb(17 18 19 / 0.25);
+  --surface: rgb(255 255 255 / 0.35);
+  --page: #d4ff3f;
+  color: var(--ink);
+  background: var(--accent);
+  padding-block: var(--space-2xl);
+  margin-block: var(--space-xl);
+  overflow: clip;
+}
+
 .inner {
   display: grid;
-  gap: var(--space-l);
+  gap: var(--space-xl);
   align-items: center;
-  background:
-    radial-gradient(60% 120% at 100% 0%, var(--accent-glow), transparent 70%),
-    var(--tile);
-}
-
-.coverWrap {
-  width: clamp(10rem, 6rem + 10vw, 15rem);
-}
-
-.cover {
-  box-shadow: 0 1.5rem 3rem -1rem rgb(0 0 0 / 0.6);
 }
 
 .copy {
   display: grid;
   justify-items: start;
   gap: var(--space-s);
-  max-width: 44rem;
+  max-width: 40rem;
 }
 
 .title {
-  font-size: var(--step-5);
+  font-size: clamp(3.5rem, 1.5rem + 9vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
 }
 
 .subtitle {
   font-size: var(--step-2);
   font-weight: 500;
-  line-height: 1.25;
+  line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
@@ -38,12 +44,52 @@
 }
 
 .link {
-  color: var(--accent-text);
+  margin-top: var(--space-xs);
+  padding: 0.7em 1.4em;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--accent);
+  background: var(--ink);
+  border-radius: 999px;
+}
+
+.link:hover {
+  color: #fff;
+}
+
+/* The cover, tilted like a book on a table. */
+.stage {
+  display: grid;
+  place-items: center;
+  perspective: 1400px;
+}
+
+.book {
+  width: clamp(11rem, 7rem + 12vw, 18rem);
+  transform: rotateY(-24deg) rotateX(6deg) rotateZ(-2deg);
+  transform-style: preserve-3d;
+  transition: transform 0.7s var(--ease-out);
+}
+
+.stage:hover .book {
+  transform: rotateY(0) rotateX(0) rotateZ(0);
+}
+
+.cover {
+  border-radius: 4px 10px 10px 4px;
+  box-shadow:
+    inset 6px 0 10px -6px rgb(0 0 0 / 0.35),
+    -18px 30px 50px -18px rgb(17 18 19 / 0.55);
 }
 
 @media (min-width: 48rem) {
   .inner {
-    grid-template-columns: auto 1fr;
-    gap: var(--space-xl);
+    grid-template-columns: 1.3fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book {
+    transition: none;
   }
 }

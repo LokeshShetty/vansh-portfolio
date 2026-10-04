@@ -98,6 +98,8 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* Lets the accordion animate to height: auto (see CaseRow). */
+  interpolate-size: allow-keywords;
   scroll-behavior: smooth;
 }
 

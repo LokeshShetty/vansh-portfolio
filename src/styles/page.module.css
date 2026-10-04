@@ -16,3 +16,8 @@
 .heading h2 {
   font-size: var(--step-5);
 }
+
+/* The non-featured projects, as an accordion list. */
+.list {
+  margin-top: var(--space-l);
+}

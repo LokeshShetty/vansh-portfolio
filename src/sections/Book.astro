@@ -1,16 +1,16 @@
 ---
+// The book, as a full-width lime band with the cover tilted in 3D. It
+// straightens up on hover. The band sets its own colour tokens, so it reads
+// the same in both themes.
 import Asset from "@/components/Asset.astro";
 import { book } from "@/data/profile";
 import styles from "./Book.module.css";
 ---
 
-<section id="book" class="shell" aria-labelledby="book-title">
-  <div class:list={["tile", styles.inner, "reveal"]}>
-    <div class={styles.coverWrap}>
-      <Asset {...book.cover} class={styles.cover} sizes="16rem" />
-    </div>
-    <div class={styles.copy}>
-      <p class="chip">Author · Amazon, 2026</p>
+<section id="book" class={styles.band} aria-labelledby="book-title">
+  <div class:list={["shell", styles.inner]}>
+    <div class:list={[styles.copy, "reveal"]}>
+      <p class="eyebrow">Co-author · Amazon, 2026</p>
       <h2 id="book-title" class:list={["display", "lift", styles.title]}>
         <span>{book.title}</span>
       </h2>
@@ -23,9 +23,14 @@ import styles from "./Book.module.css";
           target="_blank"
           rel="noopener noreferrer"
         >
-          Get it on Amazon ↗
+          Get it on Amazon <span aria-hidden="true">↗</span>
         </a>
       )}
+    </div>
+    <div class={styles.stage}>
+      <div class={styles.book}>
+        <Asset {...book.cover} class={styles.cover} sizes="18rem" />
+      </div>
     </div>
   </div>
 </section>

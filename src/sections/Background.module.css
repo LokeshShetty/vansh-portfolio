@@ -1,41 +1,82 @@
 .grid {
   display: grid;
-  gap: var(--grid-gap);
-  padding-block: var(--grid-gap);
+  gap: var(--space-2xl) var(--space-xl);
+  padding-block: var(--space-xl) var(--space-2xl);
 }
 
 .heading {
-  font-size: var(--step-4);
+  font-size: var(--step-5);
 }
 
-.list {
-  margin-top: var(--space-m);
-  border-top: 1px solid var(--line);
-}
-
-.row:last-child,
-.tool:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.row,
-.tool {
+/* Timeline: a line down the left with a dot per stop. */
+.timeline {
+  position: relative;
   display: grid;
-  gap: var(--space-2xs);
-  padding-block: var(--space-s);
-  border-bottom: 1px solid var(--hairline);
+  gap: var(--space-l);
+  margin-top: var(--space-l);
+  padding-left: var(--space-l);
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 0.3rem;
+  width: 1px;
+  background: linear-gradient(var(--ink-dim), var(--line));
+}
+
+.stop {
+  position: relative;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.stop::before {
+  content: "";
+  position: absolute;
+  top: 0.3rem;
+  left: calc(var(--space-l) * -1);
+  width: 0.6rem;
+  height: 0.6rem;
+  background: var(--page);
+  border: 1.5px solid var(--ink-dim);
+  border-radius: 50%;
+}
+
+/* The current role gets a lime dot with a ring pulsing out of it. */
+.now::before {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.now::after {
+  content: "";
+  position: absolute;
+  top: 0.3rem;
+  left: calc(var(--space-l) * -1);
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .when {
   font-family: var(--font-mono-stack);
   font-size: var(--step--1);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   color: var(--ink-dim);
 }
 
 .role {
+  margin-top: var(--space-2xs);
+  font-size: var(--step-1);
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .org {
@@ -43,20 +84,55 @@
 }
 
 .note {
+  max-width: 46ch;
   margin-top: var(--space-2xs);
   font-size: var(--step--1);
   color: var(--ink-dim);
 }
 
-@media (min-width: 40rem) {
-  .row {
-    grid-template-columns: 8rem 1fr;
-    gap: var(--space-m);
-  }
+/* Toolkit: labelled clusters of chips. */
+.clusters {
+  display: grid;
+  gap: var(--space-l);
+  margin-top: var(--space-l);
+}
+
+.cluster {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+}
+
+.chips :global(.chip) {
+  color: var(--ink);
+  background: var(--tile);
 }
 
 @media (min-width: 64rem) {
   .grid {
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Transform and opacity only, so the endless pulse never repaints. */
+@keyframes ring {
+  from {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  to {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .now::after {
+    animation: ring 2.4s ease-out infinite;
   }
 }

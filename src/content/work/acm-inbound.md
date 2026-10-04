@@ -1,4 +1,5 @@
 ---
+featured: true
 order: 1
 kicker: "Campaign · HubSpot INBOUND 2025, San Francisco"
 title: "CRM is Dead, Long Live ACM"

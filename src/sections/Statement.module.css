@@ -1,0 +1,48 @@
+.statement {
+  padding-block: var(--space-2xl);
+  view-timeline-name: --statement;
+}
+
+.text {
+  max-width: 22ch;
+  font-size: clamp(2rem, 1rem + 4.4vw, 5.25rem);
+  font-variation-settings: "opsz" 32;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.accent {
+  color: var(--accent-text);
+}
+
+/* Light theme: accent words get the lime highlighter, like the tagline. */
+:global(:root:not([data-theme="dark"])) .accent {
+  color: var(--ink);
+  background: linear-gradient(
+    transparent 60%,
+    var(--accent) 60%,
+    var(--accent) 92%,
+    transparent 92%
+  );
+}
+
+@keyframes light-up {
+  from {
+    opacity: 0.14;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Word i lights up over its own slice of the section's journey through
+       the viewport, from 10% to 55% of the way. */
+    .word {
+      animation: light-up linear both;
+      animation-timeline: --statement;
+      animation-range: cover calc(10% + 45% * var(--i) / var(--n)) cover
+        calc(14% + 45% * var(--i) / var(--n));
+    }
+  }
+}
