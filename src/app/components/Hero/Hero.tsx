@@ -1,42 +1,76 @@
+import { Fragment } from "react";
 import { Asset } from "@/components/Asset/Asset";
 import { profile } from "@/data/profile";
 import styles from "./Hero.module.css";
 
 export function Hero() {
+  const words = profile.name.split(" ");
+
   return (
-    <header className={`shell ${styles.hero}`}>
-      <div className={styles.copy}>
-        <p className="eyebrow">
-          {profile.role} · {profile.location}
-        </p>
-        <h1 className={`display ${styles.name}`}>{profile.name}</h1>
-        <p className={styles.focus}>{profile.focus.join(" · ")}</p>
-        <p className={styles.intro}>{profile.intro}</p>
-        <ul className={styles.links}>
-          <li>
-            <a href={`mailto:${profile.email}`}>{profile.email}</a>
-          </li>
-          {profile.links.map(
-            (link) =>
-              link.href && (
-                <li key={link.label}>
-                  <a href={link.href} target="_blank" rel="noopener noreferrer">
-                    {link.label} ↗
-                  </a>
-                </li>
-              ),
-          )}
-          <li>
-            <a href="#work">See the work ↓</a>
-          </li>
-        </ul>
+    <header className={styles.hero}>
+      <div className={styles.backdrop} aria-hidden="true">
+        <Asset
+          {...profile.portrait}
+          alt=""
+          className={styles.portrait}
+          sizes="(min-width: 90rem) 46rem, (min-width: 40rem) 50vw, 22rem"
+          priority
+        />
       </div>
-      <Asset
-        {...profile.portrait}
-        className={styles.portrait}
-        sizes="(min-width: 48rem) 20rem, 60vw"
-        priority
-      />
+
+      <div className={`shell ${styles.inner}`}>
+        <p className="eyebrow">
+          {profile.role} — {profile.location}
+        </p>
+        <h1 className={`display ${styles.name}`} aria-label={profile.name}>
+          {words.map((word, i) => (
+            <Fragment key={word}>
+              {i > 0 && " "}
+              <span
+                className="word"
+                style={{ "--i": i } as React.CSSProperties}
+              >
+                <span>{word}</span>
+              </span>
+            </Fragment>
+          ))}
+        </h1>
+
+        <div className={styles.foot}>
+          <p className={styles.intro}>{profile.intro}</p>
+          <div className={styles.side}>
+            <ul className={styles.focus}>
+              {profile.focus.map((f) => (
+                <li key={f}>{f}</li>
+              ))}
+            </ul>
+            <ul className={styles.links}>
+              <li>
+                <a className={styles.cta} href={`mailto:${profile.email}`}>
+                  Get in touch
+                </a>
+              </li>
+              {profile.links.map(
+                (link) =>
+                  link.href && (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {link.label} ↗
+                      </a>
+                    </li>
+                  ),
+              )}
+              <li>
+                <a href="#work">Selected work ↓</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }

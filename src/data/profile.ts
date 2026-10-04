@@ -39,8 +39,25 @@ export const profile = {
     { label: "LinkedIn", href: null },
     { label: "Résumé (PDF)", href: null },
   ] satisfies Link[],
-  portrait: { name: "portrait", alt: "Portrait of Vansh Agicha", ratio: "4 / 5" },
+  portrait: {
+    name: "portrait",
+    alt: "Portrait of Vansh Agicha",
+    ratio: "1 / 1",
+  },
 };
+
+/** Companies, clients and stages, shown in the scrolling strip under the hero. */
+export const brands = [
+  "SuperAGI",
+  "Contlo",
+  "Verk",
+  "OK",
+  "HubSpot INBOUND 2025",
+  "Flexiple",
+  "Apple India",
+  "Round Table India",
+  "Affinity Branding",
+];
 
 export const stats = [
   { value: "700+", label: "sales-qualified leads in six months" },
@@ -65,8 +82,16 @@ export const caseStudies: CaseStudy[] = [
       { value: "100-seat", label: "account closed, plus several more clients" },
     ],
     assets: [
-      { name: "acm-microsite", alt: "The ACM campaign microsite", ratio: "16 / 10" },
-      { name: "acm-activation", alt: "On-ground activation at INBOUND 2025", ratio: "4 / 3" },
+      {
+        name: "acm-microsite",
+        alt: "The ACM campaign microsite",
+        ratio: "16 / 10",
+      },
+      {
+        name: "acm-activation",
+        alt: "On-ground activation at INBOUND 2025",
+        ratio: "4 / 3",
+      },
     ],
   },
   {
@@ -86,7 +111,11 @@ export const caseStudies: CaseStudy[] = [
       { value: "₹55L", label: "monthly GMV within three months" },
     ],
     assets: [
-      { name: "ok-campaign", alt: "OK offline campaign creative", ratio: "4 / 5" },
+      {
+        name: "ok-campaign",
+        alt: "OK offline campaign creative",
+        ratio: "4 / 5",
+      },
       { name: "ok-reel", alt: "OK launch video", ratio: "9 / 16", src: null },
     ],
   },
@@ -106,7 +135,11 @@ export const caseStudies: CaseStudy[] = [
       { value: "47%", label: "SQL-to-opportunity rate" },
     ],
     assets: [
-      { name: "ads-creatives", alt: "A selection of paid ad creatives", ratio: "16 / 10" },
+      {
+        name: "ads-creatives",
+        alt: "A selection of paid ad creatives",
+        ratio: "16 / 10",
+      },
     ],
   },
   {
@@ -125,7 +158,11 @@ export const caseStudies: CaseStudy[] = [
       { value: "5×", label: "traffic from ChatGPT and Perplexity" },
     ],
     assets: [
-      { name: "organic-growth-chart", alt: "Organic traffic growth over time", ratio: "16 / 9" },
+      {
+        name: "organic-growth-chart",
+        alt: "Organic traffic growth over time",
+        ratio: "16 / 9",
+      },
     ],
   },
   {
@@ -144,8 +181,17 @@ export const caseStudies: CaseStudy[] = [
       { value: "10K", label: "GitHub stars; #1 trending for a week" },
     ],
     assets: [
-      { name: "social-posts", alt: "Top-performing LinkedIn posts", ratio: "4 / 3" },
-      { name: "social-reel", alt: "Sample automated reel", ratio: "9 / 16", src: null },
+      {
+        name: "social-posts",
+        alt: "Top-performing LinkedIn posts",
+        ratio: "4 / 3",
+      },
+      {
+        name: "social-reel",
+        alt: "Sample automated reel",
+        ratio: "9 / 16",
+        src: null,
+      },
     ],
   },
   {
@@ -207,11 +253,13 @@ export const experience = [
 export const toolkit = [
   {
     group: "Growth",
-    items: "Google, Meta and LinkedIn Ads · HubSpot · GA4 · GTM · Attribution · A/B testing",
+    items:
+      "Google, Meta and LinkedIn Ads · HubSpot · GA4 · GTM · Attribution · A/B testing",
   },
   {
     group: "Channels",
-    items: "SEO · AEO/GEO · Cold email · WhatsApp · Creators · Events and offline",
+    items:
+      "SEO · AEO/GEO · Cold email · WhatsApp · Creators · Events and offline",
   },
   {
     group: "AI & automation",

@@ -1,4 +1,5 @@
 import { Asset } from "@/components/Asset/Asset";
+import { Text } from "@/components/Text/Text";
 import { Video } from "@/components/Video/Video";
 import styles from "./CaseStudy.module.css";
 import type { CaseStudyProps } from "./types";
@@ -11,6 +12,8 @@ function isTall(ratio = "") {
 
 export function CaseStudy({ study, index }: CaseStudyProps) {
   const hasAssets = study.assets.length > 0;
+  const mediaClass = (ratio?: string) =>
+    [styles.item, isTall(ratio) ? styles.tall : ""].join(" ");
 
   return (
     <article
@@ -19,23 +22,37 @@ export function CaseStudy({ study, index }: CaseStudyProps) {
       aria-labelledby={`${study.id}-title`}
     >
       <div className={styles.copy}>
-        <p className="eyebrow">
-          {String(index).padStart(2, "0")} · {study.kicker}
-        </p>
-        <h3 id={`${study.id}-title`} className={`display ${styles.title}`}>
-          {study.title}
+        <div className={`${styles.head} reveal`}>
+          <span className={`display ${styles.index}`} aria-hidden="true">
+            {String(index).padStart(2, "0")}
+          </span>
+          <p className="eyebrow">{study.kicker}</p>
+        </div>
+        <h3
+          id={`${study.id}-title`}
+          className={`display ${styles.title} reveal`}
+        >
+          <Text>{study.title}</Text>
         </h3>
-        <p>{study.summary}</p>
-        <ul className={styles.did}>
+        <p className={`${styles.summary} reveal`}>{study.summary}</p>
+        <ul className={`${styles.did} reveal`}>
           {study.did.map((item) => (
-            <li key={item}>{item}</li>
+            <li key={item}>
+              <Text>{item}</Text>
+            </li>
           ))}
         </ul>
         <dl className={styles.results}>
-          {study.results.map((r) => (
-            <div key={r.label}>
+          {study.results.map((r, i) => (
+            <div
+              key={r.label}
+              className="reveal stagger"
+              style={{ "--i": i } as React.CSSProperties}
+            >
               <dt className={styles.label}>{r.label}</dt>
-              <dd className={`display ${styles.value}`}>{r.value}</dd>
+              <dd className={`display ${styles.value}`}>
+                <Text>{r.value}</Text>
+              </dd>
             </div>
           ))}
         </dl>
@@ -48,13 +65,13 @@ export function CaseStudy({ study, index }: CaseStudyProps) {
               <Video
                 key={asset.name}
                 {...asset}
-                className={isTall(asset.ratio) ? styles.tall : undefined}
+                className={mediaClass(asset.ratio)}
               />
             ) : (
               <Asset
                 key={asset.name}
                 {...asset}
-                className={isTall(asset.ratio) ? styles.tall : undefined}
+                className={mediaClass(asset.ratio)}
               />
             ),
           )}

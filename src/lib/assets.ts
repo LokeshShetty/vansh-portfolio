@@ -14,6 +14,11 @@ export function getAsset(name: string): ManifestEntry | undefined {
   return entries[name];
 }
 
-export function assetUrl(name: string, entry: ManifestEntry, width: number, ext: string) {
+export function assetUrl(
+  name: string,
+  entry: ManifestEntry,
+  width: number,
+  ext: string,
+) {
   return `/assets/${name}-${width}.${entry.hash}.${ext}`;
 }

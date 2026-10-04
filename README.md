@@ -51,8 +51,10 @@ Remove `-an` if the video needs sound.
   inlines the CSS. The page is about 6 KB of gzipped HTML, and nothing blocks
   rendering. If you ever add a `"use client"` component, take the postbuild
   step out of the `build` script.
-- **One font.** Instrument Serif, regular weight only, self-hosted and
-  preloaded. Body text uses the system font.
+- **One font file.** Inter as a single variable font (weight and optical
+  size), latin only, self-hosted and preloaded (~73 KB). Headings use optical
+  size 32, which is Inter Display. The ₹ sign is drawn from the system font
+  (`src/components/Text`), because Inter keeps it in a separate ~130 KB file.
 - **Images.** Each image is served as a `<picture>` with AVIF and WebP
   sources, `srcset`/`sizes`, and its real width and height (no layout shift).
   Images below the fold load lazily, the hero portrait loads with high
@@ -62,6 +64,28 @@ Remove `-an` if the video needs sound.
   poster loads with the page.
 - **Caching.** Asset filenames include a content hash, so `vercel.json` can
   cache `/assets/*` permanently.
+
+## Responsive type and spacing
+
+`src/app/globals.css` defines a fluid type scale (`--step--1` … `--step-hero`)
+and spacing scale (`--space-2xs` … `--space-2xl`) with `clamp()`. Every size
+grows smoothly between a 360px and a 1440px screen, with no breakpoint jumps.
+Use these tokens rather than fixed sizes.
+
+## Animations
+
+The animations are CSS only, so they need no JavaScript and run off the main
+thread.
+
+- The name slides up word by word when the page loads.
+- Scroll-driven (`animation-timeline`): a progress line along the top, the
+  hero portrait drifting away, the brand strip sliding sideways, sections and
+  stats rising in (`.reveal`, staggered with `.stagger` and `--i`), and
+  case-study images opening from the bottom.
+
+Anything not animated is simply shown in its final state. That covers
+browsers without scroll timelines, such as Firefox today, and visitors whose
+system asks for reduced motion.
 
 ## Deploying (Vercel)
 

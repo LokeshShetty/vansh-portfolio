@@ -1,41 +1,63 @@
 .study {
   display: grid;
-  gap: 2rem;
+  gap: var(--space-l);
+  padding-top: var(--space-l);
+  border-top: 1px solid var(--hairline);
 }
 
 .copy {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-s);
   align-content: start;
-  max-width: 34rem;
+  max-width: 40rem;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-s);
+}
+
+.index {
+  font-size: var(--step-2);
+  color: var(--accent);
 }
 
 .title {
-  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  font-size: var(--step-4);
+  line-height: 1.02;
+}
+
+.summary {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
 }
 
 .did {
   display: grid;
-  gap: 0.375rem;
+  gap: var(--space-2xs);
   color: var(--ink-dim);
 }
 
 .did li {
-  padding-left: 1.25rem;
   position: relative;
+  padding-left: 1.25em;
 }
 
 .did li::before {
-  content: "—";
+  content: "→";
   position: absolute;
   left: 0;
+  color: var(--accent);
 }
 
 .results {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem 2.5rem;
-  padding-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: var(--space-s) var(--space-m);
+  margin-top: var(--space-xs);
+  padding-top: var(--space-s);
   border-top: 1px solid var(--hairline);
 }
 
@@ -43,23 +65,21 @@
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
-  gap: 0.125rem;
+  gap: var(--space-2xs);
 }
 
 .value {
-  font-size: 2rem;
-  color: var(--accent);
+  font-size: var(--step-3);
 }
 
 .label {
-  font-size: 0.8125rem;
+  font-size: var(--step--1);
   color: var(--ink-dim);
-  max-width: 12rem;
 }
 
 .media {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-s);
   align-content: start;
   align-items: start;
 }
@@ -68,20 +88,51 @@
   width: min(100%, 18rem);
 }
 
-/* Portrait media (reels, posters) sit side by side instead of towering. */
 @media (min-width: 40rem) {
   .media {
     grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   }
 }
 
+/* Two columns from tablet-landscape up; the copy stays pinned while the
+   media scrolls past it. */
 @media (min-width: 64rem) {
   .study {
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--space-xl);
+  }
+
+  .copy {
+    position: sticky;
+    top: var(--space-l);
+  }
+
+  .textOnly {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .textOnly .copy {
-    max-width: 40rem;
+    max-width: 48rem;
+  }
+}
+
+/* Media opens from the bottom like a window blind as it scrolls in. */
+@keyframes unveil {
+  from {
+    clip-path: inset(30% 0 0 0 round var(--radius));
+    transform: translateY(3rem) scale(0.96);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round var(--radius));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .item {
+      animation: unveil linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
   }
 }

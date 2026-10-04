@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif } from "next/font/google";
+import { Inter } from "next/font/google";
 import { profile } from "@/data/profile";
 import "./globals.css";
 
-// The only web font: one weight, latin only, self-hosted and preloaded by
-// next/font. Body text uses the system stack, which costs nothing to load.
-const display = Instrument_Serif({
-  variable: "--font-display-local",
-  weight: "400",
+// The only web font: Inter as one variable file (weight + optical size),
+// latin only, self-hosted and preloaded by next/font. Headings use the
+// opsz 32 cut, which is Inter Display; body text sizes itself automatically.
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  axes: ["opsz"],
   display: "swap",
 });
 
@@ -24,15 +25,18 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f5f2" },
-    { media: "(prefers-color-scheme: dark)", color: "#121211" },
+    { media: "(prefers-color-scheme: light)", color: "#f5f4f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0f0e" },
   ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={display.variable}>
-      <body>{children}</body>
+    <html lang="en" className={inter.variable}>
+      <body>
+        <div className="progress" aria-hidden="true" />
+        {children}
+      </body>
     </html>
   );
 }

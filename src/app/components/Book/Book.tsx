@@ -6,16 +6,23 @@ export function Book() {
   return (
     <section className={styles.band} aria-labelledby="book-title">
       <div className={`shell ${styles.inner}`}>
-        <Asset {...book.cover} className={styles.cover} sizes="12rem" />
+        <div className={`${styles.coverWrap} reveal`}>
+          <Asset {...book.cover} className={styles.cover} sizes="16rem" />
+        </div>
         <div className={styles.copy}>
-          <p className="eyebrow">Publication</p>
-          <h2 id="book-title" className={`display ${styles.title}`}>
+          <p className="eyebrow reveal">Publication</p>
+          <h2 id="book-title" className={`display ${styles.title} reveal`}>
             {book.title}
           </h2>
-          <p className={styles.subtitle}>{book.subtitle}</p>
-          <p className={styles.note}>{book.note}</p>
+          <p className={`${styles.subtitle} reveal`}>{book.subtitle}</p>
+          <p className={`${styles.note} reveal`}>{book.note}</p>
           {book.href && (
-            <a href={book.href} target="_blank" rel="noopener noreferrer">
+            <a
+              className="reveal"
+              href={book.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Get it on Amazon ↗
             </a>
           )}

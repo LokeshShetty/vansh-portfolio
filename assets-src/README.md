@@ -7,7 +7,7 @@ Files in this folder are not committed; only the optimised output in
 
 | File name (any extension) | Where it shows                     | Suggested shape |
 | ------------------------- | ---------------------------------- | --------------- |
-| `portrait`                | Hero                               | 4:5             |
+| `portrait`                | Hero background (shown greyscale)  | 1:1             |
 | `acm-microsite`           | CRM is Dead campaign: microsite    | 16:10           |
 | `acm-activation`          | CRM is Dead campaign: on-ground    | 4:3             |
 | `ok-campaign`             | OK launch: campaign creative       | 4:5             |

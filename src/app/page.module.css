@@ -1,6 +1,17 @@
 .work {
   display: grid;
-  gap: var(--section-gap);
-  padding-block: var(--section-gap);
-  border-top: 1px solid var(--hairline);
+  gap: var(--space-xl);
+  padding-block: var(--space-xl) var(--space-2xl);
+}
+
+.heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-m);
+}
+
+.heading h2 {
+  font-size: var(--step-5);
 }

@@ -20,7 +20,9 @@ for (const page of pages) {
 
   // Inline each stylesheet. Font URLs are relative to the CSS file, so make
   // them absolute before moving the rules into the HTML.
-  const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"[^>]*\/?>/g)];
+  const sheets = [
+    ...html.matchAll(/<link rel="stylesheet" href="([^"]+)"[^>]*\/?>/g),
+  ];
   for (const [tag, href] of sheets) {
     const css = (await readFile(join(OUT, href), "utf8"))
       .replace(/\/\*# sourceMappingURL=.*?\*\//g, "")

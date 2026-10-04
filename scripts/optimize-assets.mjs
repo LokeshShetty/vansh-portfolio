@@ -20,7 +20,15 @@ const MANIFEST = join(ROOT, "src/data/asset-manifest.json");
 
 // Covers a phone at 1x up to a half-width desktop column at 2x.
 const WIDTHS = [480, 960, 1600];
-const IMAGE_EXT = new Set([".png", ".jpg", ".jpeg", ".webp", ".avif", ".tif", ".tiff"]);
+const IMAGE_EXT = new Set([
+  ".png",
+  ".jpg",
+  ".jpeg",
+  ".webp",
+  ".avif",
+  ".tif",
+  ".tiff",
+]);
 
 const files = (await readdir(SRC)).filter((f) =>
   IMAGE_EXT.has(extname(f).toLowerCase()),
@@ -41,17 +49,28 @@ for (const file of files.sort()) {
 
   // Never upscale; always keep at least one size.
   const widths = WIDTHS.filter((w) => w < width);
-  if (widths.length === 0 || widths.at(-1) < width) widths.push(Math.min(width, WIDTHS.at(-1)));
+  if (widths.length === 0 || widths.at(-1) < width)
+    widths.push(Math.min(width, WIDTHS.at(-1)));
   const unique = [...new Set(widths)];
 
   for (const w of unique) {
     const resized = image.clone().resize({ width: w });
-    await resized.clone().avif({ quality: 50, effort: 6 }).toFile(join(OUT, `${name}-${w}.${hash}.avif`));
-    await resized.clone().webp({ quality: 72 }).toFile(join(OUT, `${name}-${w}.${hash}.webp`));
+    await resized
+      .clone()
+      .avif({ quality: 50, effort: 6 })
+      .toFile(join(OUT, `${name}-${w}.${hash}.avif`));
+    await resized
+      .clone()
+      .webp({ quality: 72 })
+      .toFile(join(OUT, `${name}-${w}.${hash}.webp`));
   }
 
   // ~200 byte blurred preview, inlined as the image background while it loads.
-  const blur = await image.clone().resize({ width: 16 }).webp({ quality: 40 }).toBuffer();
+  const blur = await image
+    .clone()
+    .resize({ width: 16 })
+    .webp({ quality: 40 })
+    .toBuffer();
 
   manifest[name] = {
     width,
@@ -64,4 +83,6 @@ for (const file of files.sort()) {
 }
 
 await writeFile(MANIFEST, JSON.stringify(manifest, null, 2) + "\n");
-console.log(`\n${files.length} image(s) written to public/assets, manifest updated.`);
+console.log(
+  `\n${files.length} image(s) written to public/assets, manifest updated.`,
+);

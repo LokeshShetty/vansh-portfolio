@@ -1,31 +1,35 @@
 .grid {
   display: grid;
-  gap: 4rem;
-  padding-block: var(--section-gap);
+  gap: var(--space-xl);
+  padding-block: var(--space-2xl);
+}
+
+.heading {
+  font-size: var(--step-4);
 }
 
 .list {
-  list-style: none;
-  margin-top: 1.25rem;
-  border-top: 1px solid var(--hairline);
+  margin-top: var(--space-m);
+  border-top: 1px solid var(--ink);
 }
 
 .row,
 .tool {
   display: grid;
-  gap: 0.25rem;
-  padding-block: 1.25rem;
+  gap: var(--space-2xs);
+  padding-block: var(--space-s);
   border-bottom: 1px solid var(--hairline);
 }
 
 .when {
   font-family: var(--font-mono-stack);
-  font-size: 0.8125rem;
+  font-size: var(--step--1);
   color: var(--ink-dim);
 }
 
 .role {
   font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .org {
@@ -33,21 +37,20 @@
 }
 
 .note {
-  margin-top: 0.25rem;
-  font-size: 0.9375rem;
+  margin-top: var(--space-2xs);
+  font-size: var(--step--1);
   color: var(--ink-dim);
 }
 
 @media (min-width: 40rem) {
   .row {
-    grid-template-columns: 7rem 1fr;
-    gap: 1.5rem;
+    grid-template-columns: 8rem 1fr;
+    gap: var(--space-m);
   }
 }
 
 @media (min-width: 64rem) {
   .grid {
     grid-template-columns: 3fr 2fr;
-    gap: 5rem;
   }
 }
