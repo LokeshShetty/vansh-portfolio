@@ -59,55 +59,62 @@ export function Hero() {
   const nameWords = profile.name.split(" ").length;
 
   return (
-    <header className={`shell ${styles.bento}`}>
-      <div className={`tile ${styles.intro}`}>
-        {/* Filled by src/three/funnel.ts after the page is idle; see postbuild. */}
-        <canvas data-funnel className={styles.funnel} aria-hidden="true" />
-        <p className={`eyebrow ${styles.status}`}>{profile.current}</p>
-        <h1 className={`display ${styles.name}`}>
-          <Words text={profile.name} start={0} />
-          <br />
-          <span className={styles.tagline}>
-            <Words text={profile.tagline} start={nameWords} />
-          </span>
-        </h1>
-        <p className={styles.lede}>{profile.intro}</p>
-      </div>
-
-      <div className={`tile ${styles.photo}`}>
+    <header className={styles.hero}>
+      {/* Greyscale portrait behind the grid; the tiles are translucent so it
+          shows through them softly. */}
+      <div className={styles.backdrop} aria-hidden="true">
         <Asset
           {...profile.portrait}
+          alt=""
           className={styles.picture}
-          sizes="(min-width: 64rem) 20rem, 100vw"
+          sizes="(min-width: 90rem) 52rem, (min-width: 40rem) 60vw, 26rem"
           priority
         />
-        <span className={styles.place}>{profile.location}</span>
       </div>
 
-      {stats.map((stat, i) => (
-        <StatTile key={stat.kicker} stat={stat} index={i} />
-      ))}
+      <div className={`shell ${styles.bento}`}>
+        <div className={`tile ${styles.intro}`}>
+          {/* Filled by src/three/funnel.ts after the page is idle; see postbuild. */}
+          <canvas data-funnel className={styles.funnel} aria-hidden="true" />
+          <p className={`eyebrow ${styles.status}`}>{profile.current}</p>
+          <h1 className={`display ${styles.name}`}>
+            <Words text={profile.name} start={0} />
+            <br />
+            <span className={styles.tagline}>
+              <Words text={profile.tagline} start={nameWords} />
+            </span>
+          </h1>
+          <div className={styles.lower}>
+            <p className={styles.lede}>{profile.intro}</p>
+            <span className={styles.place}>{profile.location}</span>
+          </div>
+        </div>
 
-      <div className={`tile ${styles.stack} reveal`}>
-        <p className="eyebrow">Stack</p>
-        <ul className={styles.chips}>
-          {stack.map((tool) => (
-            <li key={tool} className="chip">
-              {tool}
-            </li>
-          ))}
-        </ul>
+        {stats.map((stat, i) => (
+          <StatTile key={stat.kicker} stat={stat} index={i} />
+        ))}
+
+        <div className={`tile ${styles.stack} reveal`}>
+          <p className="eyebrow">Stack</p>
+          <ul className={styles.chips}>
+            {stack.map((tool) => (
+              <li key={tool} className="chip">
+                {tool}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <a
+          className={`tile ${styles.cta} reveal`}
+          href={`mailto:${profile.email}`}
+        >
+          <span className="eyebrow">Open to talk</span>
+          <span className={`display ${styles.ctaText}`}>
+            Let&rsquo;s grow <span aria-hidden="true">→</span>
+          </span>
+        </a>
       </div>
-
-      <a
-        className={`tile ${styles.cta} reveal`}
-        href={`mailto:${profile.email}`}
-      >
-        <span className="eyebrow">Open to talk</span>
-        <span className={`display ${styles.ctaText}`}>
-          Let&rsquo;s grow <span aria-hidden="true">→</span>
-        </span>
-      </a>
     </header>
   );
 }
