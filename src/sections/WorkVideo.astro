@@ -1,0 +1,88 @@
+---
+// The work-experience video: a large player with a cover image and a big
+// lime play button. Nothing but the cover loads until someone presses play
+// (preload="none"); the button then starts it and hands over to the native
+// controls. Until the file is added it shows a placeholder frame.
+import { getImage } from "astro:assets";
+import Asset from "@/components/Asset.astro";
+import { video } from "@/data/profile";
+import { getMedia } from "@/lib/media";
+import styles from "./WorkVideo.module.css";
+
+const cover = getMedia(video.name);
+const poster =
+  video.src && cover
+    ? await getImage({
+        src: cover,
+        format: "webp",
+        width: Math.min(cover.width, 1600),
+        quality: 80,
+      })
+    : undefined;
+---
+
+<section class:list={["shell", styles.section]} aria-labelledby="video-title">
+  <div class={styles.head}>
+    <p class="eyebrow">{video.kicker}</p>
+    <h2 id="video-title" class:list={["display", "lift", styles.title]}>
+      <span>{video.title}</span>
+    </h2>
+  </div>
+
+  <div
+    class:list={[styles.player, "reveal"]}
+    data-player
+    style={{ aspectRatio: video.ratio }}
+  >
+    {video.src ? (
+      <>
+        <video
+          class={styles.video}
+          src={video.src}
+          poster={poster?.src}
+          preload="none"
+          playsinline
+          aria-label={video.alt}
+        />
+        <button
+          type="button"
+          class={styles.play}
+          aria-label={`Play: ${video.alt}`}
+        >
+          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
+          </svg>
+        </button>
+      </>
+    ) : (
+      <>
+        <Asset
+          {...video}
+          class={styles.cover}
+          sizes="(min-width: 80rem) 76rem, 100vw"
+        />
+        <span class={styles.soon} aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28">
+            <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
+          </svg>
+        </span>
+      </>
+    )}
+  </div>
+</section>
+
+<script>
+  // Big play button → play with native controls from then on.
+  for (const player of document.querySelectorAll<HTMLElement>(
+    "[data-player]",
+  )) {
+    const media = player.querySelector("video");
+    const button = player.querySelector("button");
+    if (!media || !button) continue;
+    button.addEventListener("click", () => {
+      media.controls = true;
+      media.play();
+    });
+    media.addEventListener("play", () => (button.hidden = true));
+  }
+</script>

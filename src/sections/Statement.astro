@@ -3,6 +3,7 @@
 // viewport. CSS only: every word reads the section's named view timeline and
 // starts a little later than the one before it. Without scroll-timeline
 // support (or with reduced motion) the sentence is simply shown in full.
+import Funnel from "@/components/Funnel.astro";
 import { profile } from "@/data/profile";
 import styles from "./Statement.module.css";
 
@@ -42,4 +43,6 @@ const range = (i: number) => {
       </>
     ))}
   </p>
+  {/* The 3D funnel fills the space beside the sentence on wide screens. */}
+  <Funnel class={styles.funnel} />
 </section>

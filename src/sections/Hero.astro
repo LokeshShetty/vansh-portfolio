@@ -1,6 +1,5 @@
 ---
 import Asset from "@/components/Asset.astro";
-import Funnel from "@/components/Funnel.astro";
 import Count from "@/components/Count.astro";
 import { profile, stack, stats } from "@/data/profile";
 import styles from "./Hero.module.css";
@@ -10,21 +9,19 @@ const taglineWords = profile.tagline.split(" ");
 ---
 
 <header class={styles.hero}>
-  {/* Greyscale portrait behind the grid; the tiles are translucent so it shows through them softly. */}
-  <div class={styles.backdrop} aria-hidden="true">
-    <Asset
-      {...profile.portrait}
-      alt=""
-      class={styles.picture}
-      sizes="(min-width: 90rem) 52rem, (min-width: 40rem) 60vw, 26rem"
-      priority
-      quality={80}
-    />
-  </div>
-
   <div class:list={["shell", styles.bento]}>
     <div class:list={["tile", styles.intro]}>
-      <Funnel class={styles.funnel} />
+      {/* Desktop: the whole portrait on the right of this tile, edges
+          faded. Smaller screens: a round avatar above the title. */}
+      <div class={styles.portrait}>
+        <Asset
+          {...profile.portrait}
+          class={styles.picture}
+          sizes="(min-width: 72rem) 32rem, 6rem"
+          priority
+          quality={80}
+        />
+      </div>
       <p class:list={["eyebrow", styles.status]}>{profile.current}</p>
       <h1 class:list={["display", styles.name]}>
         {nameWords.map((word, i) => (

@@ -13,6 +13,32 @@
   text-wrap: balance;
 }
 
+/* Hidden (and never downloaded) on narrow screens; see Funnel.astro. */
+.funnel {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .statement {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-l);
+  }
+
+  .funnel {
+    display: block;
+    width: 100%;
+    height: clamp(22rem, 12rem + 18vw, 34rem);
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+
+  .funnel[data-ready] {
+    opacity: 1;
+  }
+}
+
 .accent {
   color: var(--accent-text);
 }

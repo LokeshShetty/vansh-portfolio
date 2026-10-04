@@ -3,7 +3,8 @@
 // bundles the script below; three.js itself is split into its own hashed
 // chunk and only downloaded once the page has loaded and gone idle. Skipped
 // for reduced motion, Save-Data and browsers without WebGL 2, which simply
-// see the tile without it.
+// see the section without it. It's also skipped wherever CSS hides the
+// canvas (narrow screens).
 type Props = { class?: string };
 ---
 
@@ -15,6 +16,8 @@ type Props = { class?: string };
   );
   const ok =
     canvas &&
+    // Hidden by CSS on narrow screens: don't download three.js at all.
+    canvas.getClientRects().length > 0 &&
     matchMedia("(prefers-reduced-motion: no-preference)").matches &&
     !(navigator as Navigator & { connection?: { saveData?: boolean } })
       .connection?.saveData &&

@@ -15,23 +15,8 @@
   min-height: clamp(20rem, 14rem + 16vw, 30rem);
 }
 
-/* 3D funnel behind the name. Empty (and invisible) until it loads. */
-.funnel {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 85%;
-  height: 70%;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1.2s ease;
-}
-
-.funnel[data-ready] {
-  opacity: 0.4;
-}
-
-.intro > :not(.funnel) {
+/* Text sits above the desktop portrait. */
+.intro > :not(.portrait) {
   position: relative;
 }
 
@@ -84,43 +69,47 @@
   color: var(--ink-dim);
 }
 
-/* Portrait blended into the page behind the grid. */
 .hero {
   position: relative;
-  isolation: isolate;
-  overflow: clip;
 }
 
-.backdrop {
-  position: absolute;
-  z-index: -1;
-  top: clamp(-2rem, -4rem + 4vw, 0rem);
-  right: clamp(-12rem, -2rem - 8vw, -3rem);
-  width: clamp(24rem, 12rem + 42vw, 54rem);
-  pointer-events: none;
-  /* Fainter on narrow screens, where the text sits on top of the face. */
-  opacity: 0.38;
-  mask-image: radial-gradient(closest-side, #000 60%, transparent 100%);
+/* Portrait. Small screens: a round avatar with a lime ring. */
+.portrait {
+  flex: none;
+  width: clamp(4.5rem, 3.5rem + 3vw, 6rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 3px var(--accent);
 }
 
-@media (min-width: 64rem) {
-  .backdrop {
-    opacity: var(--portrait-opacity);
-  }
-}
-
-/* The source photo is already greyscale, so no CSS filter is needed. */
 .picture {
+  display: block;
+  width: 100%;
+  height: 100%;
   border-radius: 0;
   background: none;
 }
 
-/* Hero tiles are slightly see-through, so the portrait shows through them.
-   Scroll performance: no backdrop-filter blur, and the portrait has no
-   blend mode or scroll zoom. Each forced the big hero area to repaint on
-   every scroll frame. */
-.bento > :global(.tile):not(.cta) {
-  background: var(--glass);
+.picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Desktop: the whole photo, square, filling the right of the tile and
+   fading out at its edges, so nothing is cropped. */
+@media (min-width: 72rem) {
+  .portrait {
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    width: auto;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    mask-image: radial-gradient(closest-side, #000 62%, transparent 100%);
+  }
 }
 
 .lower {
@@ -251,19 +240,6 @@
 
 .cta:hover .ctaText span {
   transform: translateX(0.2em);
-}
-
-@media (min-width: 48rem) {
-  /* Sits left of the portrait so the two don't stack up. */
-  .funnel {
-    right: 30%;
-    width: 34%;
-    height: 100%;
-  }
-
-  .funnel[data-ready] {
-    opacity: 1;
-  }
 }
 
 /* Desktop: name across the top, four stats in a row, then stack + CTA. */

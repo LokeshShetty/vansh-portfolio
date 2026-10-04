@@ -43,6 +43,18 @@ export const profile = {
   },
 };
 
+/** The work-experience video, shown after the statement. Until `src` is
+ *  set, a placeholder frame shows. Put the file in public/video/ and an
+ *  image named `work-video` in src/assets/media/ for its cover. */
+export const video = {
+  name: "work-video",
+  alt: "Vansh walking through his work experience",
+  ratio: "16 / 9",
+  src: null as string | null,
+  kicker: "Watch",
+  title: "The story so far",
+};
+
 /** Second row of the scrolling strip, sliding the other way. */
 export const channels = [
   "Paid social",

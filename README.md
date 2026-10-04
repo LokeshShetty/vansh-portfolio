@@ -50,7 +50,15 @@ That's it: on build, Astro generates AVIF and WebP versions at 480, 960 and
 slot with no file renders as a labelled empty frame of the same shape, so the
 layout doesn't move when the real image arrives.
 
-**Videos.** Compress them first. Then put the file in `public/video/`, set
+**Work video.** The "The story so far" section after the statement plays
+one video. Compress it (the ffmpeg command below; use `scale=1280:-2` for a
+landscape video), put it at `public/video/work-video.mp4`, add a cover image
+named `work-video` to `src/assets/media/`, and set `src` on `video` in
+`profile.ts` to `"/video/work-video.mp4"`. For a vertical video, also set
+`ratio` to `"9 / 16"`. Only the cover loads with the page; the video
+downloads when someone presses play.
+
+**Case-study videos.** Compress them first. Then put the file in `public/video/`, set
 `src` on its slot in `profile.ts` (for example `"/video/ok-reel.mp4"`), and
 add an image with the same slot name to use as the poster.
 

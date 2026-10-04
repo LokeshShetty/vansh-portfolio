@@ -7,6 +7,7 @@ time, so commit the originals as they are.
 | File name (any extension) | Where it shows                    | Suggested shape |
 | ------------------------- | --------------------------------- | --------------- |
 | `portrait`                | Hero background (shown greyscale) | 1:1             |
+| `work-video`              | Cover image for the work video    | 16:9            |
 | `acm-microsite`           | CRM is Dead campaign: microsite   | 16:10           |
 | `acm-activation`          | CRM is Dead campaign: on-ground   | 4:3             |
 | `ok-campaign`             | OK launch: campaign creative      | 4:5             |
