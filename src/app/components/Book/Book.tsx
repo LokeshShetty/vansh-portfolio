@@ -4,7 +4,7 @@ import styles from "./Book.module.css";
 
 export function Book() {
   return (
-    <section className="shell" aria-labelledby="book-title">
+    <section id="book" className="shell" aria-labelledby="book-title">
       <div className={`tile ${styles.inner} reveal`}>
         <div className={styles.coverWrap}>
           <Asset {...book.cover} className={styles.cover} sizes="16rem" />

@@ -46,7 +46,7 @@ Remove `-an` if the video needs sound.
 
 - **Static HTML.** `output: "export"` builds plain files for a CDN, with no
   server.
-- **No JavaScript.** Nothing on the page needs React in the browser, so
+- **No JavaScript for first paint.** Nothing on the page needs React in the browser, so
   `scripts/postbuild.mjs` removes the Next runtime (about 170 KB gzipped) and
   inlines the CSS. The page is about 6 KB of gzipped HTML, and nothing blocks
   rendering. If you ever add a `"use client"` component, take the postbuild
@@ -86,6 +86,20 @@ thread.
 Anything not animated is simply shown in its final state. That covers
 browsers without scroll timelines, such as Firefox today, and visitors whose
 system asks for reduced motion.
+
+## 3D funnel (Three.js)
+
+The particle funnel in the hero is `src/three/funnel.ts`. It isn't part of
+the Next build. `scripts/postbuild.mjs` bundles it separately with esbuild
+into `/js/funnel.<hash>.js` (~130 KB gzipped) and adds a small loader to the
+page. The loader fetches the bundle only after the page has loaded and gone
+idle, so the first paint is still plain HTML. It skips visitors who ask for
+reduced motion or reduced data, and browsers without WebGL 2; they just see
+the tile without it. Particle motion runs on the GPU, and rendering pauses
+while the hero is off-screen or the tab is hidden.
+
+Because the loader is added after the build, the funnel doesn't show in
+`npm run dev`. Use `npm run build && npm start` to see it.
 
 ## Deploying (Vercel)
 

@@ -3,7 +3,11 @@ import styles from "./Background.module.css";
 
 export function Background() {
   return (
-    <section className={`shell ${styles.grid}`} aria-label="Background">
+    <section
+      id="about"
+      className={`shell ${styles.grid}`}
+      aria-label="Background"
+    >
       <div className="tile reveal">
         <h2 className={`display ${styles.heading}`}>Experience</h2>
         <ol className={styles.list}>

@@ -61,6 +61,8 @@ export function Hero() {
   return (
     <header className={`shell ${styles.bento}`}>
       <div className={`tile ${styles.intro}`}>
+        {/* Filled by src/three/funnel.ts after the page is idle; see postbuild. */}
+        <canvas data-funnel className={styles.funnel} aria-hidden="true" />
         <p className={`eyebrow ${styles.status}`}>{profile.current}</p>
         <h1 className={`display ${styles.name}`}>
           <Words text={profile.name} start={0} />
