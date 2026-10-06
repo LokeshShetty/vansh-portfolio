@@ -3,8 +3,7 @@
 // bundles the script below; three.js itself is split into its own hashed
 // chunk and only downloaded once the page has loaded and gone idle. Skipped
 // for reduced motion, Save-Data and browsers without WebGL 2, which simply
-// see the section without it. It's also skipped wherever CSS hides it
-// (narrow screens).
+// see the section without it.
 import styles from "./Cuboid.module.css";
 
 type Props = { class?: string };
@@ -12,7 +11,7 @@ type Props = { class?: string };
 
 <div class:list={[styles.wrap, Astro.props.class]} data-cuboid>
   <canvas class={styles.canvas} aria-hidden="true"></canvas>
-  <p class:list={["eyebrow", styles.hint]} aria-hidden="true">
+  <p class:list={["eyebrow", styles.hint]} aria-hidden="true" data-cuboid-hint>
     Drag to turn · Click to light up
   </p>
 </div>
@@ -22,8 +21,6 @@ type Props = { class?: string };
   const canvas = wrap?.querySelector("canvas");
   const ok =
     canvas &&
-    // Hidden by CSS on narrow screens: don't download three.js at all.
-    wrap!.getClientRects().length > 0 &&
     matchMedia("(prefers-reduced-motion: no-preference)").matches &&
     !(navigator as Navigator & { connection?: { saveData?: boolean } })
       .connection?.saveData &&

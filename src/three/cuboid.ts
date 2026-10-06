@@ -35,6 +35,15 @@ const RADIUS = GAP * 0.62; // over half, so neighbours overlap
 const PUSH = 0.6; // how far spheres move away from the pointer
 const REACH = 0.85; // how far from the pointer spheres still react
 const START_LIT = 6;
+const SMALL = matchMedia("(max-width: 48rem)").matches;
+
+// The line under the cube, once someone starts lighting spheres up.
+const message = (n: number) =>
+  n >= 12
+    ? `${n} lit · That's how growth compounds`
+    : n >= 5
+      ? `${n} lit · Small wins compound`
+      : `${n} lit · Keep going`;
 
 export function mount(canvas: HTMLCanvasElement) {
   const renderer = new WebGLRenderer({
@@ -43,7 +52,7 @@ export function mount(canvas: HTMLCanvasElement) {
     antialias: true,
     powerPreference: "low-power",
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, SMALL ? 1.5 : 1.75));
 
   const scene = new Scene();
   // Close and fairly wide, for the strong taper toward the bottom corner.
@@ -72,7 +81,9 @@ export function mount(canvas: HTMLCanvasElement) {
 
   const material = new MeshStandardMaterial({ roughness: 0.6, metalness: 0 });
   const mesh = new InstancedMesh(
-    new SphereGeometry(RADIUS, 28, 20),
+    SMALL
+      ? new SphereGeometry(RADIUS, 18, 12)
+      : new SphereGeometry(RADIUS, 28, 20),
     material,
     count,
   );
@@ -137,6 +148,10 @@ export function mount(canvas: HTMLCanvasElement) {
   let lastY = 0;
   let lastT = 0;
 
+  const hint = canvas
+    .closest("[data-cuboid]")
+    ?.querySelector<HTMLElement>("[data-cuboid-hint]");
+
   // Pointer: where it meets the cube, in the cube's own coordinates.
   const raycaster = new Raycaster();
   const ndc = new Vector2();
@@ -194,8 +209,11 @@ export function mount(canvas: HTMLCanvasElement) {
         mesh.setColorAt(hoveredId, lit[hoveredId] ? lime : white);
         mesh.instanceColor!.needsUpdate = true;
         scale[hoveredId] = 1.35;
+        if (hint) hint.textContent = message(lit.reduce((a, b) => a + b, 0));
       }
     }
+    // Touch has no hover: let the pushed spheres settle once the finger lifts.
+    if (e.pointerType !== "mouse") hovering = false;
     canvas.style.cursor = hovering ? "pointer" : "grab";
   };
   canvas.addEventListener("pointerup", release);

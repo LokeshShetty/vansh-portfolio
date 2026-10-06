@@ -342,6 +342,19 @@ ol {
       content: counter(n);
     }
 
+    /* Figures further down count up as their card scrolls into view. Tiles
+       clip their overflow, which would make view() track the tile instead
+       of the page, so the card names its own timeline for the count. */
+    .tile:has(.count-view) {
+      view-timeline: --count-in;
+    }
+
+    .count-view {
+      animation: count linear both;
+      animation-timeline: --count-in;
+      animation-range: entry 10% cover 45%;
+    }
+
     /* Section headings slide up out of a mask as they scroll in. */
     .lift {
       overflow: clip;

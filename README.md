@@ -95,16 +95,16 @@ to `"/resume.pdf"`.
 
 ## 3D cube (Three.js)
 
-Beside the big statement on wide screens: a cube built from spheres, seen
-from above. Spheres near the pointer push outward and spring back, dragging
+Beside the big statement (under it on phones): a cube built from spheres,
+seen from above. Spheres near the pointer push outward and spring back, dragging
 turns it (with a little momentum), and clicking a sphere lights it up lime.
-Left alone, it turns slowly.
+Left alone, it turns slowly. The line under it counts the lit spheres.
 
 `components/Cuboid.astro` holds the canvas and a ~1 KB loader script. The
 loader imports `src/three/cuboid.ts`, and Astro splits three.js into its own
-chunk, downloaded only after the page has loaded and gone idle. Narrow
-screens, visitors who ask for reduced motion or reduced data, and browsers
-without WebGL 2 never download it; they see the section without it. All the
+chunk, downloaded only after the page has loaded and gone idle. Visitors
+who ask for reduced motion or reduced data, and browsers without WebGL 2,
+never download it; they see the section without it. All the
 spheres are one instanced mesh (one draw call), and rendering pauses while
 the cube is off-screen or the tab is hidden.
 
@@ -154,8 +154,9 @@ JavaScript and run off the main thread.
 - Tiles get a faint lime spotlight that follows the cursor (mouse and
   trackpad only; a few lines in `layouts/Base.astro`).
 - The hero stats count up from 0 (a registered `@property` integer printed
-  by a CSS counter; `components/Count.astro`). Screen readers get the plain
-  value.
+  by a CSS counter; `components/Count.astro`). Results on the project cards
+  and case pages count up as they scroll into view. Screen readers get the
+  plain value.
 - The brand and channel strips scroll continuously in opposite directions
   and pause on hover.
 - Scroll-driven (`animation-timeline`): a progress line along the top,

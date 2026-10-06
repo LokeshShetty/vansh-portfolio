@@ -1,5 +1,6 @@
 ---
 import Asset from "@/components/Asset.astro";
+import Count from "@/components/Count.astro";
 import Text from "@/components/Text.astro";
 import Video from "@/components/Video.astro";
 import type { CollectionEntry } from "astro:content";
@@ -65,7 +66,7 @@ const mediaClass = (ratio?: string) =>
         >
           <dt class={styles.label}>{r.label}</dt>
           <dd class:list={["display", styles.value]}>
-            <Text text={r.value} />
+            <Count value={r.value} onView />
           </dd>
         </div>
       ))}

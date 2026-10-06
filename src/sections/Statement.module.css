@@ -13,9 +13,9 @@
   text-wrap: balance;
 }
 
-/* Hidden (and never downloaded) on narrow screens; see Cuboid.astro. */
+/* Narrow screens: under the sentence. */
 .cuboid {
-  display: none;
+  margin-top: var(--space-m);
 }
 
 @media (min-width: 64rem) {
@@ -27,7 +27,7 @@
   }
 
   .cuboid {
-    display: grid;
+    margin-top: 0;
   }
 }
 
