@@ -11,8 +11,8 @@ const taglineWords = profile.tagline.split(" ");
 <header class={styles.hero}>
   <div class:list={["shell", styles.bento]}>
     <div class:list={["tile", styles.intro]}>
-      {/* Desktop: the whole portrait on the right of this tile, edges
-          faded. Smaller screens: a round avatar above the title. */}
+      {/* Desktop: the cut-out portrait standing on the right of this
+          tile. Smaller screens: a small version above the title. */}
       <div class={styles.portrait}>
         <Asset
           {...profile.portrait}

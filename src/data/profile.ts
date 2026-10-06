@@ -40,9 +40,9 @@ export const profile = {
     { label: "Résumé (PDF)", href: null },
   ] satisfies Link[],
   portrait: {
-    name: "portrait",
+    name: "portrait-cutout",
     alt: "Portrait of Vansh Agicha",
-    ratio: "1 / 1",
+    ratio: "1070 / 1102",
   },
 };
 
