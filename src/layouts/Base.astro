@@ -6,7 +6,7 @@
 import "@fontsource-variable/inter/opsz.css";
 import interLatin from "@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2?url";
 import "@/styles/globals.css";
-import ThemeToggle from "@/components/ThemeToggle.astro";
+import TopActions from "@/components/TopActions.astro";
 import { profile } from "@/data/profile";
 
 type Props = { title?: string; description?: string };
@@ -55,7 +55,7 @@ const ogImage = new URL("/og.png", Astro.site ?? Astro.url).href;
   </head>
   <body>
     <div class="progress" aria-hidden="true"></div>
-    <ThemeToggle />
+    <TopActions />
     <slot />
     {import.meta.env.PROD && (
       <>

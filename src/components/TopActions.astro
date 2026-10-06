@@ -1,0 +1,31 @@
+---
+// Sticky top-right group on every page: "Get in touch" (to the contact card
+// in the footer), "Get my Book" (Amazon) and the theme toggle.
+import { book } from "@/data/profile";
+import ThemeToggle from "./ThemeToggle.astro";
+import styles from "./TopActions.module.css";
+---
+
+<div class={styles.bar}>
+  <a
+    class:list={[styles.pill, styles.primary]}
+    href="#contact"
+    data-track="contact_click"
+    data-from="top-bar"
+  >
+    Get in touch
+  </a>
+  {book.href && (
+    <a
+      class={styles.pill}
+      href={book.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-track="link_click"
+      data-from="top-bar-book"
+    >
+      Get my Book <span aria-hidden="true">↗</span>
+    </a>
+  )}
+  <ThemeToggle />
+</div>

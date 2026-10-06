@@ -28,6 +28,7 @@ const personJsonLd = {
   name: profile.name,
   jobTitle: profile.role,
   email: `mailto:${profile.email}`,
+  telephone: profile.phone,
   sameAs: profile.links.flatMap((l) => (l.href ? [l.href] : [])),
 };
 ---

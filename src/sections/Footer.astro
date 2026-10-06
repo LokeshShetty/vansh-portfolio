@@ -1,11 +1,15 @@
 ---
-// Closing contact card: a big "Get in touch", the email, round icon links,
-// and a slim footer row.
+// Closing contact card (#contact, where every "Get in touch" leads): the
+// pitch, the email and phone, round icon links, and a slim footer row.
 import { next, profile } from "@/data/profile";
 import styles from "./Footer.module.css";
 
 const icons: Record<string, { d: string; width: number }> = {
   Email: { d: "M3 6h18v12H3zM3 6l9 7 9-7", width: 1.6 },
+  Phone: {
+    d: "M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1",
+    width: 1.6,
+  },
   LinkedIn: {
     d: "M6.5 9.5V18M6.5 6.2v.1M10.5 18v-5a2.5 2.5 0 0 1 5 0v5M10.5 9.5V18",
     width: 1.8,
@@ -24,6 +28,7 @@ const sections = [
 
 const links = [
   { label: "Email", href: `mailto:${profile.email}` },
+  { label: "Phone", href: `tel:${profile.phone.replace(/\s/g, "")}` },
   ...profile.links,
 ].filter((l): l is { label: string; href: string } => Boolean(l.href));
 
@@ -31,7 +36,7 @@ const links = [
 const [ctaBefore, ctaAccent, ctaAfter = ""] = next.cta.split("*");
 ---
 
-<footer class:list={["shell", styles.footer]}>
+<footer id="contact" class:list={["shell", styles.footer]}>
   <div class:list={["tile", styles.card, "reveal"]}>
     <p class="eyebrow">{next.kicker}</p>
     <p class={styles.pitch}>{next.pitch}</p>
@@ -44,14 +49,24 @@ const [ctaBefore, ctaAccent, ctaAfter = ""] = next.cta.split("*");
     </h2>
 
     <div class={styles.contact}>
-      <a
-        class={styles.email}
-        href={`mailto:${profile.email}`}
-        data-track="contact_click"
-        data-from="footer"
-      >
-        {profile.email}
-      </a>
+      <div class={styles.lines}>
+        <a
+          class={styles.email}
+          href={`mailto:${profile.email}`}
+          data-track="contact_click"
+          data-from="footer"
+        >
+          {profile.email}
+        </a>
+        <a
+          class={styles.phone}
+          href={`tel:${profile.phone.replace(/\s/g, "")}`}
+          data-track="contact_click"
+          data-from="footer-phone"
+        >
+          {profile.phone}
+        </a>
+      </div>
       <ul class={styles.icons}>
         {links.map((link) => {
           const external = link.href.startsWith("http");
@@ -62,7 +77,9 @@ const [ctaBefore, ctaAccent, ctaAfter = ""] = next.cta.split("*");
                 href={link.href}
                 aria-label={link.label}
                 data-track={
-                  link.label === "Email" ? "contact_click" : "link_click"
+                  link.label === "Email" || link.label === "Phone"
+                    ? "contact_click"
+                    : "link_click"
                 }
                 data-from={`footer-${link.label.toLowerCase()}`}
                 target={external ? "_blank" : undefined}

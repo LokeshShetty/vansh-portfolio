@@ -73,6 +73,23 @@
   border-color: var(--accent);
 }
 
+.lines {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-2xs);
+}
+
+.phone {
+  font-size: var(--step-1);
+  color: var(--ink-dim);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.phone:hover {
+  color: inherit;
+}
+
 .icons {
   display: flex;
   gap: var(--space-2xs);

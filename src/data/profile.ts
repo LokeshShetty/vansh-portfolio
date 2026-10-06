@@ -35,8 +35,9 @@ export const profile = {
   statement:
     "From part-time video editor to *marketing manager* in four years, with two 100% performance-based raises, a *team of seven* and a *book on AGI* along the way",
   email: "agi.vansh@gmail.com",
+  phone: "+91 7417709500",
   links: [
-    { label: "LinkedIn", href: null },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/vansh-agicha/" },
     { label: "Résumé (PDF)", href: null },
   ] satisfies Link[],
   portrait: {

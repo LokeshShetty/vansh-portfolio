@@ -1,8 +1,5 @@
 .toggle {
-  position: fixed;
-  z-index: 20;
-  top: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);
-  right: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);
+  flex: none;
   display: grid;
   place-items: center;
   width: 2.75rem;
