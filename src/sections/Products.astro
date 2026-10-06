@@ -1,0 +1,52 @@
+---
+// "I also build products": three product cards with their core flow, a line
+// for the smaller builds, and the commercial proof. The proof names its
+// scope (HRMS + Content Pilot) so it isn't read as covering every product.
+import Text from "@/components/Text.astro";
+import { products } from "@/data/profile";
+import styles from "./Products.module.css";
+---
+
+<section
+  id="products"
+  class:list={["shell", styles.section]}
+  aria-labelledby="products-title"
+>
+  <h2 id="products-title" class:list={["display", "lift", styles.title]}>
+    <span>{products.title}</span>
+  </h2>
+
+  <div class={styles.cards}>
+    {products.items.map((p, i) => (
+      <article
+        class:list={["tile", styles.card, "reveal", "stagger"]}
+        style={{ "--i": i }}
+      >
+        <h3 class:list={["display", styles.name]}>{p.name}</h3>
+        <p class={styles.type}>{p.type}</p>
+        <ol class={styles.flow}>
+          {p.flow.map((step) => (
+            <li>{step}</li>
+          ))}
+        </ol>
+      </article>
+    ))}
+  </div>
+
+  <div class:list={[styles.foot, "reveal"]}>
+    <p class={styles.also}>Also built {products.also.join(" • ")}</p>
+    <div class={styles.proof}>
+      <span class="eyebrow">{products.proof.scope}</span>
+      <dl class={styles.figures}>
+        {products.proof.figures.map((f) => (
+          <div>
+            <dt>{f.label}</dt>
+            <dd class="display">
+              <Text text={f.value} />
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>

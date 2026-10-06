@@ -1,0 +1,90 @@
+.section {
+  display: grid;
+  gap: var(--space-m);
+  padding-block: var(--space-xl) var(--grid-gap);
+}
+
+.title {
+  font-size: var(--step-5);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: var(--grid-gap);
+}
+
+.card {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2xs);
+}
+
+.name {
+  font-size: var(--step-3);
+}
+
+.type {
+  color: var(--ink-dim);
+}
+
+/* The product's core loop, as steps joined by arrows. */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.5rem;
+  margin-top: var(--space-s);
+  font-size: var(--step--1);
+}
+
+.flow li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flow li + li::before {
+  content: "→";
+  color: var(--accent-text);
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s) var(--space-l);
+  padding-top: var(--space-s);
+}
+
+.also {
+  color: var(--ink-dim);
+}
+
+.proof {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs) var(--space-m);
+}
+
+.figures {
+  display: flex;
+  gap: var(--space-m);
+}
+
+.figures > div {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.figures dt {
+  font-size: var(--step--1);
+  color: var(--ink-dim);
+}
+
+.figures dd {
+  font-size: var(--step-3);
+  color: var(--accent-text);
+}

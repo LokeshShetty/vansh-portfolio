@@ -28,6 +28,19 @@ const { Content } = await render(study);
 // The body starts as just an outline in an HTML comment; show the write-up
 // area only once there's real text.
 const hasWriteUp = Boolean(study.body?.replace(/<!--[\s\S]*?-->/g, "").trim());
+// The story tile shows if there is anything to put in it: structured
+// fields, the "What I did" fallback, or a written-up body.
+const hasStory =
+  hasWriteUp ||
+  Boolean(
+    data.challenge ||
+    data.approach ||
+    data.owned ||
+    data.system ||
+    data.scale ||
+    data.execution ||
+    !data.engines,
+  );
 ---
 
 <Base title={data.title} description={data.summary}>
@@ -49,20 +62,6 @@ const hasWriteUp = Boolean(study.body?.replace(/<!--[\s\S]*?-->/g, "").trim());
       <p class={styles.summary}>{data.summary}</p>
     </header>
 
-    <dl class={styles.results}>
-      {data.results.map((r, i) => (
-        <div
-          class:list={["tile", styles.result, "reveal", "stagger"]}
-          style={{ "--i": i }}
-        >
-          <dt class={styles.label}>{r.label}</dt>
-          <dd class:list={["display", styles.value]}>
-            <Text text={r.value} />
-          </dd>
-        </div>
-      ))}
-    </dl>
-
     {data.assets.length > 0 && (
       <div class={styles.media}>
         {data.assets.map((asset) =>
@@ -79,21 +78,132 @@ const hasWriteUp = Boolean(study.body?.replace(/<!--[\s\S]*?-->/g, "").trim());
       </div>
     )}
 
-    <section class:list={["tile", styles.body, "reveal"]}>
-      <h2 class="eyebrow">What I did</h2>
-      <ul class={styles.did}>
-        {data.did.map((item) => (
-          <li>
-            <Text text={item} />
-          </li>
-        ))}
-      </ul>
-      {hasWriteUp && (
-        <div class={styles.prose}>
-          <Content />
+    {/* Challenge → Approach → What I Owned → Execution, then Result. */}
+    {hasStory && (
+      <section class:list={["tile", styles.story, "reveal"]}>
+        {data.challenge && (
+          <div class={styles.block}>
+            <h2 class="eyebrow">Challenge</h2>
+            <p class={styles.lead}>{data.challenge}</p>
+          </div>
+        )}
+        {data.approach && (
+          <div class={styles.block}>
+            <h2 class="eyebrow">{data.approachLabel ?? "Approach"}</h2>
+            <div>
+              <p class={styles.lead}>{data.approach}</p>
+              {data.approachNotes?.map((note) => (
+                <p class={styles.aside}>{note}</p>
+              ))}
+            </div>
+          </div>
+        )}
+        {data.owned && (
+          <div class={styles.block}>
+            <h2 class="eyebrow">What I Owned</h2>
+            <ul class={styles.chips}>
+              {data.owned.map((item) => (
+                <li class="chip">{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {(data.system || data.scale || data.execution) && (
+          <div class={styles.block}>
+            <h2 class="eyebrow">Execution</h2>
+            <div class={styles.stack}>
+              {data.system && (
+                <ol class={styles.flow} aria-label="System">
+                  {data.system.map((step) => (
+                    <li>{step}</li>
+                  ))}
+                </ol>
+              )}
+              {data.scale && <p class={styles.scale}>{data.scale}</p>}
+              {data.execution && (
+                <ul class={styles.did}>
+                  {data.execution.map((item) => (
+                    <li>
+                      <Text text={item} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        )}
+        {!data.challenge && !data.owned && !data.execution && !data.engines && (
+          <div class={styles.block}>
+            <h2 class="eyebrow">What I did</h2>
+            <ul class={styles.did}>
+              {data.did.map((item) => (
+                <li>
+                  <Text text={item} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {hasWriteUp && (
+          <div class={styles.prose}>
+            <Content />
+          </div>
+        )}
+      </section>
+    )}
+
+    {data.engines ? (
+      <section class={styles.result} aria-labelledby="result-title">
+        <h2 id="result-title" class="eyebrow">
+          Execution and results
+        </h2>
+        <div class={styles.engines}>
+          {data.engines.map((engine, i) => (
+            <div
+              class:list={[
+                "tile",
+                styles.engine,
+                engine.highlight && styles.highlight,
+                "reveal",
+                "stagger",
+              ]}
+              style={{ "--i": i }}
+            >
+              <h3 class:list={["display", styles.engineName]}>{engine.name}</h3>
+              <ul>
+                {engine.points.map((point) => (
+                  <li>
+                    <Text text={point} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      )}
-    </section>
+      </section>
+    ) : (
+      <section class={styles.result} aria-labelledby="result-title">
+        <h2 id="result-title" class="eyebrow">
+          Result
+        </h2>
+        <dl class={styles.results}>
+          {data.results.map((r, i) => (
+            <div
+              class:list={["tile", styles.resultCard, "reveal", "stagger"]}
+              style={{ "--i": i }}
+            >
+              <dt class={styles.label}>{r.label}</dt>
+              <dd class:list={["display", styles.value]}>
+                <Text text={r.value} />
+              </dd>
+            </div>
+          ))}
+        </dl>
+        {data.resultNotes?.map((note) => (
+          <p class={styles.aside}>{note}</p>
+        ))}
+      </section>
+    )}
 
     <a href={`/work/${next.id}/`} class:list={["tile", styles.next, "reveal"]}>
       <span class="eyebrow">Next project</span>

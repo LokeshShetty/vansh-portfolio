@@ -1,16 +1,15 @@
 ---
-featured: true
-order: 1
+order: 4
 kicker: "Campaign · HubSpot INBOUND 2025, San Francisco"
-title: "CRM is Dead, Long Live ACM"
-summary: "An end-to-end launch campaign for SuperAGI at INBOUND: the microsite, on-ground activations and geo-targeted ads around the venue."
+title: "CRM is Dead: a GTM campaign at HubSpot INBOUND"
+summary: "An end-to-end GTM campaign for SuperAGI at HubSpot INBOUND: microsite, street activations and geo-targeted ads around the venue"
 did:
   - "Owned the campaign from concept to the event floor"
   - "Built the campaign microsite"
   - "Ran geo-targeted ads to reach attendees around the venue"
 results:
   - value: "100-seat"
-    label: "account closed, plus several more clients"
+    label: "Account closed"
 assets:
   - name: "acm-microsite"
     alt: "The ACM campaign microsite"
@@ -18,6 +17,28 @@ assets:
   - name: "acm-activation"
     alt: "On-ground activation at INBOUND 2025"
     ratio: "4 / 3"
+challenge: "HubSpot INBOUND was crowded with CRM and SaaS companies competing for the same attention"
+approachLabel: "Idea"
+approach: "CRM is Dead, Long Live ACM"
+approachNotes:
+  - "ACM: Autonomous Customer Management"
+owned:
+  - "Campaign concept"
+  - "Microsite"
+  - "Creative direction"
+  - "Print collateral"
+  - "Street activations"
+  - "Campaign boards"
+  - "Geo-targeted ads"
+  - "Event execution"
+execution:
+  - "theCRMisDead.com"
+  - "Pamphlets inside and around the event"
+  - "People holding campaign boards"
+  - "Geo-targeted San Francisco ads"
+  - "News-style campaign videos"
+resultNotes:
+  - "Also contributed to several additional client wins"
 ---
 
 <!--

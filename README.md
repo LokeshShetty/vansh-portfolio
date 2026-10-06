@@ -14,17 +14,17 @@ npm run check     # type-check .astro and .ts files
 
 ## Where things live
 
-| Path                        | What                                                                  |
-| --------------------------- | --------------------------------------------------------------------- |
-| `src/data/profile.ts`       | Copy: intro, statement, stats, brands, book, experience, links        |
-| `src/content/work/`         | One Markdown file per case study (card and its own page)              |
-| `src/assets/media/`         | Images; drop a file in, named after its slot                          |
-| `src/pages/index.astro`     | The home page: puts the sections in order                             |
-| `src/pages/work/[id].astro` | A page per case study, at `/work/<id>/`                               |
-| `src/sections/`             | Hero, Brands, Statement, CaseStudy, CaseRow, Book, Background, Footer |
-| `src/components/`           | Asset (images), Video, Text, Funnel                                   |
-| `src/three/funnel.ts`       | The Three.js particle funnel                                          |
-| `src/styles/globals.css`    | Colours, fluid type and spacing scales, scroll animations             |
+| Path                        | What                                                                            |
+| --------------------------- | ------------------------------------------------------------------------------- |
+| `src/data/profile.ts`       | Copy: intro, statement, stats, brands, book, experience, links                  |
+| `src/content/work/`         | One Markdown file per case study (card and its own page)                        |
+| `src/assets/media/`         | Images; drop a file in, named after its slot                                    |
+| `src/pages/index.astro`     | The home page: puts the sections in order                                       |
+| `src/pages/work/[id].astro` | A page per case study, at `/work/<id>/`                                         |
+| `src/sections/`             | Hero, Brands, Statement, CaseStudy, CaseRow, Products, Book, Background, Footer |
+| `src/components/`           | Asset (images), Video, Text, Funnel                                             |
+| `src/three/funnel.ts`       | The Three.js particle funnel                                                    |
+| `src/styles/globals.css`    | Colours, fluid type and spacing scales, scroll animations                       |
 
 Any link set to `null` in `profile.ts` (LinkedIn, résumé, Amazon) is hidden
 until you fill it in.
@@ -50,7 +50,7 @@ That's it: on build, Astro generates AVIF and WebP versions at 480, 960 and
 slot with no file renders as a labelled empty frame of the same shape, so the
 layout doesn't move when the real image arrives.
 
-**Work video.** The "The story so far" section after the statement plays
+**Work video.** The "From Execution to Ownership" section after the statement plays
 one video. Compress it (the ffmpeg command below; use `scale=1280:-2` for a
 landscape video), put it at `public/video/work-video.mp4`, add a cover image
 named `work-video` to `src/assets/media/`, and set `src` on `video` in
@@ -113,7 +113,7 @@ in both themes. Anything lime as text uses `--accent-text`, which is deep
 olive on light, where lime would be unreadable. The light theme also has a
 few touches of its own:
 
-- a lime highlighter behind "grows things." instead of lime text;
+- a lime highlighter behind "grows things" instead of lime text;
 - a faint dot-grid page background;
 - dark funnel particles;
 - a stronger green on the meters.

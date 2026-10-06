@@ -21,16 +21,19 @@ export const profile = {
   name: "Vansh Agicha",
   role: "Growth Marketing Manager",
   /** Second line of the hero headline, in the accent colour. */
-  tagline: "grows things.",
+  tagline: "grows things",
   current: "Marketing Manager @ Contlo · SuperAGI",
   focus: ["Performance marketing", "GTM", "AI-led growth"],
   location: "Rishikesh, India",
-  intro:
-    "I run full-funnel growth for B2B SaaS and consumer brands. In four years at Contlo Technologies (SuperAGI, Verk, OK) I went from part-time video editor to marketing manager, leading a team of seven.",
+  /** Hero supporting copy: one line per entry. */
+  intro: [
+    "I build growth systems across performance marketing, GTM, AI automation, content and product launches",
+    "Over four years at Contlo Technologies, I went from part-time Video Editor to Marketing Manager, leading a team of 7",
+  ],
   /** The big scroll-lit sentence under the strips. *Starred* words get the
    *  accent colour. */
   statement:
-    "From part-time video editor to *marketing manager* in four years, with two 100% performance-based raises, a *team of seven* and a *book on AGI* along the way.",
+    "From part-time video editor to *marketing manager* in four years, with two 100% performance-based raises, a *team of seven* and a *book on AGI* along the way",
   email: "agi.vansh@gmail.com",
   links: [
     { label: "LinkedIn", href: null },
@@ -52,7 +55,12 @@ export const video = {
   ratio: "16 / 9",
   src: null as string | null,
   kicker: "Watch",
-  title: "The story so far",
+  title: "From Execution to Ownership",
+  /** Short supporting copy: one line per entry. */
+  copy: [
+    "I started by editing videos and gradually moved across design, product, growth, GTM and marketing leadership",
+    "The scope changed, but the habit stayed the same: build, test, learn and own the outcome",
+  ],
 };
 
 /** Second row of the scrolling strip, sliding the other way. */
@@ -69,17 +77,18 @@ export const channels = [
   "Launches",
 ];
 
-/** Tools shown as chips in the hero grid. */
-export const stack = [
-  "Google Ads",
-  "Meta Ads",
-  "LinkedIn Ads",
-  "HubSpot",
-  "GA4",
-  "n8n",
-  "OpenAI",
-  "Claude Code",
-  "AI voice agents",
+/** "How I Grow" tile in the hero grid: what each set of tools is for. */
+export const howIGrow = [
+  {
+    stage: "Acquire",
+    items: ["Google Ads", "Meta Ads", "LinkedIn Ads", "Cold Email"],
+  },
+  {
+    stage: "Convert",
+    items: ["HubSpot", "Landing Pages", "WhatsApp", "AI Voice"],
+  },
+  { stage: "Scale", items: ["SEO", "AEO/GEO", "Creators", "Events"] },
+  { stage: "Automate", items: ["n8n", "OpenAI", "Claude Code"] },
 ];
 
 /** Companies, clients and stages, shown in the scrolling strip under the hero. */
@@ -99,6 +108,8 @@ export type Stat = {
   kicker: string;
   value: string;
   label: string;
+  /** Optional supporting line under the label. */
+  detail?: string;
   /** Optional bar drawn under the number. Real figures only, 0–100. */
   meter?: { label: string; from?: number; to: number; display: string };
 };
@@ -107,43 +118,89 @@ export const stats: Stat[] = [
   {
     kicker: "Pipeline",
     value: "700+",
-    label: "SQLs in six months",
-    meter: { label: "SQL → opportunity", to: 47, display: "47%" },
+    label: "SQLs in 6 months",
+    meter: { label: "SQL → Opportunity", to: 47, display: "47%" },
   },
   {
     kicker: "Organic",
     value: "60×",
-    label: "organic traffic",
-    meter: {
-      label: "Domain Rating 45 → 75",
-      from: 45,
-      to: 75,
-      display: "75/100",
-    },
+    label: "Traffic growth",
+    meter: { label: "DR 45 → 75", from: 45, to: 75, display: "75/100" },
   },
   {
-    kicker: "Launch",
+    kicker: "Consumer",
     value: "₹55L",
-    label: "monthly GMV, three months after launch",
+    label: "Monthly GMV",
+    detail: "30K+ installs • 800 peak orders/day",
   },
   {
-    kicker: "Reach",
+    kicker: "Brand",
     value: "1M",
-    label: "people reached by a single LinkedIn post",
+    label: "Peak reach on a single LinkedIn post",
   },
 ];
+
+/** "I also build products" section, after Selected Work. */
+export const products = {
+  title: "I also build products",
+  items: [
+    {
+      name: "Content Pilot",
+      type: "AI Social Media Operating System",
+      flow: [
+        "Learns brand context",
+        "Builds content calendar",
+        "Generates posts and creatives",
+        "Publishes",
+        "Monitors engagement",
+      ],
+    },
+    {
+      name: "InfluencerEarn",
+      type: "Performance Influencer Marketplace",
+      flow: ["Campaign", "Creator", "Content", "Performance", "Payout"],
+    },
+    {
+      name: "HRMS",
+      type: "End-to-End HR Platform",
+      flow: [
+        "Hiring",
+        "Attendance",
+        "Leave",
+        "Payroll",
+        "Performance",
+        "Offboarding",
+      ],
+    },
+  ],
+  also: ["LOS", "POS", "Invoice Generator", "Event Platform"],
+  /** Revenue is from HRMS and Content Pilot only, not every product. */
+  proof: {
+    scope: "HRMS + Content Pilot",
+    figures: [
+      { value: "5", label: "Clients" },
+      { value: "₹2.5L", label: "Total one-time revenue" },
+    ],
+  },
+};
+
+/** Closing section: what he's looking for, and the final call to action. */
+export const next = {
+  kicker: "What’s Next",
+  pitch:
+    "I’m interested in Growth Marketing, Marketing & Growth, GTM and AI-native marketing roles where I can own outcomes across acquisition, distribution and experimentation",
+  /** *Starred* word gets the accent colour. */
+  cta: "Let’s build something that *grows*",
+};
 
 // Case studies live in src/content/work (one Markdown file each).
 
 export const book = {
   title: "AGI Now",
-  subtitle:
-    "AGI is Already Here, Are You Ready for the Biggest Technological Revolution?",
-  /** From the back cover. */
-  quote:
-    "AGI did not arrive with an announcement. It has started emerging in our systems.",
-  credit: "By Ishaan Bhola (CEO & Founder, SuperAGI) with Vansh Agicha",
-  note: "Amazon, January 2026 · Kindle and paperback",
+  kicker: "Co-author • Amazon • 2026",
+  description:
+    "Co-authored with SuperAGI founder Ishaan Bhola, exploring how agentic AI is changing software, economics and responsibility",
+  cta: "View on Amazon",
   href: "https://www.amazon.com/dp/B0GJFGW6V9" as string | null,
   /** The three parts of the wraparound cover, cut from one image. */
   cover: {
@@ -155,24 +212,47 @@ export const book = {
   back: { name: "agi-now-back", alt: "Back cover of AGI Now", ratio: "2 / 3" },
 };
 
-export const experience = [
+export type Role = {
+  role: string;
+  org: string;
+  when: string;
+  note: string | null;
+  /** The path within the role, shown as steps. */
+  path?: string[];
+  /** Short proof points, shown as chips. */
+  highlights?: string[];
+};
+
+export const experience: Role[] = [
   {
     role: "Marketing Manager",
     org: "Contlo Technologies (SuperAGI, Verk, OK)",
     when: "2022 to now",
-    note: "Grew from part-time video editor through design, product and GTM roles. Two 100% performance-based raises.",
+    note: null,
+    path: [
+      "Video Editor",
+      "Design",
+      "Product",
+      "Growth",
+      "GTM",
+      "Marketing Manager",
+    ],
+    highlights: [
+      "Managed a team of 7",
+      "Two 100% performance-based salary increases",
+    ],
   },
   {
     role: "Marketing Associate (contract)",
     org: "Flexiple",
     when: "2024",
-    note: "Short-form video on startup stories, and helped build @terminalbyflexiple on Instagram.",
+    note: "Short-form video on startup stories, and helped build @terminalbyflexiple on Instagram",
   },
   {
     role: "Freelance video producer",
     org: "Apple India, Round Table India, Affinity Branding",
     when: "Earlier",
-    note: "Social media and event videos.",
+    note: "Social media and event videos",
   },
   {
     role: "BCA, GPA 8.83",
@@ -182,23 +262,21 @@ export const experience = [
   },
 ];
 
-export const toolkit = [
+export const capabilities = [
   {
     group: "Growth",
-    items:
-      "Google, Meta and LinkedIn Ads · HubSpot · GA4 · GTM · Attribution · A/B testing",
+    items: ["Paid Acquisition", "Attribution", "CRO", "GTM", "A/B Testing"],
   },
   {
-    group: "Channels",
-    items:
-      "SEO · AEO/GEO · Cold email · WhatsApp · Creators · Events and offline",
+    group: "Distribution",
+    items: ["SEO", "AEO/GEO", "Influencers", "Email", "WhatsApp", "Events"],
   },
   {
-    group: "AI & automation",
-    items: "n8n · OpenAI API · Claude Code · AI voice agents",
+    group: "AI",
+    items: ["n8n", "OpenAI", "AI Voice", "Claude Code", "Automation"],
   },
   {
     group: "Creative",
-    items: "Premiere Pro · After Effects · Photoshop · Figma · Landing pages",
+    items: ["Landing Pages", "Video", "Design", "Campaign Creative"],
   },
 ];

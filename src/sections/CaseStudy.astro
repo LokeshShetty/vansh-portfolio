@@ -58,7 +58,7 @@ const mediaClass = (ratio?: string) =>
       ))}
     </ul>
     <dl class={styles.results}>
-      {study.results.map((r, i) => (
+      {study.results.slice(0, 4).map((r, i) => (
         <div
           class:list={[styles.result, "reveal", "stagger"]}
           style={{ "--i": i }}

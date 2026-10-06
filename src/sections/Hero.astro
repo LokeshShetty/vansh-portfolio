@@ -1,7 +1,7 @@
 ---
 import Asset from "@/components/Asset.astro";
 import Count from "@/components/Count.astro";
-import { profile, stack, stats } from "@/data/profile";
+import { howIGrow, profile, stats } from "@/data/profile";
 import styles from "./Hero.module.css";
 
 const nameWords = profile.name.split(" ");
@@ -45,7 +45,11 @@ const taglineWords = profile.tagline.split(" ");
         </span>
       </h1>
       <div class={styles.lower}>
-        <p class={styles.lede}>{profile.intro}</p>
+        <div class={styles.lede}>
+          {profile.intro.map((line) => (
+            <p>{line}</p>
+          ))}
+        </div>
         <span class={styles.place}>{profile.location}</span>
       </div>
     </div>
@@ -60,6 +64,7 @@ const taglineWords = profile.tagline.split(" ");
           <Count value={stat.value} />
         </p>
         <p class={styles.label}>{stat.label}</p>
+        {stat.detail && <p class={styles.detail}>{stat.detail}</p>}
         {stat.meter && (
           <div class={styles.meter}>
             <div
@@ -83,12 +88,21 @@ const taglineWords = profile.tagline.split(" ");
     ))}
 
     <div class:list={["tile", styles.stack, "reveal"]}>
-      <p class="eyebrow">Stack</p>
-      <ul class={styles.chips}>
-        {stack.map((tool) => (
-          <li class="chip">{tool}</li>
+      <h2 class="eyebrow">How I Grow</h2>
+      <dl class={styles.grow}>
+        {howIGrow.map((g) => (
+          <div>
+            <dt class={styles.stage}>{g.stage}</dt>
+            <dd>
+              <ul class={styles.chips}>
+                {g.items.map((item) => (
+                  <li class="chip">{item}</li>
+                ))}
+              </ul>
+            </dd>
+          </div>
         ))}
-      </ul>
+      </dl>
     </div>
 
     <a
@@ -97,9 +111,9 @@ const taglineWords = profile.tagline.split(" ");
       data-track="contact_click"
       data-from="hero"
     >
-      <span class="eyebrow">Open to talk</span>
+      <span class="eyebrow">Open to Growth &amp; GTM roles</span>
       <span class:list={["display", styles.ctaText]}>
-        Let&rsquo;s grow <span aria-hidden="true">→</span>
+        Get in touch <span aria-hidden="true">→</span>
       </span>
     </a>
   </div>

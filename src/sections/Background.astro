@@ -1,8 +1,8 @@
 ---
-// Experience as a vertical timeline and the toolkit as clusters of chips.
+// Experience as a vertical timeline and capabilities as clusters of chips.
 // Deliberately open (no tiles), to contrast with the card-heavy sections
 // above.
-import { experience, toolkit } from "@/data/profile";
+import { capabilities, experience } from "@/data/profile";
 import styles from "./Background.module.css";
 ---
 
@@ -21,6 +21,20 @@ import styles from "./Background.module.css";
           <p class={styles.role}>{item.role}</p>
           <p class={styles.org}>{item.org}</p>
           {item.note && <p class={styles.note}>{item.note}</p>}
+          {item.path && (
+            <ol class={styles.path} aria-label="Path within the role">
+              {item.path.map((step) => (
+                <li>{step}</li>
+              ))}
+            </ol>
+          )}
+          {item.highlights && (
+            <ul class={styles.highlights}>
+              {item.highlights.map((h) => (
+                <li>{h}</li>
+              ))}
+            </ul>
+          )}
         </li>
       ))}
     </ol>
@@ -28,17 +42,17 @@ import styles from "./Background.module.css";
 
   <div>
     <h2 class:list={["display", "lift", styles.heading]}>
-      <span>Toolkit</span>
+      <span>Capabilities</span>
     </h2>
     <div class={styles.clusters}>
-      {toolkit.map((t, i) => (
+      {capabilities.map((t, i) => (
         <div
           class:list={[styles.cluster, "reveal", "stagger"]}
           style={{ "--i": i }}
         >
           <p class="eyebrow">{t.group}</p>
           <ul class={styles.chips}>
-            {t.items.split(" · ").map((item) => (
+            {t.items.map((item) => (
               <li class="chip">{item}</li>
             ))}
           </ul>

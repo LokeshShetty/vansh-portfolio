@@ -11,14 +11,11 @@ import styles from "./Book.module.css";
 <section id="book" class={styles.band} aria-labelledby="book-title">
   <div class:list={["shell", styles.inner]}>
     <div class:list={[styles.copy, "reveal"]}>
-      <p class="eyebrow">Co-author · Amazon, 2026</p>
+      <p class="eyebrow">{book.kicker}</p>
       <h2 id="book-title" class:list={["display", "lift", styles.title]}>
         <span>{book.title}</span>
       </h2>
-      <p class={styles.subtitle}>{book.subtitle}</p>
-      <blockquote class={styles.quote}>“{book.quote}”</blockquote>
-      <p class={styles.credit}>{book.credit}</p>
-      <p class={styles.note}>{book.note}</p>
+      <p class={styles.subtitle}>{book.description}</p>
       {book.href && (
         <a
           class={styles.link}
@@ -28,7 +25,7 @@ import styles from "./Book.module.css";
           target="_blank"
           rel="noopener noreferrer"
         >
-          Get it on Amazon <span aria-hidden="true">↗</span>
+          {book.cta} <span aria-hidden="true">↗</span>
         </a>
       )}
     </div>

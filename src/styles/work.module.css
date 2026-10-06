@@ -57,7 +57,7 @@
   gap: var(--grid-gap);
 }
 
-.result {
+.resultCard {
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
@@ -145,4 +145,109 @@
 
 .next:hover .nextTitle {
   color: var(--accent-text);
+}
+
+/* Case-study structure: one labelled block per stage. */
+.story {
+  display: grid;
+  gap: var(--space-l);
+}
+
+.block {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.lead {
+  max-width: 52ch;
+  font-size: var(--step-1);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.aside {
+  margin-top: var(--space-2xs);
+  color: var(--ink-dim);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+}
+
+.stack {
+  display: grid;
+  gap: var(--space-s);
+}
+
+/* A system, as steps joined by arrows. */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.6rem;
+}
+
+.flow li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 500;
+}
+
+.flow li + li::before {
+  content: "→";
+  color: var(--accent-text);
+}
+
+.scale {
+  font-weight: 600;
+}
+
+.result {
+  display: grid;
+  gap: var(--space-s);
+  padding-top: var(--space-s);
+}
+
+.engines {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--grid-gap);
+}
+
+.engine {
+  display: grid;
+  align-content: start;
+  gap: var(--space-s);
+}
+
+.engineName {
+  font-size: var(--step-2);
+}
+
+.engine ul {
+  display: grid;
+  gap: var(--space-2xs);
+  color: var(--ink-dim);
+}
+
+/* The strongest workstream gets the accent. */
+.highlight {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.highlight ul {
+  color: var(--accent-ink);
+}
+
+@media (min-width: 48rem) {
+  .block {
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: var(--space-l);
+    align-items: baseline;
+  }
 }

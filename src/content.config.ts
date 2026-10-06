@@ -26,6 +26,38 @@ const work = defineCollection({
     did: z.array(z.string()),
     results: z.array(z.object({ value: z.string(), label: z.string() })),
     assets: z.array(asset).default([]),
+
+    // Case-study page structure. All optional; each renders only if set.
+    /** The business or growth problem. */
+    challenge: z.string().optional(),
+    /** The strategy, system or idea. */
+    approach: z.string().optional(),
+    /** Heading for the approach block, e.g. "Idea". Defaults to "Approach". */
+    approachLabel: z.string().optional(),
+    /** Extra lines under the approach. */
+    approachNotes: z.array(z.string()).optional(),
+    /** What he personally owned. */
+    owned: z.array(z.string()).optional(),
+    /** A pipeline or system, drawn as steps joined by arrows. */
+    system: z.array(z.string()).optional(),
+    /** One line on scale, shown under the system. */
+    scale: z.string().optional(),
+    /** Channels, campaigns, workflows, creative used. */
+    execution: z.array(z.string()).optional(),
+    /** Parallel workstreams, each with its own points (and results). When
+     *  set, they replace the separate Result block on the page. */
+    engines: z
+      .array(
+        z.object({
+          name: z.string(),
+          points: z.array(z.string()),
+          /** Emphasise the strongest one. */
+          highlight: z.boolean().default(false),
+        }),
+      )
+      .optional(),
+    /** Lines under the result figures. */
+    resultNotes: z.array(z.string()).optional(),
   }),
 });
 

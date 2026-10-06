@@ -27,6 +27,11 @@ const poster =
     <h2 id="video-title" class:list={["display", "lift", styles.title]}>
       <span>{video.title}</span>
     </h2>
+    <div class={styles.copy}>
+      {video.copy.map((line) => (
+        <p>{line}</p>
+      ))}
+    </div>
   </div>
 
   <div

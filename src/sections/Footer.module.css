@@ -28,9 +28,17 @@
 
 /* Weight contrast stands in for the reference's italic serif: same idea,
    no second font file. */
+.pitch {
+  max-width: 52ch;
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-dim);
+}
+
+/* Sized for a full sentence rather than two words. */
 .big {
-  margin-top: calc(var(--space-s) * -1);
-  font-size: clamp(3.25rem, 1rem + 10vw, 11rem);
+  margin-top: var(--space-s);
+  font-size: clamp(2.6rem, 1rem + 6.5vw, 7.5rem);
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.055em;

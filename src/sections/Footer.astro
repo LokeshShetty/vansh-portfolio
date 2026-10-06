@@ -1,7 +1,7 @@
 ---
 // Closing contact card: a big "Get in touch", the email, round icon links,
 // and a slim footer row.
-import { profile } from "@/data/profile";
+import { next, profile } from "@/data/profile";
 import styles from "./Footer.module.css";
 
 const icons: Record<string, { d: string; width: number }> = {
@@ -26,14 +26,20 @@ const links = [
   { label: "Email", href: `mailto:${profile.email}` },
   ...profile.links,
 ].filter((l): l is { label: string; href: string } => Boolean(l.href));
+
+// "Let’s build something that *grows*": the starred word is the accent.
+const [ctaBefore, ctaAccent, ctaAfter = ""] = next.cta.split("*");
 ---
 
 <footer class:list={["shell", styles.footer]}>
   <div class:list={["tile", styles.card, "reveal"]}>
-    <p class={styles.lets}>Let&rsquo;s</p>
+    <p class="eyebrow">{next.kicker}</p>
+    <p class={styles.pitch}>{next.pitch}</p>
     <h2 class:list={["display", "lift", styles.big]}>
       <span>
-        Get in <span class={styles.touch}>touch</span>
+        {ctaBefore}
+        <span class={styles.touch}>{ctaAccent}</span>
+        {ctaAfter}
       </span>
     </h2>
 

@@ -14,7 +14,7 @@ type Props = { title?: string; description?: string };
 const title = Astro.props.title
   ? `${Astro.props.title} | ${profile.name}`
   : `${profile.name}, ${profile.role}`;
-const description = Astro.props.description ?? profile.intro;
+const description = Astro.props.description ?? profile.intro.join(". ");
 const ogImage = new URL("/og.png", Astro.site ?? Astro.url).href;
 ---
 

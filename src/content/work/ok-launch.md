@@ -2,19 +2,23 @@
 featured: true
 order: 2
 kicker: "Launch · Consumer quick commerce, Bengaluru"
-title: "OK: from zero to ₹55 lakh GMV"
-summary: "Launched OK, a private-label grocery app, with two dark stores and city-wide offline campaigns alongside paid installs."
+title: "Launching OK: 30K installs to ₹55L monthly GMV"
+summary: "Launched OK, a private-label quick commerce app in Bengaluru, with paid installs, city-wide offline campaigns and two dark stores"
 did:
   - "Ran app-install campaigns at ₹22 per install"
   - "Planned and ran offline campaigns across the city"
   - "Ran two dark stores through launch"
 results:
   - value: "30,000+"
-    label: "installs in two months"
+    label: "App installs in 2 months"
+  - value: "~₹55L"
+    label: "Monthly GMV"
   - value: "800"
-    label: "orders a day at peak"
-  - value: "₹55L"
-    label: "monthly GMV within three months"
+    label: "Peak orders/day"
+  - value: "₹22"
+    label: "Average CPI"
+  - value: "2"
+    label: "Dark stores managed"
 assets:
   - name: "ok-campaign"
     alt: "OK offline campaign creative"
@@ -23,6 +27,24 @@ assets:
     alt: "OK launch video"
     ratio: "9 / 16"
     src: null
+challenge: "Launch a new private-label quick commerce brand in Bengaluru and build demand quickly"
+owned:
+  - "Performance marketing"
+  - "Social media"
+  - "WhatsApp"
+  - "Push notifications"
+  - "Landing page"
+  - "BTL"
+  - "Dark store operations"
+execution:
+  - "Meta Ads"
+  - "App install campaigns"
+  - "Billboards"
+  - "No-parking boards"
+  - "Pamphlets"
+  - "Human billboards"
+  - "Auto branding"
+  - "Push notification campaigns"
 ---
 
 <!--
