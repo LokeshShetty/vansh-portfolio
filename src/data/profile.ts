@@ -42,7 +42,7 @@ export const profile = {
   portrait: {
     name: "portrait-cutout",
     alt: "Portrait of Vansh Agicha",
-    ratio: "1070 / 1102",
+    ratio: "1006 / 1150",
   },
 };
 
