@@ -24,7 +24,7 @@ export const profile = {
   tagline: "grows things",
   current: "Marketing Manager @ Contlo · SuperAGI",
   focus: ["Performance marketing", "GTM", "AI-led growth"],
-  location: "Rishikesh, India",
+  location: "Bengaluru, India",
   /** Hero supporting copy: one line per entry. */
   intro: [
     "I build growth systems across performance marketing, GTM, AI automation, content and product launches",
