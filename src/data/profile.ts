@@ -77,7 +77,10 @@ export const channels = [
   "Launches",
 ];
 
-/** "How I Grow" tile in the hero grid: what each set of tools is for. */
+/** "How I Grow" tile in the hero grid: what each set of tools is for.
+ *  Previous labels, to restore: Acquire (Google Ads, Meta Ads, LinkedIn Ads,
+ *  Cold Email); Convert (HubSpot, Landing Pages, WhatsApp, AI Voice); Scale
+ *  (SEO, AEO/GEO, Creators, Events); Automate (n8n, OpenAI, Claude Code) */
 export const howIGrow = [
   {
     stage: "Acquire",
@@ -85,10 +88,13 @@ export const howIGrow = [
   },
   {
     stage: "Convert",
-    items: ["HubSpot", "Landing Pages", "WhatsApp", "AI Voice"],
+    items: ["HubSpot CRM", "Landing Pages", "WhatsApp", "AI Voice Agents"],
   },
-  { stage: "Scale", items: ["SEO", "AEO/GEO", "Creators", "Events"] },
-  { stage: "Automate", items: ["n8n", "OpenAI", "Claude Code"] },
+  {
+    stage: "Scale",
+    items: ["SEO", "AEO / GEO", "Influencer Marketing", "Events / Offline GTM"],
+  },
+  { stage: "Automate", items: ["n8n", "OpenAI API", "Claude Code"] },
 ];
 
 /** Companies, clients and stages, shown in the scrolling strip under the hero. */
