@@ -6,7 +6,7 @@ static files.
 
 ```bash
 npm install
-npm run dev       # local preview, 3D funnel included
+npm run dev       # local preview, 3D cube included
 npm run build     # static site in dist/
 npm run preview   # serve dist/ to check the production build
 npm run check     # type-check .astro and .ts files
@@ -22,8 +22,8 @@ npm run check     # type-check .astro and .ts files
 | `src/pages/index.astro`     | The home page: puts the sections in order                                       |
 | `src/pages/work/[id].astro` | A page per case study, at `/work/<id>/`                                         |
 | `src/sections/`             | Hero, Brands, Statement, CaseStudy, CaseRow, Products, Book, Background, Footer |
-| `src/components/`           | Asset (images), Video, Text, Funnel                                             |
-| `src/three/funnel.ts`       | The Three.js particle funnel                                                    |
+| `src/components/`           | Asset (images), Video, Text, Cuboid                                             |
+| `src/three/cuboid.ts`       | The Three.js sphere cube                                                        |
 | `src/styles/globals.css`    | Colours, fluid type and spacing scales, scroll animations                       |
 
 Any link set to `null` in `profile.ts` (LinkedIn, résumé, Amazon) is hidden
@@ -93,15 +93,20 @@ to `"/resume.pdf"`.
 - **Caching.** Everything in `/_astro/` has a content hash in its filename, so
   `vercel.json` caches it permanently.
 
-## 3D funnel (Three.js)
+## 3D cube (Three.js)
 
-`components/Funnel.astro` holds the canvas and a ~1 KB loader script. The
-loader imports `src/three/funnel.ts`, and Astro splits three.js into its own
-chunk (~130 KB gzipped), downloaded only after the page has loaded and gone
-idle. Visitors who ask for reduced motion or reduced data, and browsers
-without WebGL 2, never download it; they see the tile without it. Particle
-motion runs on the GPU, and rendering pauses while the hero is off-screen or
-the tab is hidden.
+Beside the big statement on wide screens: a cube built from spheres, seen
+from above. Spheres near the pointer push outward and spring back, dragging
+turns it (with a little momentum), and clicking a sphere lights it up lime.
+Left alone, it turns slowly.
+
+`components/Cuboid.astro` holds the canvas and a ~1 KB loader script. The
+loader imports `src/three/cuboid.ts`, and Astro splits three.js into its own
+chunk, downloaded only after the page has loaded and gone idle. Narrow
+screens, visitors who ask for reduced motion or reduced data, and browsers
+without WebGL 2 never download it; they see the section without it. All the
+spheres are one instanced mesh (one draw call), and rendering pauses while
+the cube is off-screen or the tab is hidden.
 
 ## Themes
 
@@ -117,7 +122,6 @@ few touches of its own:
 
 - a lime highlighter behind "grows things" instead of lime text;
 - a faint dot-grid page background;
-- dark funnel particles;
 - a stronger green on the meters.
 
 The contact card stays dark in both themes.
@@ -140,7 +144,7 @@ with no breakpoint jumps. Use these tokens rather than fixed sizes.
 
 ## Animations
 
-Apart from the funnel, the animations are CSS only, so they need no
+Apart from the 3D cube, the animations are CSS only, so they need no
 JavaScript and run off the main thread.
 
 - The name slides up word by word when the page loads.
@@ -149,7 +153,6 @@ JavaScript and run off the main thread.
   Transitions API; an instant switch where it isn't supported).
 - Tiles get a faint lime spotlight that follows the cursor (mouse and
   trackpad only; a few lines in `layouts/Base.astro`).
-- The 3D funnel flows faster while you scroll and eases back after.
 - The hero stats count up from 0 (a registered `@property` integer printed
   by a CSS counter; `components/Count.astro`). Screen readers get the plain
   value.

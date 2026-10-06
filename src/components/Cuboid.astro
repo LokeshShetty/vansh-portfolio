@@ -1,23 +1,29 @@
 ---
-// Canvas for the Three.js particle funnel (src/three/funnel.ts). Astro
+// Canvas for the interactive Three.js cuboid (src/three/cuboid.ts). Astro
 // bundles the script below; three.js itself is split into its own hashed
 // chunk and only downloaded once the page has loaded and gone idle. Skipped
 // for reduced motion, Save-Data and browsers without WebGL 2, which simply
-// see the section without it. It's also skipped wherever CSS hides the
-// canvas (narrow screens).
+// see the section without it. It's also skipped wherever CSS hides it
+// (narrow screens).
+import styles from "./Cuboid.module.css";
+
 type Props = { class?: string };
 ---
 
-<canvas data-funnel class={Astro.props.class} aria-hidden="true"></canvas>
+<div class:list={[styles.wrap, Astro.props.class]} data-cuboid>
+  <canvas class={styles.canvas} aria-hidden="true"></canvas>
+  <p class:list={["eyebrow", styles.hint]} aria-hidden="true">
+    Drag to turn · Click to light up
+  </p>
+</div>
 
 <script>
-  const canvas = document.querySelector<HTMLCanvasElement>(
-    "canvas[data-funnel]",
-  );
+  const wrap = document.querySelector<HTMLElement>("[data-cuboid]");
+  const canvas = wrap?.querySelector("canvas");
   const ok =
     canvas &&
     // Hidden by CSS on narrow screens: don't download three.js at all.
-    canvas.getClientRects().length > 0 &&
+    wrap!.getClientRects().length > 0 &&
     matchMedia("(prefers-reduced-motion: no-preference)").matches &&
     !(navigator as Navigator & { connection?: { saveData?: boolean } })
       .connection?.saveData &&
@@ -25,7 +31,7 @@ type Props = { class?: string };
 
   if (canvas && ok) {
     const go = () =>
-      import("../three/funnel")
+      import("../three/cuboid")
         .then(({ mount }) => mount(canvas))
         .catch(() => {});
     const idle = () =>

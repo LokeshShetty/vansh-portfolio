@@ -1,0 +1,20 @@
+.wrap {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2xs);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.wrap[data-ready] {
+  opacity: 1;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: clamp(24rem, 14rem + 18vw, 36rem);
+  cursor: grab;
+  /* Vertical swipes still scroll the page; sideways drags turn it. */
+  touch-action: pan-y;
+}

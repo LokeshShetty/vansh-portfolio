@@ -13,8 +13,8 @@
   text-wrap: balance;
 }
 
-/* Hidden (and never downloaded) on narrow screens; see Funnel.astro. */
-.funnel {
+/* Hidden (and never downloaded) on narrow screens; see Cuboid.astro. */
+.cuboid {
   display: none;
 }
 
@@ -26,16 +26,8 @@
     gap: var(--space-l);
   }
 
-  .funnel {
-    display: block;
-    width: 100%;
-    height: clamp(22rem, 12rem + 18vw, 34rem);
-    opacity: 0;
-    transition: opacity 1.2s ease;
-  }
-
-  .funnel[data-ready] {
-    opacity: 1;
+  .cuboid {
+    display: grid;
   }
 }
 
