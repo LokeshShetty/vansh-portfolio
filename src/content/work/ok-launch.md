@@ -21,12 +21,12 @@ results:
     label: "Dark stores managed"
 assets:
   - name: "ok-campaign"
-    alt: "OK offline campaign creative"
+    alt: "OK Groceries Bengaluru launch creative: a walking billboard, a branded auto and the app"
     ratio: "4 / 5"
   - name: "ok-reel"
     alt: "OK launch video"
     ratio: "9 / 16"
-    src: null
+    src: "/video/ok-reel.mp4"
 challenge: "Launch a new private-label quick commerce brand in Bengaluru and build demand quickly"
 owned:
   - "Performance marketing"

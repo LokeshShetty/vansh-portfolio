@@ -1,10 +1,11 @@
 ---
-// The work-experience video: a large player with a cover image and a big
-// lime play button. Nothing but the cover loads until someone presses play
-// (preload="none"); the button then starts it and hands over to the native
-// controls. Until the file is added it shows a placeholder frame.
+// The work-experience video: a large muted, looping player that plays while
+// on screen (src/lib/autoplay.ts), with a sound toggle. Only the cover loads
+// with the page (preload="none"). Until the file is added it shows a
+// placeholder frame.
 import { getImage } from "astro:assets";
 import Asset from "@/components/Asset.astro";
+import SoundToggle from "@/components/SoundToggle.astro";
 import { video } from "@/data/profile";
 import { getMedia } from "@/lib/media";
 import styles from "./WorkVideo.module.css";
@@ -46,18 +47,13 @@ const poster =
           src={video.src}
           poster={poster?.src}
           preload="none"
+          muted
+          loop
           playsinline
+          data-autoplay
           aria-label={video.alt}
         />
-        <button
-          type="button"
-          class={styles.play}
-          aria-label={`Play: ${video.alt}`}
-        >
-          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-            <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
-          </svg>
-        </button>
+        <SoundToggle />
       </>
     ) : (
       <>
@@ -77,17 +73,5 @@ const poster =
 </section>
 
 <script>
-  // Big play button → play with native controls from then on.
-  for (const player of document.querySelectorAll<HTMLElement>(
-    "[data-player]",
-  )) {
-    const media = player.querySelector("video");
-    const button = player.querySelector("button");
-    if (!media || !button) continue;
-    button.addEventListener("click", () => {
-      media.controls = true;
-      media.play();
-    });
-    media.addEventListener("play", () => (button.hidden = true));
-  }
+  import "@/lib/autoplay";
 </script>

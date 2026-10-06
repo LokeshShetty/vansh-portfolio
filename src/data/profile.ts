@@ -53,7 +53,7 @@ export const video = {
   name: "work-video",
   alt: "Vansh walking through his work experience",
   ratio: "16 / 9",
-  src: null as string | null,
+  src: "/video/work-video.mp4" as string | null,
   kicker: "Watch",
   title: "From Execution to Ownership",
   /** Short supporting copy: one line per entry. */

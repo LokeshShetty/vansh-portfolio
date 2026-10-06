@@ -1,11 +1,12 @@
 ---
-// Native player with preload="none": only the poster loads with the page,
-// and no video bytes are fetched until someone presses play. No JavaScript.
+// A muted, looping video that plays while on screen (src/lib/autoplay.ts),
+// with a sound toggle. preload="none": only the poster loads with the page.
 // The poster is the image in src/assets/media with the same name.
 import { getImage } from "astro:assets";
 import type { VideoSlot } from "@/data/profile";
 import { getMedia } from "@/lib/media";
 import Asset from "./Asset.astro";
+import SoundToggle from "./SoundToggle.astro";
 import styles from "./Video.module.css";
 
 type Props = VideoSlot & { class?: string };
@@ -23,18 +24,27 @@ const poster =
 ---
 
 {src && image && poster ? (
-  <video
-    class:list={[styles.video, className]}
-    style={{ aspectRatio: ratio }}
-    src={src}
-    poster={poster.src}
-    aria-label={alt}
-    width={image.width}
-    height={image.height}
-    preload="none"
-    controls
-    playsinline
-  />
+  <div class:list={[styles.wrap, className]}>
+    <video
+      class={styles.video}
+      style={{ aspectRatio: ratio }}
+      src={src}
+      poster={poster.src}
+      aria-label={alt}
+      width={image.width}
+      height={image.height}
+      preload="none"
+      muted
+      loop
+      playsinline
+      data-autoplay
+    />
+    <SoundToggle />
+  </div>
 ) : (
   <Asset {...Astro.props} />
 )}
+
+<script>
+  import "@/lib/autoplay";
+</script>

@@ -19,8 +19,8 @@ results:
     label: "Less creative production time, via AI-assisted workflows"
 assets:
   - name: "ads-creatives"
-    alt: "A selection of paid ad creatives"
-    ratio: "16 / 10"
+    alt: "Illustration of Google, Meta and LinkedIn ads feeding a B2B landing page"
+    ratio: "4 / 3"
 challenge: "Generate qualified B2B SaaS pipeline, not just traffic or low-intent leads"
 approach: "Built a full-funnel paid acquisition system across Google, Meta and LinkedIn"
 owned:

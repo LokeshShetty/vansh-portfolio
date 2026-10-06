@@ -56,7 +56,7 @@ landscape video), put it at `public/video/work-video.mp4`, add a cover image
 named `work-video` to `src/assets/media/`, and set `src` on `video` in
 `profile.ts` to `"/video/work-video.mp4"`. For a vertical video, also set
 `ratio` to `"9 / 16"`. Only the cover loads with the page; the video
-downloads when someone presses play.
+downloads when it first scrolls into view.
 
 **Case-study videos.** Compress them first. Then put the file in `public/video/`, set
 `src` on its slot in `profile.ts` (for example `"/video/ok-reel.mp4"`), and
@@ -86,8 +86,10 @@ to `"/resume.pdf"`.
 - **Images.** Every image becomes a `<picture>` with AVIF and WebP sources,
   `srcset`/`sizes`, and real width and height. Images below the fold load
   lazily, and the hero portrait loads with high priority.
-- **Video.** Videos use the native player with `preload="none"`, so only the
-  poster loads with the page.
+- **Video.** Videos play muted and on loop while on screen, and pause off
+  screen (`src/lib/autoplay.ts`), with a sound toggle. With
+  `preload="none"`, only the poster loads with the page; visitors who ask
+  for reduced motion get the poster and native controls.
 - **Caching.** Everything in `/_astro/` has a content hash in its filename, so
   `vercel.json` caches it permanently.
 
