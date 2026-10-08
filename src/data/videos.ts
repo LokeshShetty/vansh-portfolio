@@ -17,7 +17,7 @@ const P = (id: string): YouTubeVideo => ({ id, shape: "portrait" });
 
 export const videoRows: YouTubeVideo[][] = [
   [L("8JqbJ_j18Rw")],
-  [P("LpOckl2GZgk"), L("UE5BiDEs90Q"), P("5AcZSHBh8ko")],
+  [P("LpOckl2GZgk"), L("QbTxitaPFdc"), P("5AcZSHBh8ko")],
   [L("AYnTomGhhN0"), L("VkuEsqlx2eI")],
   [
     P("4KNW5AxgWWU"),
@@ -27,8 +27,8 @@ export const videoRows: YouTubeVideo[][] = [
     P("RJz2h-bvS1g"),
   ],
   [L("Wh30hpForIU"), L("DstP5ODXBMQ"), L("81klrncCIxg")],
-  [L("QFeoz5-E7Mk"), L("SKL2fnoZlDU")],
-  [L("-XFWpEpQzmU"), L("QbTxitaPFdc")],
+  [L("QFeoz5-E7Mk"), L("UE5BiDEs90Q")],
+  [L("-XFWpEpQzmU"), L("SKL2fnoZlDU")],
 ];
 
 /** The short row on the home page, linking to the full page. */
