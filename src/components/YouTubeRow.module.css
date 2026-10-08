@@ -39,8 +39,9 @@
 }
 
 /* The player is for watching, not clicking: the bar below has the
-   controls. It fades in over the thumbnail once it's playing. */
+   controls. It fades in over the thumbnail once it's actually playing. */
 .tile iframe {
+  z-index: 1;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.6s ease;
@@ -50,10 +51,38 @@
   opacity: 1;
 }
 
+/* Shown only if autoplay was blocked (or with reduced motion). */
+.play {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: none;
+  place-items: center;
+  width: clamp(3.5rem, 2.5rem + 3vw, 5rem);
+  height: clamp(3.5rem, 2.5rem + 3vw, 5rem);
+  margin: auto;
+  padding-left: 0.25rem;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px var(--accent-glow);
+  cursor: pointer;
+}
+
+.tile[data-blocked] .play {
+  display: grid;
+}
+
+.play:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 .bar {
   position: absolute;
   inset: auto 0 0;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;

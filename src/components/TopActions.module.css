@@ -1,8 +1,65 @@
+/* A fixed row across the top. The row itself lets clicks through; only
+   the buttons catch them. Body padding (globals.css) keeps page content
+   clear of it at the top. */
 .bar {
   position: fixed;
   z-index: 20;
-  top: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);
-  right: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);
+  top: var(--header-top);
+  left: var(--header-top);
+  right: var(--header-top);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  pointer-events: none;
+}
+
+.bar > * {
+  pointer-events: auto;
+}
+
+/* Page links: a segmented pill, the current page filled. */
+.nav {
+  display: flex;
+  gap: 0.2rem;
+  padding: 0.25rem;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+}
+
+.page {
+  display: inline-flex;
+  align-items: center;
+  height: 2.15rem;
+  padding-inline: 1em;
+  font-size: var(--step--1);
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--ink-dim);
+  text-decoration: none;
+  border-radius: 999px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.page:hover {
+  color: var(--ink);
+}
+
+.page[aria-current="page"] {
+  color: var(--page);
+  background: var(--ink);
+}
+
+.page:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 2px;
+}
+
+.actions {
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -11,6 +68,7 @@
 .pill {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.3em;
   height: 2.75rem;
   padding-inline: 1.1em;
@@ -50,20 +108,48 @@
   border-color: var(--accent);
 }
 
-/* Phones: compact, so the group stays clear of the hero portrait. */
+.icon {
+  display: none;
+}
+
+/* Phones: compact; "Get my Book" becomes a book icon so everything fits. */
 @media (max-width: 30rem) {
-  .bar {
+  .bar,
+  .actions {
     gap: 0.25rem;
   }
 
+  .nav {
+    padding: 0.2rem;
+  }
+
+  .page {
+    height: 1.85rem;
+    padding-inline: 0.7em;
+    font-size: 0.75rem;
+  }
+
   .pill {
-    height: 2.25rem;
+    height: 2.35rem;
     padding-inline: 0.75em;
     font-size: 0.75rem;
   }
 
-  .bar > button {
-    width: 2.25rem;
-    height: 2.25rem;
+  .book {
+    width: 2.35rem;
+    padding: 0;
+  }
+
+  .book .label {
+    display: none;
+  }
+
+  .book .icon {
+    display: block;
+  }
+
+  .actions > button {
+    width: 2.35rem;
+    height: 2.35rem;
   }
 }

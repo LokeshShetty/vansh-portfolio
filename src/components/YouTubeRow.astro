@@ -28,6 +28,16 @@ const { videos } = Astro.props;
         width="480"
         height="360"
       />
+      <button
+        type="button"
+        class={styles.play}
+        data-yt-play
+        aria-label="Play video"
+      >
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+          <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
+        </svg>
+      </button>
       <div class={styles.bar}>
         <a
           class={styles.open}

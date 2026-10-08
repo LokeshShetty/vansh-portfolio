@@ -99,7 +99,19 @@ html {
   scroll-behavior: smooth;
 }
 
+/* The fixed header (components/TopActions): where it sits, and room for it
+   above the page content. */
+:root {
+  --header-top: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);
+  --header-space: calc(var(--header-top) + 3.25rem);
+}
+
+html {
+  scroll-padding-top: var(--header-space);
+}
+
 body {
+  padding-top: var(--header-space);
   min-height: 100svh;
   color: var(--ink);
   background: var(--page);

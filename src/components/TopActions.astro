@@ -1,31 +1,70 @@
 ---
-// Sticky top-right group on every page: "Get in touch" (to the contact card
-// in the footer), "Get my Book" (Amazon) and the theme toggle.
+// The fixed header on every page: page links on the left (Home, My Videos)
+// and, on the right, "Get in touch" (to the contact card in the footer),
+// "Get my Book" (Amazon) and the theme toggle.
 import { book } from "@/data/profile";
 import ThemeToggle from "./ThemeToggle.astro";
 import styles from "./TopActions.module.css";
+
+const path = Astro.url.pathname;
+const pages = [
+  { label: "Home", href: "/", current: path === "/" },
+  { label: "My Videos", href: "/videos/", current: path.startsWith("/videos") },
+];
 ---
 
-<div class={styles.bar}>
-  <a
-    class:list={[styles.pill, styles.primary]}
-    href="#contact"
-    data-track="contact_click"
-    data-from="top-bar"
-  >
-    Get in touch
-  </a>
-  {book.href && (
+<header class={styles.bar}>
+  <nav class={styles.nav} aria-label="Pages">
+    {pages.map((p) => (
+      <a
+        class={styles.page}
+        href={p.href}
+        aria-current={p.current ? "page" : undefined}
+      >
+        {p.label}
+      </a>
+    ))}
+  </nav>
+
+  <div class={styles.actions}>
     <a
-      class={styles.pill}
-      href={book.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      data-track="link_click"
-      data-from="top-bar-book"
+      class:list={[styles.pill, styles.primary]}
+      href="#contact"
+      data-track="contact_click"
+      data-from="top-bar"
     >
-      Get my Book <span aria-hidden="true">↗</span>
+      Get in touch
     </a>
-  )}
-  <ThemeToggle />
-</div>
+    {book.href && (
+      <a
+        class:list={[styles.pill, styles.book]}
+        href={book.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Get my Book (Amazon)"
+        data-track="link_click"
+        data-from="top-bar-book"
+      >
+        <span class={styles.label}>
+          Get my Book <span aria-hidden="true">↗</span>
+        </span>
+        <svg
+          class={styles.icon}
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
+          <path
+            d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5zM5 19.5A1.5 1.5 0 0 0 6.5 21H19"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    )}
+    <ThemeToggle />
+  </div>
+</header>

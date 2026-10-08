@@ -1,11 +1,10 @@
-// Video work: YouTube films and Shorts that play muted on loop, and
-// Instagram reels (Instagram embeds can't autoplay, so they play on tap).
+// Video work: YouTube films (16:9) and Shorts (9:16). They play muted on
+// loop as they scroll into view.
 //
-// `rows` sets how the /videos/ page lays them out: every video in a row is
-// sized to the same height, so landscape (16:9) and portrait (9:16) videos
-// sit side by side. To add a video, put it in a row; a row of two or three
-// reads best. On phones the rows stack: landscape full width, portrait two
-// across.
+// `videoRows` sets how the /videos/ page lays them out: every video in a
+// row is sized to the same height, so films and Shorts sit side by side.
+// To add a video, put it in a row. On phones the rows stack: films full
+// width, Shorts two across.
 
 export type YouTubeVideo = {
   id: string;
@@ -20,6 +19,13 @@ export const videoRows: YouTubeVideo[][] = [
   [L("8JqbJ_j18Rw")],
   [P("LpOckl2GZgk"), L("UE5BiDEs90Q"), P("5AcZSHBh8ko")],
   [L("AYnTomGhhN0"), L("VkuEsqlx2eI")],
+  [
+    P("4KNW5AxgWWU"),
+    P("7gkNyU_YsK8"),
+    P("SMPW1ersKFY"),
+    P("GmicGBolS7k"),
+    P("RJz2h-bvS1g"),
+  ],
   [L("Wh30hpForIU"), L("DstP5ODXBMQ"), L("81klrncCIxg")],
   [L("QFeoz5-E7Mk"), L("SKL2fnoZlDU")],
   [L("-XFWpEpQzmU"), L("QbTxitaPFdc")],
@@ -32,14 +38,4 @@ export const videoTeaser: YouTubeVideo[] = [
   P("5AcZSHBh8ko"),
 ];
 
-/** Instagram reel ids (from instagram.com/reel/<id>/). */
-export const reels = [
-  "C_dOGbRvxgs",
-  "C_iL0hAPFfn",
-  "C_nUP2WsRUm",
-  "C_sdqxovLKN",
-  "C_xnc_5Pf5l",
-];
-
-export const videoCount =
-  videoRows.reduce((n, row) => n + row.length, 0) + reels.length;
+export const videoCount = videoRows.reduce((n, row) => n + row.length, 0);

@@ -31,13 +31,18 @@ until you fill it in.
 
 ## Video work
 
-`/videos/` shows every video; the home page has a one-row teaser. The list
-is `src/data/videos.ts`: YouTube films and Shorts, arranged in rows (every
-video in a row is the same height, so 16:9 and 9:16 sit side by side), and
-Instagram reel ids. YouTube videos load when they scroll into view, play
-muted on loop, pause off screen, and have a sound button
-(`src/lib/youtube.ts`). Instagram doesn't let embedded reels autoplay, so
-those use Instagram's own embed and play on tap.
+The header on every page links to Home and My Videos (`/videos/`), next to
+Get in touch, Get my Book and the theme toggle
+(`components/TopActions.astro`). `/videos/` shows every video; the home
+page has a one-row teaser. The list is `src/data/videos.ts`: YouTube films
+and Shorts arranged in rows (every video in a row is the same height, so
+16:9 and 9:16 sit side by side).
+
+Each video loads when it scrolls into view, plays muted on loop, pauses off
+screen, and has a sound button that unmutes one video at a time
+(`src/lib/youtube.ts`, using YouTube's IFrame Player API). If a browser
+blocks autoplay, or the visitor asks for reduced motion, a play button
+shows instead.
 
 ## Case studies
 

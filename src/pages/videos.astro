@@ -1,31 +1,26 @@
 ---
-// Every video, at /videos/: YouTube films and Shorts in rows of equal
-// height (they play muted on loop as they come into view), then the
-// Instagram reels. The list lives in src/data/videos.ts.
+// My Videos, at /videos/: every YouTube film and Short, in rows of equal
+// height. They play muted on loop as they come into view. The list lives
+// in src/data/videos.ts.
 import Base from "@/layouts/Base.astro";
-import Reels from "@/components/Reels.astro";
 import YouTubeRow from "@/components/YouTubeRow.astro";
 import Footer from "@/sections/Footer.astro";
-import { reels, videoCount, videoRows } from "@/data/videos";
+import { videoCount, videoRows } from "@/data/videos";
 import work from "@/styles/work.module.css";
 import styles from "@/styles/videos.module.css";
 ---
 
 <Base
-  title="Video work"
-  description="Films, YouTube Shorts and Instagram reels from Vansh Agicha's work"
+  title="My Videos"
+  description="Films and YouTube Shorts from Vansh Agicha's work"
 >
-  <main class:list={["shell", work.page]}>
-    <a href="/" class={work.back}>
-      <span aria-hidden="true">←</span> Home
-    </a>
-
+  <main class:list={["shell", work.page, styles.page]}>
     <header class:list={["tile", work.header]}>
       <p class="eyebrow">{videoCount} videos</p>
-      <h1 class:list={["display", work.title]}>Video work</h1>
+      <h1 class:list={["display", work.title]}>My Videos</h1>
       <p class={work.summary}>
-        Films, Shorts and reels from my work. They play muted; turn the sound on
-        for any one of them
+        Films and Shorts from my work. They play muted; turn the sound on for
+        any one of them
       </p>
     </header>
 
@@ -33,16 +28,6 @@ import styles from "@/styles/videos.module.css";
       {videoRows.map((row) => (
         <YouTubeRow videos={row} />
       ))}
-    </section>
-
-    <section class={styles.reels} aria-labelledby="reels-title">
-      <div class={styles.reelsHead}>
-        <h2 id="reels-title" class="display">
-          On Instagram
-        </h2>
-        <p class="chip">{reels.length} reels</p>
-      </div>
-      <Reels />
     </section>
   </main>
   <Footer />
