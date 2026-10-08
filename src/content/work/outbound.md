@@ -1,5 +1,5 @@
 ---
-order: 6
+order: 5
 kicker: "Outbound · Email, WhatsApp, AI voice"
 title: "500K emails/month + AI voice: outbound at scale"
 summary: "Multi-channel outbound at scale, with AI voice agents for cold calling and hiring"

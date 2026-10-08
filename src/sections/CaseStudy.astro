@@ -4,6 +4,7 @@ import Count from "@/components/Count.astro";
 import Text from "@/components/Text.astro";
 import Video from "@/components/Video.astro";
 import type { CollectionEntry } from "astro:content";
+import { showCaseStudyLinks } from "@/data/profile";
 import styles from "./CaseStudy.module.css";
 
 type Props = {
@@ -17,7 +18,8 @@ const { id } = Astro.props.study;
 const study = Astro.props.study.data;
 const { index, flip = false } = Astro.props;
 const href = `/work/${id}/`;
-const hasAssets = study.assets.length > 0;
+const assets = study.archivedAssets ? [] : study.assets;
+const hasAssets = assets.length > 0;
 
 // "9 / 16" → true. Portrait media is capped so a reel doesn't fill a phone screen.
 const isTall = (ratio = "") => {
@@ -71,14 +73,16 @@ const mediaClass = (ratio?: string) =>
         </div>
       ))}
     </dl>
-    <a href={href} class:list={[styles.more, "reveal"]}>
-      Read the case study <span aria-hidden="true">→</span>
-    </a>
+    {showCaseStudyLinks && (
+      <a href={href} class:list={[styles.more, "reveal"]}>
+        Read the case study <span aria-hidden="true">→</span>
+      </a>
+    )}
   </div>
 
   {hasAssets && (
     <div class={styles.media}>
-      {study.assets.map((asset) =>
+      {assets.map((asset) =>
         asset.src !== undefined ? (
           <Video {...asset} src={asset.src} class={mediaClass(asset.ratio)} />
         ) : (

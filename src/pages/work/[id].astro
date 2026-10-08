@@ -25,6 +25,7 @@ type Props = { study: CollectionEntry<"work">; next: CollectionEntry<"work"> };
 
 const { study, next } = Astro.props;
 const { data } = study;
+const assets = data.archivedAssets ? [] : data.assets;
 const { Content } = await render(study);
 // The body starts as just an outline in an HTML comment; show the write-up
 // area only once there's real text.
@@ -63,9 +64,9 @@ const hasStory =
       <p class={styles.summary}>{data.summary}</p>
     </header>
 
-    {data.assets.length > 0 && (
+    {assets.length > 0 && (
       <div class={styles.media}>
-        {data.assets.map((asset) =>
+        {assets.map((asset) =>
           asset.src !== undefined ? (
             <Video {...asset} src={asset.src} class={styles.item} />
           ) : (

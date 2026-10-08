@@ -1,5 +1,6 @@
 ---
-order: 5
+featured: true
+order: 2
 kicker: "Brand & social · SuperAGI"
 title: "From 10K GitHub stars to 1M LinkedIn reach"
 summary: "Turning SuperAGI from an open-source project into a recognisable AI brand through community, creators and content"

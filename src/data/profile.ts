@@ -287,3 +287,7 @@ export const capabilities = [
     items: ["Landing Pages", "Video", "Design", "Campaign Creative"],
   },
 ];
+
+/** Show "Read the case study" links on the project cards and list. Off for
+ *  now; set to true to bring them back. */
+export const showCaseStudyLinks = false;

@@ -1,6 +1,6 @@
 ---
-featured: true
-order: 2
+featured: false
+order: 6
 kicker: "Launch · Consumer quick commerce, Bengaluru"
 title: "Launching OK: 30K installs to ₹55L monthly GMV"
 summary: "Launched OK, a private-label quick commerce app in Bengaluru, with paid installs, city-wide offline campaigns and two dark stores"
@@ -19,6 +19,8 @@ results:
     label: "Average CPI"
   - value: "2"
     label: "Dark stores managed"
+# Media archived (hidden, not deleted). Set to false to show it again.
+archivedAssets: true
 assets:
   - name: "ok-campaign"
     alt: "OK Groceries Bengaluru launch creative: a walking billboard, a branded auto and the app"

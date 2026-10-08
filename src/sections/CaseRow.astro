@@ -5,6 +5,7 @@
 // `name` close each other in browsers that support it.
 import type { CollectionEntry } from "astro:content";
 import Text from "@/components/Text.astro";
+import { showCaseStudyLinks } from "@/data/profile";
 import styles from "./CaseRow.module.css";
 
 type Props = { study: CollectionEntry<"work">; index: number };
@@ -57,8 +58,10 @@ const [headline, ...rest] = data.results;
         ))}
       </dl>
     )}
-    <a href={`/work/${id}/`} class={styles.link}>
-      Read the case study <span aria-hidden="true">→</span>
-    </a>
+    {showCaseStudyLinks && (
+      <a href={`/work/${id}/`} class={styles.link}>
+        Read the case study <span aria-hidden="true">→</span>
+      </a>
+    )}
   </div>
 </details>
