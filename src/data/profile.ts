@@ -27,13 +27,13 @@ export const profile = {
   location: "Bengaluru, India",
   /** Hero supporting copy: one line per entry. */
   intro: [
-    "I build growth systems across performance marketing, GTM, AI automation, content and product launches",
-    "Over four years at Contlo Technologies, I went from part-time Video Editor to Marketing Manager, leading a team of 7",
+    "I work across product marketing, growth and GTM, turning product capabilities into positioning, campaigns and distribution that drive adoption and revenue",
+    "Across B2B SaaS, AI and quick commerce, I’ve worked on launches, acquisition, messaging, content, automation and go-to-market systems from strategy through execution",
   ],
   /** The big scroll-lit sentence under the strips. *Starred* words get the
    *  accent colour. */
   statement:
-    "From part-time video editor to *marketing manager* in four years, with two 100% performance-based raises, a *team of seven* and a *book on AGI* along the way",
+    "I *understand products*, shape *how they go to market*, and build *systems that help them grow*",
   email: "agi.vansh@gmail.com",
   phone: "+91 7417709500",
   links: [
@@ -56,12 +56,14 @@ export const video = {
   ratio: "16 / 9",
   src: "/video/work-video.mp4" as string | null,
   kicker: "Watch",
-  title: "From Execution to Ownership",
+  title: "Built across product, marketing and growth",
   /** Short supporting copy: one line per entry. */
   copy: [
-    "I started by editing videos and gradually moved across design, product, growth, GTM and marketing leadership",
-    "The scope changed, but the habit stayed the same: build, test, learn and own the outcome",
+    "Over four years, my scope expanded from execution into product launches, positioning, acquisition, GTM systems, automation and team leadership",
   ],
+  /** A smaller line under the copy. */
+  aside:
+    "Started in video, stayed close to the craft, moved closer to the business",
 };
 
 /** Second row of the scrolling strip, sliding the other way. */
@@ -78,24 +80,27 @@ export const channels = [
   "Launches",
 ];
 
-/** "How I Grow" tile in the hero grid: what each set of tools is for.
- *  Previous labels, to restore: Acquire (Google Ads, Meta Ads, LinkedIn Ads,
- *  Cold Email); Convert (HubSpot, Landing Pages, WhatsApp, AI Voice); Scale
- *  (SEO, AEO/GEO, Creators, Events); Automate (n8n, OpenAI, Claude Code) */
+/** Go-to-market tile in the hero grid: four stages, each with its work.
+ *  Earlier versions ("How I Grow": Acquire, Convert, Scale, Automate) are in
+ *  git history and content-backup/. */
+export const howIGrowTitle = "How I Take Products to Market";
 export const howIGrow = [
   {
-    stage: "Acquire",
-    items: ["Google Ads", "Meta Ads", "LinkedIn Ads", "Cold Email"],
+    stage: "Position",
+    items: ["Audience", "Messaging", "Value Proposition", "Category Narrative"],
   },
   {
-    stage: "Convert",
-    items: ["HubSpot CRM", "Landing Pages", "WhatsApp", "AI Voice Agents"],
+    stage: "Launch",
+    items: ["GTM Strategy", "Campaigns", "Landing Pages", "Sales Enablement"],
+  },
+  {
+    stage: "Grow",
+    items: ["Paid Acquisition", "SEO", "AEO / GEO", "Creators", "Outbound"],
   },
   {
     stage: "Scale",
-    items: ["SEO", "AEO / GEO", "Influencer Marketing", "Events / Offline GTM"],
+    items: ["Automation", "CRM", "Attribution", "AI Workflows"],
   },
-  { stage: "Automate", items: ["n8n", "OpenAI API", "Claude Code"] },
 ];
 
 /** Companies, clients and stages, shown in the scrolling strip under the hero. */
@@ -154,6 +159,9 @@ export const products = {
     {
       name: "Content Pilot",
       type: "AI Social Media Operating System",
+      problem: "Lean teams struggle to publish consistently",
+      positioning:
+        "An AI social media operating system, not another content generator",
       flow: [
         "Learns brand context",
         "Builds content calendar",
@@ -165,11 +173,16 @@ export const products = {
     {
       name: "InfluencerEarn",
       type: "Performance Influencer Marketplace",
+      problem: "Influencer campaigns are difficult to measure",
+      positioning: "A performance marketplace where brands pay for outcomes",
       flow: ["Campaign", "Creator", "Content", "Performance", "Payout"],
     },
     {
       name: "HRMS",
       type: "End-to-End HR Platform",
+      problem: "Employee operations are fragmented across tools",
+      positioning:
+        "One system covering the employee lifecycle from hiring to exit",
       flow: [
         "Hiring",
         "Attendance",
@@ -191,11 +204,35 @@ export const products = {
   },
 };
 
+/** "Product Marketing" section, after Selected Work. */
+export const productMarketing = {
+  title: "Product Marketing",
+  blocks: [
+    {
+      name: "Positioning",
+      line: "Turn product capabilities into a clear market story",
+    },
+    {
+      name: "Messaging",
+      line: "Translate technical features into customer-facing value",
+    },
+    {
+      name: "Launches",
+      line: "Build GTM plans across web, campaigns, creators, sales and offline",
+    },
+    {
+      name: "Adoption",
+      line: "Connect acquisition, onboarding, follow-up and lifecycle communication",
+    },
+  ],
+  note: "Worked across SuperAGI, Verk and OK, spanning AI SaaS, B2B software and consumer quick commerce",
+};
+
 /** Closing section: what he's looking for, and the final call to action. */
 export const next = {
   kicker: "What’s Next",
   pitch:
-    "I’m interested in Growth Marketing, Marketing & Growth, GTM and AI-native marketing roles where I can own outcomes across acquisition, distribution and experimentation",
+    "I’m interested in Growth Marketing, Product Marketing, GTM and AI-native marketing roles where I can own outcomes across positioning, acquisition, distribution and experimentation",
   /** *Starred* word gets the accent colour. */
   cta: "Let’s build something that *grows*",
 };
@@ -235,18 +272,11 @@ export const experience: Role[] = [
     role: "Marketing Manager",
     org: "Contlo Technologies (SuperAGI, Verk, OK)",
     when: "2022 to now",
-    note: null,
-    path: [
-      "Video Editor",
-      "Design",
-      "Product",
-      "Growth",
-      "GTM",
-      "Marketing Manager",
-    ],
+    note: "Worked across product, GTM and growth for SuperAGI, Verk and OK, spanning B2B SaaS, AI and quick commerce",
     highlights: [
+      "Progressed from part-time Video Editor to Marketing Manager",
       "Managed a team of 7",
-      "Two 100% performance-based salary increases",
+      "Received two 100% performance-based salary increases",
     ],
   },
   {
@@ -271,20 +301,31 @@ export const experience: Role[] = [
 
 export const capabilities = [
   {
+    group: "Product Marketing",
+    items: ["Positioning", "Messaging", "Launches", "GTM", "Sales Enablement"],
+  },
+  {
     group: "Growth",
-    items: ["Paid Acquisition", "Attribution", "CRO", "GTM", "A/B Testing"],
+    items: ["Paid Acquisition", "Attribution", "A/B Testing", "CRO"],
   },
   {
     group: "Distribution",
-    items: ["SEO", "AEO/GEO", "Influencers", "Email", "WhatsApp", "Events"],
+    items: [
+      "SEO",
+      "AEO / GEO",
+      "Influencer Marketing",
+      "Email",
+      "WhatsApp",
+      "Events",
+    ],
   },
   {
-    group: "AI",
-    items: ["n8n", "OpenAI", "AI Voice", "Claude Code", "Automation"],
+    group: "AI & Automation",
+    items: ["n8n", "OpenAI API", "Claude Code", "AI Voice Agents"],
   },
   {
     group: "Creative",
-    items: ["Landing Pages", "Video", "Design", "Campaign Creative"],
+    items: ["Landing Pages", "Campaign Creative", "Video", "Figma"],
   },
 ];
 

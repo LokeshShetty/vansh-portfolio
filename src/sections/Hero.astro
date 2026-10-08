@@ -1,7 +1,7 @@
 ---
 import Asset from "@/components/Asset.astro";
 import Count from "@/components/Count.astro";
-import { howIGrow, profile, stats } from "@/data/profile";
+import { howIGrow, howIGrowTitle, profile, stats } from "@/data/profile";
 import styles from "./Hero.module.css";
 
 const nameWords = profile.name.split(" ");
@@ -88,7 +88,7 @@ const taglineWords = profile.tagline.split(" ");
     ))}
 
     <div class:list={["tile", styles.stack, "reveal"]}>
-      <h2 class="eyebrow">How I Grow</h2>
+      <h2 class="eyebrow">{howIGrowTitle}</h2>
       <dl class={styles.grow}>
         {howIGrow.map((g) => (
           <div>

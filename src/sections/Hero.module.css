@@ -204,7 +204,7 @@
   color: var(--ink-dim);
 }
 
-/* How I Grow: four stages, each with its tools. */
+/* Go-to-market tile: four stages, each with its work. */
 .grow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));

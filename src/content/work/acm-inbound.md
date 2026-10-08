@@ -2,7 +2,7 @@
 order: 4
 kicker: "Campaign · HubSpot INBOUND 2025, San Francisco"
 title: "CRM is Dead: a GTM campaign at HubSpot INBOUND"
-summary: "An end-to-end GTM campaign for SuperAGI at HubSpot INBOUND: microsite, street activations and geo-targeted ads around the venue"
+summary: "Reframed the product story from traditional CRM to Autonomous Customer Management, then built a launch campaign around that narrative for HubSpot INBOUND"
 did:
   - "Owned the campaign from concept to the event floor"
   - "Built the campaign microsite"

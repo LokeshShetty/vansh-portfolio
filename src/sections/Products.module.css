@@ -28,6 +28,24 @@
   color: var(--ink-dim);
 }
 
+/* Problem and positioning, stacked. */
+.framing {
+  display: grid;
+  gap: var(--space-xs);
+  margin-top: var(--space-2xs);
+}
+
+.framing dd {
+  margin-top: 0.15rem;
+  color: var(--ink-dim);
+  line-height: 1.45;
+}
+
+.framing .positioning {
+  color: var(--ink);
+  font-weight: 500;
+}
+
 /* The product's core loop, as steps joined by arrows. */
 .flow {
   display: flex;

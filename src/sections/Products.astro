@@ -1,5 +1,6 @@
 ---
-// "I also build products": three product cards with their core flow, a line
+// "I also build products": three product cards (the problem, how it's
+// positioned, and its core flow), a line
 // for the smaller builds, and the commercial proof. The proof names its
 // scope (HRMS + Content Pilot) so it isn't read as covering every product.
 import Text from "@/components/Text.astro";
@@ -23,7 +24,16 @@ import styles from "./Products.module.css";
         style={{ "--i": i }}
       >
         <h3 class:list={["display", styles.name]}>{p.name}</h3>
-        <p class={styles.type}>{p.type}</p>
+        <dl class={styles.framing}>
+          <div>
+            <dt class="eyebrow">Problem</dt>
+            <dd>{p.problem}</dd>
+          </div>
+          <div>
+            <dt class="eyebrow">Positioning</dt>
+            <dd class={styles.positioning}>{p.positioning}</dd>
+          </div>
+        </dl>
         <ol class={styles.flow}>
           {p.flow.map((step) => (
             <li>{step}</li>

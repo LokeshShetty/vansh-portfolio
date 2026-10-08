@@ -3,7 +3,7 @@ featured: false
 order: 6
 kicker: "Launch · Consumer quick commerce, Bengaluru"
 title: "Launching OK: 30K installs to ₹55L monthly GMV"
-summary: "Launched OK, a private-label quick commerce app in Bengaluru, with paid installs, city-wide offline campaigns and two dark stores"
+summary: "Took a new quick-commerce brand to market in Bengaluru, shaping acquisition, launch messaging, offline distribution and retention across the customer journey"
 did:
   - "Ran app-install campaigns at ₹22 per install"
   - "Planned and ran offline campaigns across the city"

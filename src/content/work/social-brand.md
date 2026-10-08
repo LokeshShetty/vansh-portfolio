@@ -3,7 +3,7 @@ featured: true
 order: 2
 kicker: "Brand & social · SuperAGI"
 title: "From 10K GitHub stars to 1M LinkedIn reach"
-summary: "Turning SuperAGI from an open-source project into a recognisable AI brand through community, creators and content"
+summary: "Helped turn an open-source AI product into a recognizable category brand through positioning, community, creators, content and launch distribution"
 did:
   - "Built a video automation producing 50 reels a day"
   - "Onboarded 20+ LinkedIn creators a month on a $10K monthly budget"

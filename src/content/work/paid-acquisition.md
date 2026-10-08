@@ -3,7 +3,7 @@ featured: true
 order: 1
 kicker: "Performance marketing · B2B SaaS"
 title: "A $20K/month engine for qualified pipeline"
-summary: "Full-funnel paid acquisition across Google, Meta and LinkedIn, built for qualified B2B pipeline rather than traffic"
+summary: "Built the acquisition and attribution engine around a B2B SaaS product, connecting positioning, landing pages, paid media and CRM reporting to qualified pipeline"
 did:
   - "Set up attribution with GA4, HubSpot, Google Tag Manager, Meta Pixel and UTMs"
   - "Ran bi-weekly performance reviews with leadership"

@@ -1,0 +1,31 @@
+---
+// "Product Marketing": four compact blocks (positioning, messaging,
+// launches, adoption) and one line on where the work was done.
+import { productMarketing } from "@/data/profile";
+import styles from "./ProductMarketing.module.css";
+---
+
+<section
+  id="product-marketing"
+  class:list={["shell", styles.section]}
+  aria-labelledby="pmm-title"
+>
+  <h2 id="pmm-title" class:list={["display", "lift", styles.title]}>
+    <span>{productMarketing.title}</span>
+  </h2>
+  <div class={styles.blocks}>
+    {productMarketing.blocks.map((b, i) => (
+      <div
+        class:list={["tile", styles.block, "reveal", "stagger"]}
+        style={{ "--i": i }}
+      >
+        <span class:list={["tnum", styles.index]} aria-hidden="true">
+          {String(i + 1).padStart(2, "0")}
+        </span>
+        <h3 class:list={["display", styles.name]}>{b.name}</h3>
+        <p class={styles.line}>{b.line}</p>
+      </div>
+    ))}
+  </div>
+  <p class:list={[styles.note, "reveal"]}>{productMarketing.note}</p>
+</section>
