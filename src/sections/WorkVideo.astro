@@ -1,11 +1,13 @@
 ---
 // The work-experience video: a large muted, looping player that plays while
-// on screen (src/lib/autoplay.ts), with a sound toggle. Only the cover loads
-// with the page (preload="none"). Until the file is added it shows a
-// placeholder frame.
+// on screen, with a sound control. With `video.youtube` set it's a YouTube
+// player (src/lib/youtube.ts), which adapts quality to the connection;
+// otherwise the file in `video.src` (src/lib/autoplay.ts), of which only the
+// cover loads with the page. With neither, a placeholder frame.
 import { getImage } from "astro:assets";
 import Asset from "@/components/Asset.astro";
 import SoundToggle from "@/components/SoundToggle.astro";
+import YouTubeRow from "@/components/YouTubeRow.astro";
 import { video } from "@/data/profile";
 import { getMedia } from "@/lib/media";
 import styles from "./WorkVideo.module.css";
@@ -36,41 +38,45 @@ const poster =
     </div>
   </div>
 
-  <div
-    class:list={[styles.player, "reveal"]}
-    data-player
-    style={{ aspectRatio: video.ratio }}
-  >
-    {video.src ? (
-      <>
-        <video
-          class={styles.video}
-          src={video.src}
-          poster={poster?.src}
-          preload="none"
-          muted
-          loop
-          playsinline
-          data-autoplay
-          aria-label={video.alt}
-        />
-        <SoundToggle />
-      </>
-    ) : (
-      <>
-        <Asset
-          {...video}
-          class={styles.cover}
-          sizes="(min-width: 80rem) 76rem, 100vw"
-        />
-        <span class={styles.soon} aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="28" height="28">
-            <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
-          </svg>
-        </span>
-      </>
-    )}
-  </div>
+  {video.youtube ? (
+    <YouTubeRow videos={[{ id: video.youtube, shape: "landscape" }]} />
+  ) : (
+    <div
+      class:list={[styles.player, "reveal"]}
+      data-player
+      style={{ aspectRatio: video.ratio }}
+    >
+      {video.src ? (
+        <>
+          <video
+            class={styles.video}
+            src={video.src}
+            poster={poster?.src}
+            preload="none"
+            muted
+            loop
+            playsinline
+            data-autoplay
+            aria-label={video.alt}
+          />
+          <SoundToggle />
+        </>
+      ) : (
+        <>
+          <Asset
+            {...video}
+            class={styles.cover}
+            sizes="(min-width: 80rem) 76rem, 100vw"
+          />
+          <span class={styles.soon} aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28">
+              <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
+            </svg>
+          </span>
+        </>
+      )}
+    </div>
+  )}
 </section>
 
 <script>

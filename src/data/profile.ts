@@ -55,6 +55,10 @@ export const video = {
   alt: "Vansh walking through his work experience",
   ratio: "16 / 9",
   src: "/video/work-video.mp4" as string | null,
+  /** A YouTube video id. When set, the section plays this instead of `src`
+   *  (muted on loop in view, sound button). Set to null to go back to the
+   *  file above. */
+  youtube: "Bp-BwjTOmqY" as string | null,
   kicker: "Watch",
   title: "Built across product, marketing and growth",
   /** Short supporting copy: one line per entry. */
