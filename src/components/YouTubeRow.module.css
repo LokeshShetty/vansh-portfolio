@@ -1,0 +1,152 @@
+.row {
+  min-width: 0;
+  display: flex;
+  gap: var(--grid-gap);
+}
+
+/* Width in proportion to aspect ratio → every tile in the row is the same
+   height. */
+.tile {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: #0b0c0e;
+  border: 1px solid var(--line);
+  border-radius: var(--tile-radius);
+}
+
+.landscape {
+  flex: 16 1 0;
+  aspect-ratio: 16 / 9;
+}
+
+.portrait {
+  flex: 5.0625 1 0;
+  aspect-ratio: 9 / 16;
+}
+
+.poster,
+.tile iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.poster {
+  object-fit: cover;
+}
+
+/* The player is for watching, not clicking: the bar below has the
+   controls. It fades in over the thumbnail once it's playing. */
+.tile iframe {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.tile[data-playing] iframe {
+  opacity: 1;
+}
+
+.bar {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2xs);
+  padding: var(--space-xs);
+  background: linear-gradient(transparent, rgb(0 0 0 / 0.55));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.tile:hover .bar,
+.tile:focus-within .bar,
+.tile[data-sound-on] .bar {
+  opacity: 1;
+}
+
+/* Touch screens have no hover: always show the controls. */
+@media (hover: none) {
+  .bar {
+    opacity: 1;
+  }
+}
+
+.open {
+  padding: 0.4em 0.9em;
+  font-size: var(--step--1);
+  font-weight: 600;
+  white-space: nowrap;
+  color: #fff;
+  text-decoration: none;
+  background: rgb(0 0 0 / 0.45);
+  border-radius: 999px;
+}
+
+.open:hover {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+
+.sound {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: #fff;
+  background: rgb(0 0 0 / 0.45);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sound[aria-pressed="true"] {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+
+.sound[aria-pressed="false"] .on,
+.sound[aria-pressed="true"] .off {
+  display: none;
+}
+
+.open:focus-visible,
+.sound:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Portrait tiles are narrow on wide screens: the link shrinks to its
+   arrow so the controls fit. */
+.portrait .open {
+  font-size: 0;
+  padding: 0.45em 0.7em;
+}
+
+.portrait .open span {
+  font-size: var(--step--1);
+}
+
+/* Phones: films full width, Shorts two across. */
+@media (max-width: 48rem) {
+  .row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Films first, so Shorts in the same row end up side by side. */
+  .landscape {
+    order: -1;
+    flex: 1 1 100%;
+  }
+
+  .portrait {
+    flex: 0 1 calc(50% - var(--grid-gap) / 2);
+  }
+}

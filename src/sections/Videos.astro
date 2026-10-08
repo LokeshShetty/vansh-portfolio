@@ -1,0 +1,24 @@
+---
+// Home-page teaser for the video work: one row (a film and two Shorts) and
+// a link to the full /videos/ page.
+import YouTubeRow from "@/components/YouTubeRow.astro";
+import { videoCount, videoTeaser } from "@/data/videos";
+import styles from "./Videos.module.css";
+---
+
+<section
+  id="videos"
+  class:list={["shell", styles.section]}
+  aria-labelledby="videos-title"
+>
+  <div class={styles.heading}>
+    <h2 id="videos-title" class="display lift">
+      <span>Video work</span>
+    </h2>
+    <p class="chip reveal">{videoCount} videos</p>
+  </div>
+  <YouTubeRow videos={videoTeaser} />
+  <a href="/videos/" class:list={[styles.all, "reveal"]}>
+    Watch all {videoCount} videos <span aria-hidden="true">→</span>
+  </a>
+</section>

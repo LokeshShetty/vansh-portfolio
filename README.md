@@ -29,6 +29,16 @@ npm run check     # type-check .astro and .ts files
 Any link set to `null` in `profile.ts` (LinkedIn, résumé, Amazon) is hidden
 until you fill it in.
 
+## Video work
+
+`/videos/` shows every video; the home page has a one-row teaser. The list
+is `src/data/videos.ts`: YouTube films and Shorts, arranged in rows (every
+video in a row is the same height, so 16:9 and 9:16 sit side by side), and
+Instagram reel ids. YouTube videos load when they scroll into view, play
+muted on loop, pause off screen, and have a sound button
+(`src/lib/youtube.ts`). Instagram doesn't let embedded reels autoplay, so
+those use Instagram's own embed and play on tap.
+
 ## Case studies
 
 Each project is a Markdown file in `src/content/work/`. The frontmatter

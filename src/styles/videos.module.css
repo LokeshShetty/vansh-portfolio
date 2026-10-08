@@ -1,0 +1,28 @@
+/* min-width: 0 so the page grid doesn't widen to fit the videos. */
+.rows,
+.reels {
+  min-width: 0;
+}
+
+.rows {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+.reels {
+  display: grid;
+  gap: var(--space-s);
+  padding-block: var(--space-l) var(--space-xl);
+}
+
+.reelsHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-s);
+}
+
+.reelsHead h2 {
+  font-size: var(--step-4);
+}

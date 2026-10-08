@@ -1,0 +1,52 @@
+---
+// Instagram reels in a sideways-scrolling strip, using Instagram's own
+// embed. Instagram doesn't allow embedded reels to autoplay, so they play
+// on tap. Instagram's embed script only loads once the strip is near the
+// screen; until then (or without JavaScript) each card is a plain link.
+import { reels } from "@/data/videos";
+import styles from "./Reels.module.css";
+---
+
+<div class={styles.strip} data-reels>
+  {reels.map((id) => (
+    <div class={styles.card}>
+      <blockquote
+        class="instagram-media"
+        data-instgrm-permalink={`https://www.instagram.com/reel/${id}/`}
+        data-instgrm-version="14"
+      >
+        <a
+          class={styles.fallback}
+          href={`https://www.instagram.com/reel/${id}/`}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-track="link_click"
+          data-from="video-instagram"
+        >
+          <span class="eyebrow">Instagram reel</span>
+          <span>
+            Watch on Instagram <span aria-hidden="true">↗</span>
+          </span>
+        </a>
+      </blockquote>
+    </div>
+  ))}
+</div>
+
+<script>
+  const strip = document.querySelector("[data-reels]");
+  if (strip) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        const script = document.createElement("script");
+        script.src = "https://www.instagram.com/embed.js";
+        script.async = true;
+        document.body.append(script);
+      },
+      { rootMargin: "600px 0px" },
+    );
+    observer.observe(strip);
+  }
+</script>
