@@ -12,6 +12,10 @@ const asset = z.object({
   ratio: z.string().optional(),
   /** Videos only: "/video/<file>.mp4" once uploaded, null until then. */
   src: z.string().nullable().optional(),
+  /** A YouTube video id instead of a file: plays muted on loop in view. */
+  youtube: z.string().optional(),
+  /** YouTube only: start (and loop back to) this many seconds in. */
+  start: z.number().optional(),
 });
 
 const work = defineCollection({

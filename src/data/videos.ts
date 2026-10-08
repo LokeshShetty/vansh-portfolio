@@ -10,6 +10,8 @@ export type YouTubeVideo = {
   id: string;
   /** 16:9 film or 9:16 Short. */
   shape: "landscape" | "portrait";
+  /** Start (and loop back to) this many seconds in. */
+  start?: number;
 };
 
 const L = (id: string): YouTubeVideo => ({ id, shape: "landscape" });

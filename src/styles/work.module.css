@@ -251,3 +251,8 @@
     align-items: baseline;
   }
 }
+
+/* A YouTube video spans the whole media area. */
+.wide {
+  grid-column: 1 / -1;
+}

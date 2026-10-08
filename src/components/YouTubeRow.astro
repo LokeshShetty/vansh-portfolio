@@ -18,6 +18,7 @@ const { videos } = Astro.props;
       class:list={["reveal", styles.tile, styles[v.shape]]}
       data-yt={v.id}
       data-shape={v.shape}
+      data-start={v.start}
     >
       <img
         class={styles.poster}

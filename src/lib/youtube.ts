@@ -82,6 +82,7 @@ async function create(tile: HTMLElement, play: boolean) {
   tile.dataset.loading = "";
   const YT = await loadApi();
   const id = tile.dataset.yt!;
+  const start = Number(tile.dataset.start ?? 0);
   const mount = document.createElement("div");
   tile.prepend(mount);
   new YT.Player(mount, {
@@ -98,6 +99,7 @@ async function create(tile: HTMLElement, play: boolean) {
       iv_load_policy: 3,
       disablekb: 1,
       fs: 0,
+      start,
       origin: location.origin,
     },
     events: {
@@ -118,7 +120,7 @@ async function create(tile: HTMLElement, play: boolean) {
           delete tile.dataset.blocked;
         } else if (data === ENDED) {
           // Loop.
-          target.seekTo(0, true);
+          target.seekTo(start, true);
           target.playVideo();
         }
       },

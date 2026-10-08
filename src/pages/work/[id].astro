@@ -6,6 +6,7 @@ import { getCollection, render, type CollectionEntry } from "astro:content";
 import Base from "@/layouts/Base.astro";
 import Asset from "@/components/Asset.astro";
 import Video from "@/components/Video.astro";
+import YouTubeRow from "@/components/YouTubeRow.astro";
 import Count from "@/components/Count.astro";
 import Text from "@/components/Text.astro";
 import Footer from "@/sections/Footer.astro";
@@ -67,7 +68,14 @@ const hasStory =
     {assets.length > 0 && (
       <div class={styles.media}>
         {assets.map((asset) =>
-          asset.src !== undefined ? (
+          asset.youtube ? (
+            <YouTubeRow
+              videos={[
+                { id: asset.youtube, shape: "landscape", start: asset.start },
+              ]}
+              class:list={[styles.item, styles.wide]}
+            />
+          ) : asset.src !== undefined ? (
             <Video {...asset} src={asset.src} class={styles.item} />
           ) : (
             <Asset

@@ -3,6 +3,7 @@ import Asset from "@/components/Asset.astro";
 import Count from "@/components/Count.astro";
 import Text from "@/components/Text.astro";
 import Video from "@/components/Video.astro";
+import YouTubeRow from "@/components/YouTubeRow.astro";
 import type { CollectionEntry } from "astro:content";
 import { showCaseStudyLinks } from "@/data/profile";
 import styles from "./CaseStudy.module.css";
@@ -83,7 +84,14 @@ const mediaClass = (ratio?: string) =>
   {hasAssets && (
     <div class={styles.media}>
       {assets.map((asset) =>
-        asset.src !== undefined ? (
+        asset.youtube ? (
+          <YouTubeRow
+            videos={[
+              { id: asset.youtube, shape: "landscape", start: asset.start },
+            ]}
+            class:list={[mediaClass(asset.ratio), styles.wide]}
+          />
+        ) : asset.src !== undefined ? (
           <Video {...asset} src={asset.src} class={mediaClass(asset.ratio)} />
         ) : (
           <Asset {...asset} class={mediaClass(asset.ratio)} />

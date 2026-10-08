@@ -15,13 +15,17 @@ results:
   - value: "~1,000"
     label: "Sign-ups per influencer in key campaigns"
 assets:
-  - name: "social-posts"
-    alt: "Top-performing LinkedIn posts"
+  - name: "superagi-install-video"
+    alt: "How To Install SuperAGI, a video by Matthew Berman"
+    ratio: "16 / 9"
+    youtube: "Unj5NLNTkLY"
+    start: 7
+  - name: "superagi-github"
+    alt: "The SuperAGI repository on GitHub, with 17.7K stars"
     ratio: "4 / 3"
-  - name: "social-reel"
-    alt: "Sample automated reel"
-    ratio: "9 / 16"
-    src: null
+  - name: "superagi-trending"
+    alt: "SuperAGI at the top of GitHub Trending"
+    ratio: "4 / 3"
 challenge: "Turn SuperAGI from an open-source project into a recognisable AI brand"
 approach: "Three engines working together: community, creators and content"
 engines:
