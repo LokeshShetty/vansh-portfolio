@@ -18,9 +18,9 @@ const L = (id: string): YouTubeVideo => ({ id, shape: "landscape" });
 const P = (id: string): YouTubeVideo => ({ id, shape: "portrait" });
 
 export const videoRows: YouTubeVideo[][] = [
-  [L("8JqbJ_j18Rw")],
+  [L("AYnTomGhhN0")],
   [P("LpOckl2GZgk"), L("QbTxitaPFdc"), P("5AcZSHBh8ko")],
-  [L("AYnTomGhhN0"), L("VkuEsqlx2eI")],
+  [L("8JqbJ_j18Rw"), L("VkuEsqlx2eI")],
   [
     P("4KNW5AxgWWU"),
     P("7gkNyU_YsK8"),
