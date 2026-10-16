@@ -1,13 +1,13 @@
 ---
 order: 3
 kicker: "Organic growth · SEO & AEO/GEO"
-title: "An AI content engine that grew traffic 60×"
+title: "An AI content engine that grew traffic 5×"
 summary: "An n8n and OpenAI engine publishing up to 100 blogs a day, plus AEO/GEO to show up in ChatGPT and Perplexity answers"
 did:
   - "Designed and built the publishing automation"
   - "Set up prompt monitoring for AI search visibility"
 results:
-  - value: "60×"
+  - value: "5×"
     label: "Organic traffic growth"
   - value: "45 → 75"
     label: "Domain Rating"

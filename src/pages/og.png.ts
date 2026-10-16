@@ -119,7 +119,7 @@ export const GET: APIRoute = async () => {
       h(
         "div",
         { display: "flex", fontSize: 26, color: "#8b8f96" },
-        ...["700+ SQLs", "60× organic traffic", "1M reach"].map((t, i) =>
+        ...["700+ SQLs", "5× organic traffic", "1M reach"].map((t, i) =>
           h(
             "div",
             {

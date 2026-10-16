@@ -139,7 +139,7 @@ export const stats: Stat[] = [
   },
   {
     kicker: "Organic",
-    value: "60×",
+    value: "5×",
     label: "Traffic growth",
     meter: { label: "DR 45 → 75", from: 45, to: 75, display: "75/100" },
   },
