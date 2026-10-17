@@ -60,6 +60,14 @@ export const otherWork = {
       })) as Shot[],
       href: "/decks/contlo-ai-deck.pdf",
     },
+    /** The training course built for the internal team and partners. */
+    academy: {
+      tag: "Enablement LMS",
+      title: "SuperAGI Academy",
+      figure: "47 lessons",
+      note: "A course I built on Thinkific to train the internal team and partners on the product",
+      href: "https://team-s-site-4cd4.thinkific.com/courses/take/master-superagi-course",
+    },
     /** Google Slides decks (shared as "anyone with the link"). */
     slides: [
       {

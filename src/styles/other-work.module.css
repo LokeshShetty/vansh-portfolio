@@ -314,3 +314,18 @@
 .appName {
   font-size: var(--step-1);
 }
+
+/* Enablement LMS: one row on wide screens, stacked on phones. */
+.academy {
+  display: grid;
+  gap: var(--space-s);
+  align-items: center;
+  margin-top: var(--grid-gap);
+}
+
+@media (min-width: 48rem) {
+  .academy {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: var(--space-l);
+  }
+}
