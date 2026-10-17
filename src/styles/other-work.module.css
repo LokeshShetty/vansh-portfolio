@@ -185,6 +185,7 @@
 
 .flow {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   align-content: start;
   gap: var(--space-xs);
 }
@@ -228,6 +229,17 @@
 
   .flowShots > .shot {
     flex: var(--ar) 1 0;
+  }
+}
+
+/* Lead layout: the first screenshot full width, the rest share a row. */
+@media (min-width: 48rem) {
+  .leadShots {
+    flex-wrap: wrap;
+  }
+
+  .leadShots > .shot:first-child {
+    flex-basis: 100%;
   }
 }
 

@@ -44,12 +44,6 @@ export const otherWork = {
         caption: "The repository today",
       },
     ] as Shot[],
-    video: {
-      id: "Unj5NLNTkLY",
-      shape: "landscape",
-      start: 7,
-    } as YouTubeVideo,
-    videoCaption: "Launch coverage: How To Install SuperAGI, by Matthew Berman",
   },
 
   enablement: {
@@ -99,6 +93,8 @@ export const otherWork = {
         figure: "100 blogs/day",
         tools: ["n8n", "Anthropic", "Perplexity", "Grok", "ngrok"],
         note: "Ran on my own local server, exposed through ngrok",
+        /** First screenshot full width, the rest in a row below. */
+        lead: true,
         shots: [
           {
             name: "blog-n8n-workflow",

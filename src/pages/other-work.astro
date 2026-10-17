@@ -85,10 +85,6 @@ const n = (key: string) => String(blocks.indexOf(key) + 1).padStart(2, "0");
           </figure>
         ))}
       </div>
-      <figure class={styles.shot}>
-        <YouTubeRow videos={[w.launch.video]} />
-        <figcaption>{w.launch.videoCaption}</figcaption>
-      </figure>
     </section>
 
     {/* Sales enablement */}
@@ -161,7 +157,12 @@ const n = (key: string) => String(blocks.indexOf(key) + 1).padStart(2, "0");
                 ))}
               </ul>
               {shots.length > 0 && (
-                <div class={styles.flowShots}>
+                <div
+                  class:list={[
+                    styles.flowShots,
+                    "lead" in f && styles.leadShots,
+                  ]}
+                >
                   {shots.map((s) => (
                     <figure class={styles.shot} style={{ "--ar": ratio(s) }}>
                       <Asset {...s} sizes="(min-width: 64rem) 40rem, 100vw" />
