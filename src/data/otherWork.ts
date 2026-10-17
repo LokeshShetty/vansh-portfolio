@@ -205,6 +205,11 @@ export const otherWork = {
         caption: "SuperAGI · AI Super App for Work",
       },
       {
+        name: "creative-superagi-four-apps",
+        alt: "SuperAGI creative: Four new apps just landed in SuperAGI",
+        caption: "SuperAGI · Four new apps launch",
+      },
+      {
         name: "creative-superagi-dialer",
         alt: "SuperAGI creative: Reach a global audience with the AI-native dialer",
         caption: "SuperAGI · AI-native dialer",
