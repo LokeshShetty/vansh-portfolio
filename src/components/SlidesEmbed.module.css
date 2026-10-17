@@ -1,14 +1,23 @@
 .card {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
   gap: var(--space-xs);
   padding: var(--space-xs);
 }
 
+/* Until opened, the card fills its row (cards in a row match heights) and
+   grows to fit its text; once opened, the deck itself is exactly 16:9. */
 .frame {
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-radius: calc(var(--tile-radius) * 0.6);
+}
+
+.frame:has(iframe) {
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: calc(var(--tile-radius) * 0.6);
 }
 
 .frame iframe {
@@ -22,10 +31,12 @@
 .open {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-2xs);
+  align-items: stretch;
+  min-width: 0;
+  gap: var(--space-xs);
   width: 100%;
   height: 100%;
+  min-height: 13rem;
   padding: var(--space-m);
   text-align: left;
   color: var(--ink);
@@ -42,13 +53,13 @@
 }
 
 .note {
-  max-width: 40ch;
   font-size: var(--step--1);
   line-height: 1.45;
   color: var(--ink-dim);
 }
 
 .cta {
+  align-self: flex-start;
   margin-top: auto;
   padding: 0.5em 1em;
   font-size: var(--step--1);

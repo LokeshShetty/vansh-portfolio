@@ -25,6 +25,7 @@ const blocks = [
   "launch",
   "enablement",
   "ai",
+  ...(w.landing.items.length ? ["landing"] : []),
   ...(w.apps.items.length ? ["apps"] : []),
   "videos",
   "book",
@@ -204,6 +205,31 @@ const n = (key: string) => String(blocks.indexOf(key) + 1).padStart(2, "0");
     </section>
 
     {/* Apps built with Claude Code (shows once there are items) */}
+    {/* Landing pages (shows once there are items) */}
+    {w.landing.items.length > 0 && (
+      <section class={styles.block} aria-labelledby="landing-title">
+        <div class={styles.head}>
+          <span class:list={["display", styles.index]}>{n("landing")}</span>
+          <p class="eyebrow">{w.landing.kicker}</p>
+        </div>
+        <h2 id="landing-title" class:list={["display", styles.title]}>
+          {w.landing.title}
+        </h2>
+        <p class={styles.lead}>{w.landing.lead}</p>
+        <div class={styles.apps}>
+          {w.landing.items.map((a) => (
+            <figure class:list={["tile", styles.app]}>
+              <Asset {...a.shot} sizes="(min-width: 64rem) 38rem, 100vw" />
+              <figcaption>
+                <span class:list={["display", styles.appName]}>{a.name}</span>
+                <span class={styles.aside}>{a.note}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
+
     {w.apps.items.length > 0 && (
       <section class={styles.block} aria-labelledby="apps-title">
         <div class={styles.head}>

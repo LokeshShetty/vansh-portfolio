@@ -152,6 +152,14 @@ export const otherWork = {
     ],
   },
 
+  /** Landing pages. The section shows once it has items. */
+  landing: {
+    kicker: "Landing pages",
+    title: "Pages built to convert",
+    lead: "A glimpse of the landing pages I designed and built for launches and campaigns",
+    items: [] as { name: string; note: string; shot: Shot }[],
+  },
+
   /** Apps built with Claude Code. The section shows once it has items. */
   apps: {
     kicker: "Built with Claude Code",
