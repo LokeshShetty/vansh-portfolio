@@ -156,7 +156,40 @@ export const otherWork = {
   apps: {
     kicker: "Built with Claude Code",
     title: "Apps I’ve built",
-    items: [] as { name: string; note: string; shot: Shot }[],
+    items: [
+      {
+        name: "Asset Track",
+        note: "Company assets, inventory and assignments across employees",
+        shot: {
+          name: "app-asset-track",
+          alt: "Asset Track inventory view with utilisation per item",
+        },
+      },
+      {
+        name: "ContentPilot",
+        note: "AI social media operating system for agencies and their clients",
+        shot: {
+          name: "app-content-pilot",
+          alt: "ContentPilot client view with benchmark posts and engagement",
+        },
+      },
+      {
+        name: "HRMS",
+        note: "One system for attendance, leave, pay and the employee lifecycle",
+        shot: {
+          name: "app-hrms",
+          alt: "HRMS attendance view with check-in, calendar and history",
+        },
+      },
+      {
+        name: "Restaurant POS",
+        note: "Checkout, orders, products and customers for cafes and restaurants",
+        shot: {
+          name: "app-pos",
+          alt: "Point-of-sale checkout for a cafe, with menu and cart",
+        },
+      },
+    ] as { name: string; note: string; shot: Shot }[],
   },
 
   videos: {

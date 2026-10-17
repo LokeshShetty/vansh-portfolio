@@ -213,12 +213,13 @@ const n = (key: string) => String(blocks.indexOf(key) + 1).padStart(2, "0");
         <h2 id="apps-title" class:list={["display", styles.title]}>
           {w.apps.title}
         </h2>
-        <div class={styles.flowShots}>
+        <div class={styles.apps}>
           {w.apps.items.map((a) => (
-            <figure class={styles.shot}>
-              <Asset {...a.shot} sizes="(min-width: 64rem) 26rem, 100vw" />
+            <figure class:list={["tile", styles.app]}>
+              <Asset {...a.shot} sizes="(min-width: 64rem) 38rem, 100vw" />
               <figcaption>
-                <strong>{a.name}</strong> {a.note}
+                <span class:list={["display", styles.appName]}>{a.name}</span>
+                <span class={styles.aside}>{a.note}</span>
               </figcaption>
             </figure>
           ))}
