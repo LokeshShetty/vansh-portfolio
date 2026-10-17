@@ -84,8 +84,8 @@ export const otherWork = {
       },
       {
         id: "1q7MJDqZk-81VM2m08zYDP38Fcvx9ZltQcJjE1tEN-Fw",
-        tag: "Pitch deck",
-        title: "Contlo for Shopify brands",
+        tag: "Sales deck",
+        title: "SuperAGI Marketing",
         note: "AI-native marketing for ecommerce: campaigns, chat support, automation and analytics",
       },
     ],
