@@ -1,0 +1,242 @@
+---
+// Other Work, at /other-work/: campaigns, launches, sales enablement, AI
+// workflows, apps, videos and the book. All copy is in src/data/otherWork.ts.
+import Base from "@/layouts/Base.astro";
+import Asset from "@/components/Asset.astro";
+import SlideStrip from "@/components/SlideStrip.astro";
+import SlidesEmbed from "@/components/SlidesEmbed.astro";
+import YouTubeRow from "@/components/YouTubeRow.astro";
+import Footer from "@/sections/Footer.astro";
+import { otherWork as w, type Shot } from "@/data/otherWork";
+import { book } from "@/data/profile";
+import { getMedia } from "@/lib/media";
+import work from "@/styles/work.module.css";
+import styles from "@/styles/other-work.module.css";
+
+// Screenshots show once their file is in src/assets/media.
+const ready = (shots: Shot[]) => shots.filter((s) => getMedia(s.name));
+const blocks = [
+  "crm",
+  "launch",
+  "enablement",
+  "ai",
+  ...(w.apps.items.length ? ["apps"] : []),
+  "videos",
+  "book",
+];
+const n = (key: string) => String(blocks.indexOf(key) + 1).padStart(2, "0");
+---
+
+<Base title={w.title} description={w.summary}>
+  <main class:list={["shell", work.page, styles.page]}>
+    <header class:list={["tile", work.header]}>
+      <p class="eyebrow">{w.kicker}</p>
+      <h1 class:list={["display", work.title]}>{w.title}</h1>
+      <p class={work.summary}>{w.summary}</p>
+    </header>
+
+    {/* CRM is Dead */}
+    <section class={styles.block} aria-labelledby="crm-title">
+      <div class={styles.head}>
+        <span class:list={["display", styles.index]}>{n("crm")}</span>
+        <p class="eyebrow">{w.crm.kicker}</p>
+      </div>
+      <h2 id="crm-title" class:list={["display", styles.title]}>
+        {w.crm.title}
+      </h2>
+      <p class={styles.lead}>{w.crm.lead}</p>
+      <div class={styles.split}>
+        <YouTubeRow videos={[w.crm.video]} />
+        <div class:list={["tile", styles.side]}>
+          <ul class={styles.list}>
+            {w.crm.did.map((d) => (
+              <li>{d}</li>
+            ))}
+          </ul>
+          <div class={styles.result}>
+            <p class:list={["display", styles.value]}>{w.crm.result.value}</p>
+            <p class={styles.label}>{w.crm.result.label}</p>
+            <p class={styles.aside}>{w.crm.resultNote}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* SuperAGI launch */}
+    <section class={styles.block} aria-labelledby="launch-title">
+      <div class={styles.head}>
+        <span class:list={["display", styles.index]}>{n("launch")}</span>
+        <p class="eyebrow">{w.launch.kicker}</p>
+      </div>
+      <h2 id="launch-title" class:list={["display", styles.title]}>
+        {w.launch.title}
+      </h2>
+      <p class={styles.lead}>{w.launch.lead}</p>
+      <div class={styles.shots}>
+        {ready(w.launch.shots).map((s) => (
+          <figure class={styles.shot}>
+            <Asset {...s} sizes="(min-width: 64rem) 38rem, 100vw" />
+            {s.caption && <figcaption>{s.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+      <figure class={styles.shot}>
+        <YouTubeRow videos={[w.launch.video]} />
+        <figcaption>{w.launch.videoCaption}</figcaption>
+      </figure>
+    </section>
+
+    {/* Sales enablement */}
+    <section class={styles.block} aria-labelledby="enable-title">
+      <div class={styles.head}>
+        <span class:list={["display", styles.index]}>{n("enablement")}</span>
+        <p class="eyebrow">{w.enablement.kicker}</p>
+      </div>
+      <h2 id="enable-title" class:list={["display", styles.title]}>
+        {w.enablement.title}
+      </h2>
+      <p class={styles.lead}>{w.enablement.lead}</p>
+      <div class={styles.deck}>
+        <div class={styles.deckHead}>
+          <div>
+            <p class="eyebrow">Sales deck</p>
+            <h3 class:list={["display", styles.deckTitle]}>
+              {w.enablement.pdf.title}
+            </h3>
+            <p class={styles.aside}>{w.enablement.pdf.note}</p>
+          </div>
+          <a
+            class={styles.pill}
+            href={w.enablement.pdf.href}
+            target="_blank"
+            rel="noopener"
+            data-track="link_click"
+            data-from="other-work-pdf"
+          >
+            Open PDF <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <SlideStrip
+          slides={ready(w.enablement.pdf.slides)}
+          label={w.enablement.pdf.title}
+        />
+      </div>
+      <div class={styles.decks}>
+        {w.enablement.slides.map((d) => (
+          <SlidesEmbed {...d} />
+        ))}
+      </div>
+    </section>
+
+    {/* AI workflows */}
+    <section class={styles.block} aria-labelledby="ai-title">
+      <div class={styles.head}>
+        <span class:list={["display", styles.index]}>{n("ai")}</span>
+        <p class="eyebrow">{w.ai.kicker}</p>
+      </div>
+      <h2 id="ai-title" class:list={["display", styles.title]}>
+        {w.ai.title}
+      </h2>
+      <p class={styles.lead}>{w.ai.lead}</p>
+      <div class={styles.flows}>
+        {w.ai.workflows.map((f) => {
+          const shots = ready(f.shots);
+          return (
+            <article
+              class:list={["tile", styles.flow, shots.length && styles.wide]}
+            >
+              <div class={styles.flowHead}>
+                <h3 class:list={["display", styles.flowName]}>{f.name}</h3>
+                <p class:list={["display", styles.value]}>{f.figure}</p>
+              </div>
+              <p class={styles.aside}>{f.note}</p>
+              <ul class={styles.tools}>
+                {f.tools.map((t) => (
+                  <li class="chip">{t}</li>
+                ))}
+              </ul>
+              {shots.length > 0 && (
+                <div class={styles.flowShots}>
+                  {shots.map((s) => (
+                    <figure class={styles.shot}>
+                      <Asset {...s} sizes="(min-width: 64rem) 26rem, 100vw" />
+                      {s.caption && <figcaption>{s.caption}</figcaption>}
+                    </figure>
+                  ))}
+                </div>
+              )}
+            </article>
+          );
+        })}
+      </div>
+    </section>
+
+    {/* Apps built with Claude Code (shows once there are items) */}
+    {w.apps.items.length > 0 && (
+      <section class={styles.block} aria-labelledby="apps-title">
+        <div class={styles.head}>
+          <span class:list={["display", styles.index]}>{n("apps")}</span>
+          <p class="eyebrow">{w.apps.kicker}</p>
+        </div>
+        <h2 id="apps-title" class:list={["display", styles.title]}>
+          {w.apps.title}
+        </h2>
+        <div class={styles.flowShots}>
+          {w.apps.items.map((a) => (
+            <figure class={styles.shot}>
+              <Asset {...a.shot} sizes="(min-width: 64rem) 26rem, 100vw" />
+              <figcaption>
+                <strong>{a.name}</strong> {a.note}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {/* Videos */}
+    <section class={styles.block} aria-labelledby="videos-title">
+      <div class={styles.head}>
+        <span class:list={["display", styles.index]}>{n("videos")}</span>
+        <p class="eyebrow">{w.videos.kicker}</p>
+      </div>
+      <h2 id="videos-title" class:list={["display", styles.title]}>
+        {w.videos.title}
+      </h2>
+      <YouTubeRow videos={w.videos.items} />
+      <a href="/videos/" class:list={[styles.pill, styles.accent]}>
+        {w.videos.cta} <span aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    {/* Book */}
+    <section class={styles.block} aria-labelledby="book-title">
+      <div class={styles.head}>
+        <span class:list={["display", styles.index]}>{n("book")}</span>
+        <p class="eyebrow">{book.kicker}</p>
+      </div>
+      <div class:list={["tile", styles.book]}>
+        <Asset {...book.cover} class={styles.cover} sizes="12rem" />
+        <div class={styles.bookCopy}>
+          <h2 id="book-title" class:list={["display", styles.title]}>
+            {book.title}
+          </h2>
+          <p class={styles.lead}>{book.description}</p>
+          {book.href && (
+            <a
+              href={book.href}
+              class:list={[styles.pill, styles.accent]}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track="link_click"
+              data-from="other-work-book"
+            >
+              {book.cta} <span aria-hidden="true">↗</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

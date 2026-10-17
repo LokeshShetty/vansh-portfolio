@@ -1,0 +1,242 @@
+.page {
+  padding-bottom: var(--space-xl);
+}
+
+/* min-width: 0 so wide media never stretches the page grid. */
+.block {
+  min-width: 0;
+  display: grid;
+  gap: var(--space-s);
+  padding-top: var(--space-xl);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.index {
+  display: grid;
+  place-items: center;
+  width: 2.4em;
+  height: 2.4em;
+  font-size: var(--step--1);
+  letter-spacing: 0;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.title {
+  max-width: 20ch;
+  font-size: var(--step-4);
+}
+
+.lead {
+  max-width: 58ch;
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-dim);
+}
+
+.aside {
+  font-size: var(--step--1);
+  line-height: 1.45;
+  color: var(--ink-dim);
+}
+
+.value {
+  font-size: var(--step-3);
+  color: var(--accent-text);
+}
+
+.label {
+  font-size: var(--step--1);
+  color: var(--ink-dim);
+}
+
+/* CRM: video beside what we did. */
+.split {
+  display: grid;
+  gap: var(--grid-gap);
+  margin-top: var(--space-2xs);
+}
+
+@media (min-width: 64rem) {
+  .split {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-m);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.list li {
+  display: flex;
+  gap: 0.6em;
+  line-height: 1.45;
+}
+
+.list li::before {
+  content: "↗";
+  color: var(--accent-text);
+}
+
+.result {
+  display: grid;
+  gap: 0.15rem;
+}
+
+/* Screenshots with captions. */
+.shots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--grid-gap);
+  margin-top: var(--space-2xs);
+}
+
+.shot {
+  display: grid;
+  gap: var(--space-2xs);
+  min-width: 0;
+}
+
+.shot figcaption {
+  font-size: var(--step--1);
+  color: var(--ink-dim);
+}
+
+.shot :global(picture) {
+  border: 1px solid var(--line);
+  border-radius: calc(var(--tile-radius) * 0.6);
+}
+
+/* Sales enablement. */
+.deck {
+  display: grid;
+  gap: var(--space-s);
+  margin-top: var(--space-2xs);
+}
+
+.deckHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-s);
+}
+
+.deckTitle {
+  font-size: var(--step-2);
+}
+
+.decks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: var(--grid-gap);
+  margin-top: var(--space-s);
+}
+
+.pill {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.6em 1.2em;
+  font-size: var(--step--1);
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--tile);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.pill:hover,
+.accent {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* AI workflows. */
+.flows {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--grid-gap);
+  margin-top: var(--space-2xs);
+}
+
+@media (min-width: 48rem) {
+  .flows {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.flow {
+  display: grid;
+  align-content: start;
+  gap: var(--space-xs);
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+.flowHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2xs) var(--space-s);
+}
+
+.flowName {
+  font-size: var(--step-2);
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+}
+
+.flowShots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--grid-gap);
+  margin-top: var(--space-xs);
+}
+
+/* Book. */
+.book {
+  display: grid;
+  gap: var(--space-m);
+  align-items: center;
+}
+
+@media (min-width: 40rem) {
+  .book {
+    grid-template-columns: 11rem minmax(0, 1fr);
+  }
+}
+
+.cover {
+  width: min(11rem, 50vw);
+  box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.45);
+}
+
+.bookCopy {
+  display: grid;
+  gap: var(--space-s);
+}

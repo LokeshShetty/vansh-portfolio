@@ -108,11 +108,13 @@
   border-color: var(--accent);
 }
 
-.icon {
+.icon,
+.short {
   display: none;
 }
 
-/* Phones: compact; "Get my Book" becomes a book icon so everything fits. */
+/* Phones: compact; page links use short labels and "Get in touch" and
+   "Get my Book" become icons, so everything fits on one row. */
 @media (max-width: 30rem) {
   .bar,
   .actions {
@@ -135,16 +137,21 @@
     font-size: 0.75rem;
   }
 
-  .book {
+  .book,
+  .contact {
     width: 2.35rem;
     padding: 0;
   }
 
-  .book .label {
+  .book .label,
+  .contact .label,
+  .page .full {
     display: none;
   }
 
-  .book .icon {
+  .book .icon,
+  .contact .icon,
+  .page .short {
     display: block;
   }
 

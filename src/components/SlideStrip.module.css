@@ -1,0 +1,68 @@
+.wrap {
+  display: grid;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  border: 1px solid var(--line);
+  border-radius: var(--tile-radius);
+  background: #12131a;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
+.slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+.img {
+  display: block;
+  width: 100%;
+  border-radius: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--ink);
+  background: var(--tile);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.count {
+  min-width: 4.5ch;
+  font-size: var(--step--1);
+  text-align: center;
+  color: var(--ink-dim);
+}

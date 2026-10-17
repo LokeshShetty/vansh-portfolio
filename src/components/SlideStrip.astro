@@ -1,0 +1,63 @@
+---
+// A deck as a sideways-scrolling strip of slides (images), with previous and
+// next buttons and a slide counter. Slides past the first load lazily.
+import Asset from "./Asset.astro";
+import type { Shot } from "@/data/otherWork";
+import styles from "./SlideStrip.module.css";
+
+type Props = { slides: Shot[]; label: string };
+const { slides, label } = Astro.props;
+---
+
+<div class={styles.wrap} data-strip>
+  <div class={styles.track} data-track tabindex="0" aria-label={label}>
+    {slides.map((s, i) => (
+      <div class={styles.slide}>
+        <Asset
+          {...s}
+          ratio="16 / 9"
+          class={styles.img}
+          sizes="(min-width: 64rem) 52rem, 92vw"
+          priority={false}
+        />
+      </div>
+    ))}
+  </div>
+  <div class={styles.controls}>
+    <button
+      type="button"
+      class={styles.btn}
+      data-prev
+      aria-label="Previous slide"
+    >
+      ←
+    </button>
+    <span class:list={["tnum", styles.count]} data-count>
+      1 / {slides.length}
+    </span>
+    <button type="button" class={styles.btn} data-next aria-label="Next slide">
+      →
+    </button>
+  </div>
+</div>
+
+<script>
+  for (const strip of document.querySelectorAll<HTMLElement>("[data-strip]")) {
+    const track = strip.querySelector<HTMLElement>("[data-track]")!;
+    const count = strip.querySelector("[data-count]")!;
+    const total = track.children.length;
+    const index = () => Math.round(track.scrollLeft / track.clientWidth);
+    const go = (d: number) =>
+      track.scrollTo({
+        left: (index() + d) * track.clientWidth,
+        behavior: "smooth",
+      });
+    strip.querySelector("[data-prev]")!.addEventListener("click", () => go(-1));
+    strip.querySelector("[data-next]")!.addEventListener("click", () => go(1));
+    track.addEventListener(
+      "scroll",
+      () => (count.textContent = `${Math.min(index() + 1, total)} / ${total}`),
+      { passive: true },
+    );
+  }
+</script>

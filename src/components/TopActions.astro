@@ -7,9 +7,22 @@ import ThemeToggle from "./ThemeToggle.astro";
 import styles from "./TopActions.module.css";
 
 const path = Astro.url.pathname;
+// `short` is the label on phones, where three links share the row with the
+// buttons.
 const pages = [
-  { label: "Home", href: "/", current: path === "/" },
-  { label: "My Videos", href: "/videos/", current: path.startsWith("/videos") },
+  { label: "Home", short: "Home", href: "/", current: path === "/" },
+  {
+    label: "My Videos",
+    short: "Videos",
+    href: "/videos/",
+    current: path.startsWith("/videos"),
+  },
+  {
+    label: "Other Work",
+    short: "Other",
+    href: "/other-work/",
+    current: path.startsWith("/other-work"),
+  },
 ];
 ---
 
@@ -19,21 +32,41 @@ const pages = [
       <a
         class={styles.page}
         href={p.href}
+        aria-label={p.label}
         aria-current={p.current ? "page" : undefined}
       >
-        {p.label}
+        <span class={styles.full}>{p.label}</span>
+        <span class={styles.short} aria-hidden="true">
+          {p.short}
+        </span>
       </a>
     ))}
   </nav>
 
   <div class={styles.actions}>
     <a
-      class:list={[styles.pill, styles.primary]}
+      class:list={[styles.pill, styles.primary, styles.contact]}
       href="#contact"
+      aria-label="Get in touch"
       data-track="contact_click"
       data-from="top-bar"
     >
-      Get in touch
+      <span class={styles.label}>Get in touch</span>
+      <svg
+        class={styles.icon}
+        viewBox="0 0 24 24"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          d="M3 6h18v12H3zM3 6l9 7 9-7"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linejoin="round"
+        />
+      </svg>
     </a>
     {book.href && (
       <a

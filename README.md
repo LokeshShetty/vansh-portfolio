@@ -44,6 +44,17 @@ screen, and has a sound button that unmutes one video at a time
 blocks autoplay, or the visitor asks for reduced motion, a play button
 shows instead.
 
+## Other Work
+
+`/other-work/` (linked in the header and footer) collects campaigns,
+launches, sales enablement, AI workflows, apps, videos and the book. All
+its copy and media names are in `src/data/otherWork.ts`. A screenshot
+shows once its file is in `src/assets/media/` under that name, and the
+"Apps I've built" section appears once it has items. The Contlo deck is
+shown as slide images (`contlo-deck-01` to `-11`) with the PDF in
+`public/decks/`; the Google Slides decks load only when someone opens
+them.
+
 ## Case studies
 
 Each project is a Markdown file in `src/content/work/`. The frontmatter

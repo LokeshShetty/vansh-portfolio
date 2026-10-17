@@ -1,0 +1,46 @@
+---
+// A Google Slides deck: a card with its title until someone opens it, then
+// the deck itself (Google's embed) in its place. Nothing loads from Google
+// until then.
+import styles from "./SlidesEmbed.module.css";
+
+type Props = { id: string; tag: string; title: string; note: string };
+const { id, tag, title, note } = Astro.props;
+const view = `https://docs.google.com/presentation/d/${id}/view`;
+const embed = `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000`;
+---
+
+<article class:list={["tile", styles.card]} data-slides={embed}>
+  <div class={styles.frame} data-frame>
+    <button type="button" class={styles.open} data-open>
+      <span class="eyebrow">{tag}</span>
+      <span class:list={["display", styles.title]}>{title}</span>
+      <span class={styles.note}>{note}</span>
+      <span class={styles.cta}>
+        View deck <span aria-hidden="true">→</span>
+      </span>
+    </button>
+  </div>
+  <a
+    class={styles.link}
+    href={view}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-track="link_click"
+    data-from="other-work-deck"
+  >
+    Open in Google Slides <span aria-hidden="true">↗</span>
+  </a>
+</article>
+
+<script>
+  for (const card of document.querySelectorAll<HTMLElement>("[data-slides]")) {
+    card.querySelector("[data-open]")?.addEventListener("click", () => {
+      const frame = document.createElement("iframe");
+      frame.src = card.dataset.slides!;
+      frame.title = "Slide deck";
+      frame.allowFullscreen = true;
+      card.querySelector("[data-frame]")!.replaceChildren(frame);
+    });
+  }
+</script>
