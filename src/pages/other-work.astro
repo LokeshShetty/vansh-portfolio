@@ -163,12 +163,38 @@ const n = (key: string) => String(blocks.indexOf(key) + 1).padStart(2, "0");
                     "lead" in f && styles.leadShots,
                   ]}
                 >
-                  {shots.map((s) => (
-                    <figure class={styles.shot} style={{ "--ar": ratio(s) }}>
-                      <Asset {...s} sizes="(min-width: 64rem) 40rem, 100vw" />
-                      {s.caption && <figcaption>{s.caption}</figcaption>}
-                    </figure>
-                  ))}
+                  {shots.map((s, i) => {
+                    const big = "lead" in f && i === 0;
+                    return (
+                      <figure class={styles.shot} style={{ "--ar": ratio(s) }}>
+                        {big ? (
+                          <a
+                            href={getMedia(s.name)!.src}
+                            target="_blank"
+                            rel="noopener"
+                            class={styles.zoom}
+                            aria-label={`${s.alt} (full size)`}
+                          >
+                            <Asset
+                              {...s}
+                              sizes="(min-width: 80rem) 76rem, 100vw"
+                            />
+                          </a>
+                        ) : (
+                          <Asset
+                            {...s}
+                            sizes="(min-width: 64rem) 40rem, 100vw"
+                          />
+                        )}
+                        {s.caption && (
+                          <figcaption>
+                            {s.caption}
+                            {big && " · Click to view full size"}
+                          </figcaption>
+                        )}
+                      </figure>
+                    );
+                  })}
                 </div>
               )}
             </article>

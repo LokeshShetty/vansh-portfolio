@@ -271,3 +271,8 @@
   display: grid;
   gap: var(--space-s);
 }
+
+.zoom {
+  display: block;
+  cursor: zoom-in;
+}
