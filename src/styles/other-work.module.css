@@ -335,6 +335,13 @@
   margin-top: var(--space-s);
 }
 
+.heroes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--grid-gap);
+  align-items: start;
+}
+
 .pages {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));

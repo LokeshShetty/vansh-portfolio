@@ -239,6 +239,14 @@ const n = (key: string) => String(blocks.indexOf(key) + 1).padStart(2, "0");
         </h2>
         <p class={styles.lead}>{w.landing.lead}</p>
         <h3 class:list={["eyebrow", styles.subhead]}>Landing pages</h3>
+        <div class={styles.heroes}>
+          {ready(w.landing.heroes).map((s) => (
+            <figure class={styles.shot}>
+              <Asset {...s} sizes="(min-width: 64rem) 40rem, 100vw" />
+              {s.caption && <figcaption>{s.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
         <div class={styles.pages}>
           {ready(w.landing.pages).map((s) => (
             <figure class={styles.shot}>

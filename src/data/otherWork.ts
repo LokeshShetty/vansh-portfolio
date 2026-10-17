@@ -164,7 +164,21 @@ export const otherWork = {
   landing: {
     kicker: "Landing pages and creatives",
     title: "Positioning, made visible",
-    lead: "A glimpse of the landing pages and launch creatives I made for SuperAGI and Contlo",
+    lead: "A glimpse of the landing pages and launch creatives I made for SuperAGI, Contlo and InfluencerEarn",
+    /** Landing page heroes, shown two across above the sections. */
+    heroes: [
+      {
+        name: "lp-superagi-gtm-hero",
+        alt: "SuperAGI homepage hero: All-in-one agentic GTM platform",
+        caption: "SuperAGI · All-in-one agentic GTM platform",
+      },
+      {
+        name: "lp-influencerearn",
+        alt: "InfluencerEarn homepage: where creators collaborate and brands perform",
+        caption:
+          "InfluencerEarn · Where creators collaborate and brands perform",
+      },
+    ] as Shot[],
     /** Landing page sections, widest story first. */
     pages: [
       {
