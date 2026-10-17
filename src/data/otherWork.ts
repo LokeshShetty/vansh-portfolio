@@ -162,10 +162,55 @@ export const otherWork = {
 
   /** Landing pages. The section shows once it has items. */
   landing: {
-    kicker: "Landing pages",
-    title: "Pages built to convert",
-    lead: "A glimpse of the landing pages I designed and built for launches and campaigns",
-    items: [] as { name: string; note: string; shot: Shot }[],
+    kicker: "Landing pages and creatives",
+    title: "Positioning, made visible",
+    lead: "A glimpse of the landing pages and launch creatives I made for SuperAGI and Contlo",
+    /** Landing page sections, widest story first. */
+    pages: [
+      {
+        name: "lp-superagi-sales-marketing",
+        alt: "SuperAGI landing page section: Sales and Marketing, finally together with AGI",
+        caption: "SuperAGI · Sales and marketing on one agentic platform",
+      },
+      {
+        name: "lp-supersales-why",
+        alt: "SuperSales landing page section: why SuperSales is the only sales platform you need",
+        caption: "SuperSales · Why one platform",
+      },
+      {
+        name: "lp-supersales-scheduling",
+        alt: "SuperSales landing page section: old vs new way of booking meetings",
+        caption: "SuperSales · Smarter scheduling, old way vs new",
+      },
+    ] as Shot[],
+    /** Launch and campaign creatives. */
+    creatives: [
+      {
+        name: "creative-superagi-super-app",
+        alt: "SuperAGI creative: AI Super App for Work",
+        caption: "SuperAGI · AI Super App for Work",
+      },
+      {
+        name: "creative-superagi-dialer",
+        alt: "SuperAGI creative: Reach a global audience with the AI-native dialer",
+        caption: "SuperAGI · AI-native dialer",
+      },
+      {
+        name: "creative-contlo-web-sdk",
+        alt: "Contlo launch creative: Introducing Web SDK for custom websites",
+        caption: "Contlo · Web SDK launch",
+      },
+      {
+        name: "creative-contlo-automation",
+        alt: "Contlo creative: Automation Back Population, coming soon",
+        caption: "Contlo · Automation back population",
+      },
+      {
+        name: "creative-contlo-black-friday",
+        alt: "Contlo Black Friday landing page and popup creative",
+        caption: "Contlo · Black Friday pages and popups",
+      },
+    ] as Shot[],
   },
 
   /** Apps built with Claude Code. The section shows once it has items. */

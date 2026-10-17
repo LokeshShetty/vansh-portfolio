@@ -329,3 +329,32 @@
     gap: var(--space-l);
   }
 }
+
+/* Landing pages and creatives. */
+.subhead {
+  margin-top: var(--space-s);
+}
+
+.pages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: var(--grid-gap);
+  align-items: start;
+}
+
+/* Creatives in columns (masonry), so square and tall ones pack tightly. */
+.creatives {
+  columns: 3 16rem;
+  column-gap: var(--grid-gap);
+}
+
+.creatives > .shot {
+  break-inside: avoid;
+  margin-bottom: var(--grid-gap);
+}
+
+@media (max-width: 40rem) {
+  .creatives {
+    columns: 2;
+  }
+}
