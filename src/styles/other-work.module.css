@@ -211,11 +211,30 @@
   gap: var(--space-2xs);
 }
 
+/* Screenshots in a row of equal height: each grows in proportion to its
+   aspect ratio (--ar), so tall phone shots sit beside wide ones. Phones:
+   stacked, tall shots narrower. */
 .flowShots {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   gap: var(--grid-gap);
   margin-top: var(--space-xs);
+}
+
+@media (min-width: 48rem) {
+  .flowShots {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .flowShots > .shot {
+    flex: var(--ar) 1 0;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .flowShots > .shot {
+    width: min(100%, calc(var(--ar) * 30rem));
+  }
 }
 
 /* Book. */

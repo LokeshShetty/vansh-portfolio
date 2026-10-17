@@ -122,14 +122,36 @@ export const otherWork = {
         figure: "50 videos/day",
         tools: ["OpenAI", "Pippit (CapCut)", "TikTok", "Meta"],
         note: "Generated and posted automatically to TikTok and Meta",
-        shots: [] as Shot[],
+        shots: [
+          {
+            name: "video-engine-workflow",
+            alt: "The automation that generates and sequences the videos",
+            caption: "The generation workflow",
+          },
+          {
+            name: "video-engine-posts-1",
+            alt: "A grid of AI-generated short videos on Instagram",
+            caption: "Published output",
+          },
+          {
+            name: "video-engine-posts-2",
+            alt: "More AI-generated short videos on Instagram",
+            caption: "More of the output",
+          },
+        ] as Shot[],
       },
       {
         name: "AI voice agents",
         figure: "16 demos from 100 calls",
         tools: ["Bland AI", "SuperAGI", "OpenAI"],
         note: "AI voice agents making cold calls, with 16 demos booked from the first 100",
-        shots: [] as Shot[],
+        shots: [
+          {
+            name: "voice-agent-pathway",
+            alt: "The Bland AI call pathway: qualify, introduce, book the meeting, confirm email",
+            caption: "The call pathway in Bland AI",
+          },
+        ] as Shot[],
       },
     ],
   },

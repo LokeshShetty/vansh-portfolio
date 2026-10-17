@@ -15,6 +15,11 @@ import styles from "@/styles/other-work.module.css";
 
 // Screenshots show once their file is in src/assets/media.
 const ready = (shots: Shot[]) => shots.filter((s) => getMedia(s.name));
+// Width over height, so a row of screenshots can share one height.
+const ratio = (s: Shot) => {
+  const m = getMedia(s.name)!;
+  return (m.width / m.height).toFixed(3);
+};
 const blocks = [
   "crm",
   "launch",
@@ -158,8 +163,8 @@ const n = (key: string) => String(blocks.indexOf(key) + 1).padStart(2, "0");
               {shots.length > 0 && (
                 <div class={styles.flowShots}>
                   {shots.map((s) => (
-                    <figure class={styles.shot}>
-                      <Asset {...s} sizes="(min-width: 64rem) 26rem, 100vw" />
+                    <figure class={styles.shot} style={{ "--ar": ratio(s) }}>
+                      <Asset {...s} sizes="(min-width: 64rem) 40rem, 100vw" />
                       {s.caption && <figcaption>{s.caption}</figcaption>}
                     </figure>
                   ))}
