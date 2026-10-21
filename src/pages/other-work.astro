@@ -26,6 +26,7 @@ const blocks = [
   "enablement",
   "ai",
   ...(w.landing.pages.length || w.landing.creatives.length ? ["landing"] : []),
+  "writing",
   ...(w.apps.items.length ? ["apps"] : []),
   "videos",
   "book",
@@ -266,6 +267,82 @@ const n = (key: string) => String(blocks.indexOf(key) + 1).padStart(2, "0");
         </div>
       </section>
     )}
+
+    {/* Writing */}
+    <section class={styles.block} aria-labelledby="writing-title">
+      <div class={styles.head}>
+        <span class:list={["display", styles.index]}>{n("writing")}</span>
+        <p class="eyebrow">{w.writing.kicker}</p>
+      </div>
+      <h2 id="writing-title" class:list={["display", styles.title]}>
+        {w.writing.title}
+      </h2>
+      <p class={styles.lead}>{w.writing.lead}</p>
+      <div class={styles.pieces}>
+        {w.writing.pieces.map((p) => (
+          <article
+            class:list={[
+              "tile",
+              styles.piece,
+              (p.shots || p.sections) && styles.wide,
+            ]}
+          >
+            <p class="eyebrow">{p.tag}</p>
+            <h3 class:list={["display", styles.pieceTitle]}>{p.title}</h3>
+            <p class={styles.idea}>{p.idea}</p>
+            {p.shots && (
+              <div class={styles.shots}>
+                {ready(p.shots).map((s) => (
+                  <figure class={styles.shot}>
+                    <Asset {...s} sizes="(min-width: 64rem) 34rem, 100vw" />
+                    {s.caption && <figcaption>{s.caption}</figcaption>}
+                  </figure>
+                ))}
+              </div>
+            )}
+            {(p.body || p.sections) && (
+              <details class={styles.script}>
+                <summary>{p.label}</summary>
+                {p.body && (
+                  <div class={styles.lines}>
+                    {p.body.map((l) => (
+                      <p>{l}</p>
+                    ))}
+                  </div>
+                )}
+                {p.sections && (
+                  <div class={styles.messages}>
+                    {p.sections.map((m) => (
+                      <div class={styles.message}>
+                        <p class={styles.messageName}>{m.name}</p>
+                        <p class={styles.aside}>{m.goal}</p>
+                        <div class={styles.lines}>
+                          {m.lines.map((l) => (
+                            <p>{l}</p>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </details>
+            )}
+            {p.link && (
+              <a
+                class={styles.pill}
+                href={p.link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="link_click"
+                data-from="other-work-writing"
+              >
+                {p.link.label} <span aria-hidden="true">↗</span>
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
 
     {w.apps.items.length > 0 && (
       <section class={styles.block} aria-labelledby="apps-title">

@@ -365,3 +365,75 @@
     columns: 2;
   }
 }
+
+/* Writing: cards with the idea up front and the full text on demand. */
+.pieces {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--grid-gap);
+  margin-top: var(--space-2xs);
+}
+
+@media (min-width: 48rem) {
+  .pieces {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.piece {
+  display: grid;
+  align-content: start;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.pieceTitle {
+  font-size: var(--step-2);
+}
+
+.idea {
+  max-width: 62ch;
+  line-height: 1.5;
+  color: var(--ink-dim);
+}
+
+.script {
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-xs);
+}
+
+.script summary {
+  cursor: pointer;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--accent-text);
+}
+
+.script[open] summary {
+  margin-bottom: var(--space-s);
+}
+
+.lines {
+  display: grid;
+  gap: 0.6em;
+  max-width: 62ch;
+  padding-left: var(--space-s);
+  border-left: 2px solid var(--accent);
+  line-height: 1.55;
+}
+
+.messages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: var(--space-m);
+}
+
+.message {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2xs);
+}
+
+.messageName {
+  font-weight: 600;
+}

@@ -232,6 +232,145 @@ export const otherWork = {
     ] as Shot[],
   },
 
+  /** Scripts, taglines and campaign copy. Each piece shows its idea up
+   *  front; the full text opens on demand. */
+  writing: {
+    kicker: "Writing",
+    title: "Scripts, taglines and copy",
+    lead: "Brand films, launch scripts, positioning lines and campaign copy written for Verk and SuperAGI",
+    pieces: [
+      {
+        tag: "Brand film · Verk",
+        title: "Verk Hard, So You Can Live Harder",
+        idea: "Inspired by Nike’s human-centred storytelling. Instead of talking about how AI improves productivity, the film focuses on what people could do with the time they get back: work shouldn’t take away from living",
+        label: "Read the script",
+        body: [
+          "Since the dawn of mankind.",
+          "We have always been... Well, just working.",
+          "We have toiled hard, ground it out, burned the midnight oil, slogged away, busted our backs, broken our necks, and sweated it out.",
+          "But! What if there is a better way to work?",
+          "What if your work could be done automagically by AI?",
+          "What if you could simply live better?",
+          "Leaving you with more time to savor the moments, discover new horizons, nurture your passions, smell the roses, kick back and unwind, seek out wonder, soak up the inspiration, and bask in tranquility?",
+          "With Verk, you can just delegate your work to your AI Employees.",
+          "Verk Hard, so you can live harder.",
+        ],
+        link: {
+          label: "Watch the film",
+          href: "https://www.youtube.com/watch?v=-XFWpEpQzmU",
+        },
+      },
+      {
+        tag: "Launch tagline · Verk",
+        title: "Stop Working. Start Verk-ing.",
+        idea: "A line that explains the product without getting into AI agents. Stop Working, because you don’t need to do everything yourself. Start Verk-ing, because your AI Employees take care of the work. The brand name becomes an action",
+      },
+      {
+        tag: "Product launch video · SuperAGI",
+        title: "Put AI agents to work for sales",
+        idea: "The launch script for SuperAGI’s all-in-one sales platform: from the mess of tools and tasks to one system of AI agents for leads, outreach, calls, meetings, deals, CRM and buying signals",
+        label: "Read the script",
+        body: [
+          "Growing a business? Yeah, it’s a lot.",
+          "Finding leads, crafting campaigns, juggling calls, and managing deals. It’s hard. And let’s not even start on managing all the tools needed to do it. Messy, right?",
+          "Say hello to SuperAGI, a super-intelligent, all-in-one solution for seamless, scalable, and autonomous sales, powered by AI agents.",
+          "At its core, SuperAGI uses powerful AI agents to do the heavy lifting. From finding leads to managing customer relationships, it brings everything together into one integrated system. SuperAGI handles it all, so you can spend less time on the grind and more time driving results.",
+          "SuperAGI takes the guesswork out of prospecting with access to a database of 275 million+ verified leads. Simply set your Ideal Customer Profile, and your next big client could be just seconds away. Plus, the Chrome extension makes it effortless to add leads straight from LinkedIn to your CRM. Email or call them instantly without breaking your workflow.",
+          "And with AI SDRs working around the clock, you can run outreach, handle follow-ups, and book meetings, all without lifting a finger. SuperAGI takes care of the grind, so you can focus on what you do best: the good parts of selling.",
+          "Not every lead is the same, and SuperAGI gets that. Build custom agentic workflows that combine emails, LinkedIn engagement, and calls into seamless sequences.",
+          "Need help with calls? The AI Dialer has your back. Whether it’s a Power Dialer, Parallel Dialer, or Predictive Dialer, it’s equipped to handle your call blitzes with ease. From call logs to recordings and transcriptions, it keeps everything neat and tidy. Run calling campaigns, drop voicemails automatically, and handle inbound call routing like a pro. Plus, get real-time prospect data during every call, ensuring your team has actionable insights throughout every interaction. AI-generated summaries after every call give you visibility into what worked.",
+          "Convert demand into meetings without the scheduling headaches. SuperAGI’s Meeting Agents allow you to turn incoming leads into booked meetings while keeping track of cancellations and conversions. Share a booking link, embed it on your website, or schedule meetings manually.",
+          "Introducing SuperAGI Deal Management, your tool for mastering every sales opportunity. With multiple pipelines and enhanced deal visibility, you can track, organise, and forecast revenue with greater accuracy and control.",
+          "Get rid of your bloated legacy CRM and replace it with SuperAGI’s modern, AI-native CRM. Built for both humans and AI agents, it prioritises your top prospects and keeps everything fresh and actionable. Goodbye, manual CRM data entry.",
+          "Know when buyers are ready. SuperAGI’s Signals track key intent moments, like when someone visits your website, reacts to a LinkedIn post, or engages with a competitor. Set up signals in seconds. Leads get enriched, scored, and routed instantly, so you can reach them at the right time.",
+          "No more switching between ten different tools. No more struggling to keep track of it all. With SuperAGI, your sales team can focus on what truly matters: building relationships and closing deals.",
+          "Put AI agents to work for sales. Get started with SuperAGI today.",
+        ],
+        link: {
+          label: "Watch the launch video",
+          href: "https://www.youtube.com/watch?v=7QLsNSJ1Ycg",
+        },
+      },
+      {
+        tag: "Lifecycle campaigns · SuperAGI, WhatsApp",
+        title: "Launches and feature education",
+        idea: "Customer-facing messages that announce a capability, position the platform and teach one use case at a time",
+        label: "Read the messages",
+        sections: [
+          {
+            name: "Vibe Coder launch",
+            goal: "Announce a new AI-native development capability and drive adoption",
+            lines: [
+              "We just removed weeks from your build cycle.",
+              "Vibe Coder is now inside SuperAGI.",
+              "Talk to it. It builds your website or full-stack app in real time. Branding, structure, preview included.",
+              "This is Agentic Development.",
+              "It’s live in your workspace. Start building today.",
+            ],
+          },
+          {
+            name: "Introducing SuperAGI’s AI-Native CRM",
+            goal: "Position SuperAGI as one AI-native platform for the whole customer lifecycle",
+            lines: [
+              "Big News from SuperAGI",
+              "SuperAGI just became the first AI-Native CRM built for the entire Customer Lifecycle.",
+              "AI Sales: already trusted to reimagine selling.",
+              "AI Marketing: agents that design, personalize, and run campaigns across WhatsApp, Email, SMS, Instagram & more.",
+              "AI Support: AI that listens, resolves & acts across Chat, Voice & Email.",
+              "Now it all works together, Sales + Marketing + Support, in one AI-powered platform.",
+              "No silos. No juggling tools. Just one CRM that finally does it all.",
+              "Ready to see it in action?",
+            ],
+          },
+          {
+            name: "Abandoned cart automations",
+            goal: "Introduce a practical automation use case to existing customers",
+            lines: [
+              "With Automations in SuperAGI Marketing, you can set up follow-ups that run automatically.",
+              "Try this automation: a customer adds products to their cart but doesn’t complete the order.",
+              "The automation can then: wait for a while → send a reminder → follow up on another channel if needed → stop once the purchase is completed.",
+              "Simple to set up, and useful for recovering abandoned carts.",
+            ],
+          },
+        ],
+      },
+      {
+        tag: "Moment marketing · SuperAGI, GPT-5 launch, August 2025",
+        title: "Did SuperAGI inspire GPT-5?",
+        idea: "When GPT-5 launched, its new interface shared a surprisingly similar palette with SuperAGI: purple, violet and soft warm gradients. We put the two side by side and made a playful reference to it",
+        label: "Read the post",
+        body: [
+          "GPT-5 just launched, its new interface caught our attention for a slightly different reason",
+          "The purple, violet, and warm pastel gradients looked a lot like the colours we’d been using at SuperAGI",
+          "We couldn’t resist putting the two side by side",
+          "Did we inspire OpenAI? We’ll let the screenshots do the talking",
+          "A little tribute from one AI brand to another",
+        ],
+        shots: [
+          {
+            name: "writing-superagi-ui",
+            alt: "The SuperAGI interface",
+            caption: "SuperAGI",
+          },
+          {
+            name: "writing-gpt5-ui",
+            alt: "The GPT-5 launch interface",
+            caption: "GPT-5",
+          },
+        ] as Shot[],
+      },
+    ] as {
+      tag: string;
+      title: string;
+      idea: string;
+      label?: string;
+      body?: string[];
+      sections?: { name: string; goal: string; lines: string[] }[];
+      link?: { label: string; href: string };
+      shots?: Shot[];
+    }[],
+  },
+
   /** Apps built with Claude Code. The section shows once it has items. */
   apps: {
     kicker: "Built with Claude Code",
