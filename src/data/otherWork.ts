@@ -267,6 +267,7 @@ export const otherWork = {
       },
       {
         tag: "Product launch video · SuperAGI",
+        wide: true,
         title: "Put AI agents to work for sales",
         idea: "The launch script for SuperAGI’s all-in-one sales platform: from the mess of tools and tasks to one system of AI agents for leads, outreach, calls, meetings, deals, CRM and buying signals",
         label: "Read the script",
@@ -362,6 +363,8 @@ export const otherWork = {
     ] as {
       tag: string;
       title: string;
+      /** Span the full row. */
+      wide?: boolean;
       idea: string;
       label?: string;
       body?: string[];

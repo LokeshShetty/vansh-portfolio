@@ -284,7 +284,7 @@ const n = (key: string) => String(blocks.indexOf(key) + 1).padStart(2, "0");
             class:list={[
               "tile",
               styles.piece,
-              (p.shots || p.sections) && styles.wide,
+              (p.wide || p.shots || p.sections) && styles.wide,
             ]}
           >
             <p class="eyebrow">{p.tag}</p>
